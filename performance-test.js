@@ -52,7 +52,7 @@ function getBundleSize(projectPath, projectName) {
     statsPath = path.join(
       __dirname,
       "performance-results",
-      "react-router-stats.html"
+      "react-router-bundle-stats.html"
     );
   } else {
     distPath = path.join(projectPath, "dist");
@@ -60,7 +60,7 @@ function getBundleSize(projectPath, projectName) {
     statsPath = path.join(
       __dirname,
       "performance-results",
-      "tanstack-router-stats.html"
+      "tanstack-router-bundle-stats.html"
     );
   }
 
@@ -131,17 +131,26 @@ function savePerformanceResults(data) {
   }
 
   // Save latest results
-  const latestResultsPath = path.join(resultsDir, "latest-results.json");
+  const latestResultsPath = path.join(
+    resultsDir,
+    "latest-build-performance.json"
+  );
   fs.writeFileSync(latestResultsPath, JSON.stringify(data, null, 2));
 
-  // Save timestamped results
+  // Ensure history directories exist
+  const historyDir = path.join(resultsDir, "history", "build");
+  if (!fs.existsSync(historyDir)) {
+    fs.mkdirSync(historyDir, { recursive: true });
+  }
+
+  // Save timestamped results in history
   const timestampedResultsPath = path.join(
-    resultsDir,
-    `results-${timestamp}.json`
+    historyDir,
+    `build-${timestamp}.json`
   );
   fs.writeFileSync(timestampedResultsPath, JSON.stringify(data, null, 2));
 
-  log(`\n💾 Results saved to:`, colors.blue);
+  log(`\n💾 Build test results saved to:`, colors.blue);
   log(`  Latest: ${latestResultsPath}`);
   log(`  Timestamped: ${timestampedResultsPath}`);
 }
@@ -253,13 +262,13 @@ function runPerformanceTest() {
 
   if (reactRouterBundle?.statsAvailable) {
     log(
-      `\n4. View React Router bundle analysis: ./performance-results/react-router-stats.html`
+      `\n4. View React Router bundle analysis: ./performance-results/react-router-bundle-stats.html`
     );
   }
 
   if (tanstackRouterBundle?.statsAvailable) {
     log(
-      `\n5. View Tanstack Router bundle analysis: ./performance-results/tanstack-router-stats.html`
+      `\n5. View Tanstack Router bundle analysis: ./performance-results/tanstack-router-bundle-stats.html`
     );
   }
 
@@ -297,10 +306,10 @@ function runPerformanceTest() {
     },
     statsFiles: {
       reactRouter: reactRouterBundle?.statsAvailable
-        ? "./performance-results/react-router-stats.html"
+        ? "./performance-results/react-router-bundle-stats.html"
         : null,
       tanstackRouter: tanstackRouterBundle?.statsAvailable
-        ? "./performance-results/tanstack-router-stats.html"
+        ? "./performance-results/tanstack-router-bundle-stats.html"
         : null,
     },
   };

@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-08-07T12:22:36.303Z",
-  "testDuration": 5759,
+  "timestamp": "2025-08-07T12:50:44.630Z",
+  "testDuration": 5835,
   "buildTimes": {
-    "reactRouter": 2625,
-    "tanstackRouter": 3131,
+    "reactRouter": 2660,
+    "tanstackRouter": 3173,
     "winner": "React Router",
-    "ratio": 1.1927619047619047
+    "ratio": 1.1928571428571428
   },
   "bundleSizes": {
     "reactRouter": {
@@ -27,7 +27,7 @@
     }
   },
   "statsFiles": {
-    "reactRouter": "./performance-results/react-router-stats.html",
-    "tanstackRouter": "./performance-results/tanstack-router-stats.html"
+    "reactRouter": "./performance-results/react-router-bundle-stats.html",
+    "tanstackRouter": "./performance-results/tanstack-router-bundle-stats.html"
   }
 }

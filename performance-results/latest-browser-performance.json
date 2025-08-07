@@ -1,16 +1,16 @@
 {
-  "timestamp": "2025-08-07T12:41:44.185Z",
-  "testDuration": 44274,
+  "timestamp": "2025-08-07T12:49:49.635Z",
+  "testDuration": 41869,
   "testType": "browser-based",
   "reactRouter": {
     "url": "http://localhost:5173/posts",
     "pageLoad": {
-      "domContentLoaded": 0,
+      "domContentLoaded": 0.06666666269302368,
       "loadComplete": 0,
       "domInteractive": 0,
       "firstContentfulPaint": 0,
       "largestContentfulPaint": 0,
-      "totalLoadTime": 5627.333333333333,
+      "totalLoadTime": 5191.333333333333,
       "networkRequests": 21,
       "totalTransferSize": 5953,
       "jsSize": 4809,
@@ -18,12 +18,12 @@
       "iterations": 3,
       "rawResults": [
         {
-          "domContentLoaded": 0,
+          "domContentLoaded": 0.09999996423721313,
           "loadComplete": 0,
           "domInteractive": null,
           "firstContentfulPaint": 0,
           "largestContentfulPaint": 0,
-          "totalLoadTime": 6909,
+          "totalLoadTime": 5613,
           "networkRequests": 21,
           "totalTransferSize": 5953,
           "jsSize": 4809,
@@ -35,19 +35,19 @@
           "domInteractive": null,
           "firstContentfulPaint": 0,
           "largestContentfulPaint": 0,
-          "totalLoadTime": 4964,
+          "totalLoadTime": 5010,
           "networkRequests": 21,
           "totalTransferSize": 5953,
           "jsSize": 4809,
           "cssSize": 446
         },
         {
-          "domContentLoaded": 0,
+          "domContentLoaded": 0.10000002384185791,
           "loadComplete": 0,
           "domInteractive": null,
           "firstContentfulPaint": 0,
           "largestContentfulPaint": 0,
-          "totalLoadTime": 5009,
+          "totalLoadTime": 4951,
           "networkRequests": 21,
           "totalTransferSize": 5953,
           "jsSize": 4809,
@@ -55,7 +55,7 @@
         }
       ]
     },
-    "navigation": 1039
+    "navigation": 1036
   },
   "tanstackRouter": {
     "url": "http://localhost:3000/posts",
@@ -65,34 +65,34 @@
       "domInteractive": 0,
       "firstContentfulPaint": 0,
       "largestContentfulPaint": 0,
-      "totalLoadTime": 4933.666666666667,
+      "totalLoadTime": 4655.333333333333,
       "networkRequests": 32,
-      "totalTransferSize": 10250,
+      "totalTransferSize": 10360,
       "jsSize": 7827,
       "cssSize": 0,
       "iterations": 3,
       "rawResults": [
-        {
-          "domContentLoaded": 0,
-          "loadComplete": 0,
-          "domInteractive": null,
-          "firstContentfulPaint": 0,
-          "largestContentfulPaint": 0,
-          "totalLoadTime": 4924,
-          "networkRequests": 32,
-          "totalTransferSize": 10361,
-          "jsSize": 7827,
-          "cssSize": 0
-        },
         {
           "domContentLoaded": 0.10000002384185791,
           "loadComplete": 0,
           "domInteractive": null,
           "firstContentfulPaint": 0,
           "largestContentfulPaint": 0,
-          "totalLoadTime": 4946,
+          "totalLoadTime": 4936,
           "networkRequests": 32,
-          "totalTransferSize": 10029,
+          "totalTransferSize": 10360,
+          "jsSize": 7827,
+          "cssSize": 0
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4099,
+          "networkRequests": 32,
+          "totalTransferSize": 10360,
           "jsSize": 7827,
           "cssSize": 0
         },
@@ -110,13 +110,13 @@
         }
       ]
     },
-    "navigation": 1079
+    "navigation": 1074
   },
   "comparison": {
     "loadTimeWinner": "TanStack Router",
-    "loadTimeDifference": 693.6666666666661,
+    "loadTimeDifference": 536,
     "transferSizeWinner": "React Router",
-    "transferSizeDifference": 4297,
+    "transferSizeDifference": 4407,
     "navigationWinner": "React Router"
   }
 }

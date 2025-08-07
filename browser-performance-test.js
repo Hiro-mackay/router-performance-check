@@ -290,13 +290,19 @@ function saveResults(data) {
   // Save latest browser results
   const latestResultsPath = path.join(
     resultsDir,
-    "latest-browser-results.json"
+    "latest-browser-performance.json"
   );
   fs.writeFileSync(latestResultsPath, JSON.stringify(data, null, 2));
 
-  // Save timestamped results
+  // Ensure history directories exist
+  const historyDir = path.join(resultsDir, "history", "browser");
+  if (!fs.existsSync(historyDir)) {
+    fs.mkdirSync(historyDir, { recursive: true });
+  }
+
+  // Save timestamped results in history
   const timestampedResultsPath = path.join(
-    resultsDir,
+    historyDir,
     `browser-results-${timestamp}.json`
   );
   fs.writeFileSync(timestampedResultsPath, JSON.stringify(data, null, 2));

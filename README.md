@@ -154,7 +154,7 @@ npm run test:performance:browser
 npm run build:analyze:react-router
 ```
 
-結果: `./performance-results/react-router-stats.html`
+結果: `./performance-results/react-router-bundle-stats.html`
 
 ### Tanstack Router
 
@@ -162,22 +162,28 @@ npm run build:analyze:react-router
 npm run build:analyze:tanstack-router
 ```
 
-結果: `./performance-results/tanstack-router-stats.html`
+結果: `./performance-results/tanstack-router-bundle-stats.html`
 
 ### パフォーマンス結果の管理
 
 ```bash
-# パフォーマンステスト実行後の結果ファイル
+# 最新の測定結果（メイン）
 ./performance-results/
-├── latest-results.json              # ビルド時間・バンドルサイズ結果
-├── latest-browser-results.json     # ブラウザ実行性能結果 ⭐
-├── results-[timestamp].json        # ビルド結果タイムスタンプ付き履歴
-├── browser-results-[timestamp].json # ブラウザ結果タイムスタンプ付き履歴
-├── react-router-stats.html         # React Routerバンドル分析
-└── tanstack-router-stats.html      # Tanstack Routerバンドル分析
+├── 📄 latest-browser-performance.json      # ⭐ ブラウザ実行性能結果
+├── 📄 latest-build-performance.json        # ビルド時間・バンドルサイズ結果
+├── 📄 react-router-bundle-stats.html       # React Routerバンドル分析
+├── 📄 tanstack-router-bundle-stats.html    # TanStack Routerバンドル分析
+├── 📄 README.md                            # 結果の見方説明
+└── 📁 history/                             # 履歴データ
+    ├── 📁 browser/                         # ブラウザ測定履歴
+    │   └── browser-results-[timestamp].json
+    └── 📁 build/                           # ビルド測定履歴
+        └── build-[timestamp].json
 ```
 
-**推奨**: `latest-browser-results.json` が実際のユーザー体験に最も近い結果を提供します。
+**推奨**: `📄 latest-browser-performance.json` が実際のユーザー体験に最も近い結果を提供します。
+
+詳細な結果の見方は `./performance-results/README.md` を参照してください。
 
 ## 🔍 測定対象 API
 
