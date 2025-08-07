@@ -11,6 +11,7 @@
 - ✅ ブラウザベース自動測定システムの導入
 - ✅ performance-results 構造の最適化
 - ✅ 包括的なドキュメント整備
+- 🆕 **高負荷フェッチ機能の実装**（2025 年 1 月 7 日追加）
 
 ## 📖 ドキュメント一覧
 
@@ -26,7 +27,29 @@
 
 ### 🔍 詳細ドキュメント
 
-#### 1. 問題分析と解決策
+#### 1. 高負荷フェッチ機能の実装 🆕
+
+➡️ **[高負荷フェッチ機能の実装ガイド](./high-load-fetch-implementation.md)**
+
+- 9 つの同時 API リクエストの実装
+- 約 2MB 以上のデータ処理
+- 複雑なデータ変換と CPU 集約的な処理
+- 詳細なパフォーマンス測定機能
+
+➡️ **[パフォーマンス最適化戦略とベストプラクティス](./performance-optimization-strategies.md)**
+
+- React Router・TanStack Router の最適化手法
+- フェーズ別パフォーマンス分析
+- 現実的な負荷テスト設計
+- 継続的なパフォーマンス監視
+
+➡️ **[セッション要約: 高負荷フェッチ機能の実装](./session-summary-high-load-implementation.md)**
+
+- 2025 年 1 月 7 日実装セッションの完全な記録
+- 達成された目標と成果
+- 今後の発展可能性
+
+#### 2. 問題分析と解決策
 
 ➡️ **[パフォーマンス測定の問題解決と改善](./performance-measurement-improvements.md)**
 
@@ -34,7 +57,7 @@
 - 根本原因の特定
 - 実装した解決策の効果
 
-#### 2. 技術実装の詳細
+#### 3. 技術実装の詳細
 
 ➡️ **[ブラウザベース パフォーマンス測定システム](./browser-based-performance-testing.md)**
 
@@ -42,7 +65,7 @@
 - Web Vitals 測定の実装
 - 結果ファイルフォーマット
 
-#### 3. ファイル構造の改善
+#### 4. ファイル構造の改善
 
 ➡️ **[Performance Results ファイル構造の最適化](./file-structure-optimization.md)**
 
@@ -57,7 +80,14 @@
 **新しくプロジェクトに参加する開発者**
 
 1. [包括的利用ガイド](./comprehensive-performance-guide.md) - 全体把握
-2. [ブラウザベース測定システム](./browser-based-performance-testing.md) - 技術詳細
+2. [高負荷フェッチ機能の実装ガイド](./high-load-fetch-implementation.md) - 最新機能 🆕
+3. [ブラウザベース測定システム](./browser-based-performance-testing.md) - 技術詳細
+
+**高負荷フェッチ機能について知りたい開発者** 🆕
+
+1. [セッション要約](./session-summary-high-load-implementation.md) - 実装の全体像
+2. [高負荷フェッチ機能の実装ガイド](./high-load-fetch-implementation.md) - 詳細な実装方法
+3. [パフォーマンス最適化戦略](./performance-optimization-strategies.md) - ベストプラクティス
 
 **既存の測定方法に疑問を持った開発者**
 

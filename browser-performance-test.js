@@ -4,8 +4,53 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const http = require("http");
+const https = require("https");
+const { URL } = require("url");
 
-console.log("🚀 Browser-based Router Performance Comparison Test\n");
+console.log(
+  "🚀 Browser-based Router Performance Comparison Test (High-Load Version)\n"
+);
+
+// Configuration object for centralized settings management
+const CONFIG = {
+  apps: [
+    {
+      name: "React Router",
+      url: "http://localhost:5173",
+      navLinkSelector: 'a[href*="posts"]',
+      pageUrl: "http://localhost:5173/posts",
+      // ✅ 実際のページ構造に合わせたセレクタ（h1要素を待機）
+      postsPageSelector: "h1",
+    },
+    {
+      name: "TanStack Router",
+      url: "http://localhost:3000",
+      navLinkSelector: 'a[href*="posts"]',
+      pageUrl: "http://localhost:3000/posts",
+      // ✅ 実際のページ構造に合わせたセレクタ（h1要素を待機）
+      postsPageSelector: "h1",
+    },
+  ],
+  iterations: 3,
+  timeouts: {
+    serverCheck: 5000,
+    pageLoad: 30000,
+    navigation: 10000,
+    webVitals: 15000,
+  },
+  retries: {
+    serverCheck: 30,
+    retryDelay: 1000,
+  },
+  puppeteerArgs: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    // ✅ --disable-web-securityを削除: 通常のユーザー環境に近い条件でテストするため
+    // CORS問題がある場合は、サーバー側で適切なCORS設定を行うべき
+    "--disable-features=VizDisplayCompositor",
+  ],
+};
 
 // Colors for console output
 const colors = {
@@ -31,54 +76,74 @@ function formatBytes(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 }
 
-async function waitForServer(url, maxRetries = 30, retryDelay = 1000) {
+async function waitForServer(
+  url,
+  maxRetries = CONFIG.retries.serverCheck,
+  retryDelay = CONFIG.retries.retryDelay
+) {
   log(`⏳ Waiting for server at ${url}...`, colors.yellow);
 
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const browser = await puppeteer.launch({ headless: true });
-      const page = await browser.newPage();
+      await new Promise((resolve, reject) => {
+        const urlObj = new URL(url);
+        const client = urlObj.protocol === "https:" ? https : http;
 
-      try {
-        await page.goto(url, { waitUntil: "networkidle0", timeout: 5000 });
-        await browser.close();
-        log(`✅ Server at ${url} is ready`, colors.green);
-        return true;
-      } catch (error) {
-        await browser.close();
-        if (i === maxRetries - 1) {
-          throw new Error(
-            `Server at ${url} is not ready after ${maxRetries} retries`
-          );
-        }
-        await new Promise((resolve) => setTimeout(resolve, retryDelay));
-      }
+        const req = client.get(
+          url,
+          {
+            timeout: CONFIG.timeouts.serverCheck,
+          },
+          (res) => {
+            // サーバーが応答すれば成功とみなす（ステータスコードは問わない）
+            resolve(res);
+          }
+        );
+
+        req.on("error", reject);
+        req.on("timeout", () => {
+          req.destroy();
+          reject(new Error("Request timeout"));
+        });
+      });
+
+      log(`✅ Server at ${url} is ready`, colors.green);
+      return true;
     } catch (error) {
       if (i === maxRetries - 1) {
-        throw error;
+        throw new Error(
+          `Server at ${url} is not ready after ${maxRetries} retries`
+        );
       }
       await new Promise((resolve) => setTimeout(resolve, retryDelay));
     }
   }
 }
 
-async function measurePagePerformance(url, pageName, iterations = 3) {
+async function measurePagePerformance(
+  url,
+  pageName,
+  iterations = CONFIG.iterations
+) {
   log(`\n📊 Measuring performance for ${pageName} (${url})`, colors.blue);
+
+  // Find app configuration for reliable selectors
+  const appConfig = CONFIG.apps.find((app) => app.name === pageName);
+  if (!appConfig) {
+    log(`❌ No configuration found for app: ${pageName}`, colors.red);
+    return null;
+  }
 
   const results = [];
 
+  // ブラウザを一度だけ起動
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: CONFIG.puppeteerArgs,
+  });
+
   for (let i = 0; i < iterations; i++) {
     log(`  Run ${i + 1}/${iterations}...`, colors.cyan);
-
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-web-security",
-        "--disable-features=VizDisplayCompositor",
-      ],
-    });
 
     const page = await browser.newPage();
 
@@ -90,6 +155,7 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
     await client.send("Network.enable");
     await client.send("Performance.enable");
 
+    // ✅ 各イテレーション開始時に測定変数をリセット
     let performanceMetrics = {};
     let networkRequests = [];
     let totalTransferSize = 0;
@@ -119,24 +185,65 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
     const startTime = Date.now();
 
     try {
-      // Navigate to page
+      // Navigate to page with more stable waiting condition
       await page.goto(url, {
-        waitUntil: "networkidle0",
-        timeout: 30000,
+        waitUntil: "domcontentloaded", // まずDOMの準備完了を待つ
+        timeout: CONFIG.timeouts.pageLoad,
       });
 
-      // Wait for content to be loaded
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // ✅ アプリケーションの主要コンテンツが表示されたことを確認する
+      try {
+        await page.waitForSelector(appConfig.postsPageSelector, {
+          timeout: 10000,
+          visible: true,
+        });
+      } catch (selectorError) {
+        log(
+          `⚠️ Posts page selector not found, continuing with basic waiting: ${selectorError.message}`,
+          colors.yellow
+        );
+        // フォールバック: 少し待機してからcontinue
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
 
-      // Get performance metrics
+      // ✅ 簡単なフォールバック測定: 実際の経過時間
+      const actualLoadTime = Date.now() - startTime;
+
+      // Get performance metrics using more robust approach
       const performanceData = await page.evaluate(() => {
         const perfData = performance.getEntriesByType("navigation")[0];
+
+        // より安全なフォールバック処理
+        const safeValue = (value) => {
+          return value && value > 0 ? value : 0;
+        };
+
+        const safeDuration = (end, start) => {
+          if (!end || !start || end <= 0 || start <= 0) return 0;
+          return end - start;
+        };
+
         return {
-          domContentLoaded:
-            perfData.domContentLoadedEventEnd -
-            perfData.domContentLoadedEventStart,
-          loadComplete: perfData.loadEventEnd - perfData.loadEventStart,
-          domInteractive: perfData.domInteractive - perfData.navigationStart,
+          domContentLoaded: safeDuration(
+            perfData.domContentLoadedEventEnd,
+            perfData.domContentLoadedEventStart
+          ),
+          loadComplete: safeDuration(
+            perfData.loadEventEnd,
+            perfData.loadEventStart
+          ),
+          domInteractive: safeDuration(
+            perfData.domInteractive,
+            perfData.navigationStart
+          ),
+          totalLoadTime:
+            safeValue(perfData.duration) ||
+            safeDuration(perfData.loadEventEnd, perfData.navigationStart) ||
+            safeDuration(
+              perfData.domContentLoadedEventEnd,
+              perfData.navigationStart
+            ),
+          actualLoadTime: 0, // Will be set from external measurement
           firstContentfulPaint: 0, // Will be updated below
           largestContentfulPaint: 0, // Will be updated below
         };
@@ -145,39 +252,62 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
       // Get Web Vitals metrics
       const webVitals = await page.evaluate(() => {
         return new Promise((resolve) => {
-          const vitals = {};
+          let lcp;
+          let fcp;
 
-          // LCP
-          new PerformanceObserver((list) => {
-            const entries = list.getEntries();
-            if (entries.length > 0) {
-              vitals.largestContentfulPaint =
-                entries[entries.length - 1].startTime;
+          const resolveIfReady = () => {
+            if (lcp !== undefined && fcp !== undefined) {
+              resolve({
+                largestContentfulPaint: lcp,
+                firstContentfulPaint: fcp,
+              });
             }
-          }).observe({ entryTypes: ["largest-contentful-paint"] });
+          };
 
-          // FCP
-          new PerformanceObserver((list) => {
-            const entries = list.getEntries();
+          // FCP - First Contentful Paint
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
             if (entries.length > 0) {
-              vitals.firstContentfulPaint = entries[0].startTime;
+              fcp = entries[0].startTime;
+              resolveIfReady();
             }
-          }).observe({ entryTypes: ["paint"] });
+          }).observe({ type: "first-contentful-paint", buffered: true });
 
-          // Wait a bit for metrics to be collected
+          // LCP - Largest Contentful Paint
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            if (entries.length > 0) {
+              lcp = entries[entries.length - 1].startTime;
+              resolveIfReady();
+            }
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+
+          // タイムアウトを設定して、無限に待機するのを防ぐ
           setTimeout(() => {
-            resolve(vitals);
-          }, 2000);
+            // ✅ タイムアウト時のログ出力を追加
+            if (lcp === undefined || fcp === undefined) {
+              console.warn(
+                "Web Vitals (LCP/FCP) measurement timed out. LCP:",
+                lcp,
+                "FCP:",
+                fcp
+              );
+            }
+            // 片方しか取得できていなくても、タイムアウトしたら解決する
+            resolve({
+              largestContentfulPaint: lcp || 0,
+              firstContentfulPaint: fcp || 0,
+            });
+          }, 15000); // ✅ CONFIG.timeouts.webVitalsの値を直接指定
         });
       });
-
-      const endTime = Date.now();
-      const totalTime = endTime - startTime;
 
       performanceMetrics = {
         ...performanceData,
         ...webVitals,
-        totalLoadTime: totalTime,
+        // ✅ より信頼できる測定値を使用
+        totalLoadTime: performanceData.totalLoadTime || actualLoadTime,
+        actualLoadTime, // 実際の経過時間も保持
         networkRequests: networkRequests.length,
         totalTransferSize,
         jsSize,
@@ -188,7 +318,7 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
       performanceMetrics = null;
     }
 
-    await browser.close();
+    await page.close(); // ページのみを閉じる
 
     if (performanceMetrics) {
       results.push(performanceMetrics);
@@ -198,6 +328,9 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
       );
     }
   }
+
+  // すべてのイテレーションが終了後にブラウザを閉じる
+  await browser.close();
 
   if (results.length === 0) {
     return null;
@@ -241,6 +374,13 @@ async function measurePagePerformance(url, pageName, iterations = 3) {
 async function measureNavigationPerformance(url, pageName) {
   log(`\n🧭 Measuring navigation performance for ${pageName}`, colors.blue);
 
+  // Find app configuration
+  const appConfig = CONFIG.apps.find((app) => app.name === pageName);
+  if (!appConfig) {
+    log(`❌ No configuration found for app: ${pageName}`, colors.red);
+    return null;
+  }
+
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -248,14 +388,24 @@ async function measureNavigationPerformance(url, pageName) {
     // Load the main page first
     await page.goto(url, { waitUntil: "networkidle0" });
 
+    // ✅ クリックする前に要素の存在を確認
+    await page.waitForSelector(appConfig.navLinkSelector, {
+      visible: true,
+      timeout: CONFIG.timeouts.navigation,
+    });
+
     // Measure navigation to posts page
     const startTime = Date.now();
 
-    // Click on posts link (assuming it exists)
+    // Click on posts link using CONFIG selector
     try {
-      await page.click('a[href*="posts"]');
-      await page.waitForSelector("body", { timeout: 10000 });
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for data loading
+      await Promise.all([
+        page.waitForNavigation({
+          waitUntil: "networkidle0",
+          timeout: CONFIG.timeouts.navigation,
+        }),
+        page.click(appConfig.navLinkSelector),
+      ]);
 
       const navigationTime = Date.now() - startTime;
 
@@ -465,35 +615,27 @@ async function runBrowserPerformanceTest() {
   const testStartTime = Date.now();
 
   try {
-    // Check if servers are running
+    // Check if servers are running in parallel
     log("🔍 Checking if development servers are running...", colors.blue);
 
-    await waitForServer("http://localhost:5173");
-    await waitForServer("http://localhost:3000");
+    await Promise.all([
+      waitForServer(CONFIG.apps[0].url),
+      waitForServer(CONFIG.apps[1].url),
+    ]);
 
     log("\n✅ Both servers are ready for testing\n", colors.green);
 
-    // Measure page load performance
-    const reactRouterMetrics = await measurePagePerformance(
-      "http://localhost:5173/posts",
-      "React Router"
-    );
+    // Measure page load performance in parallel
+    const [reactRouterMetrics, tanstackRouterMetrics] = await Promise.all([
+      measurePagePerformance(CONFIG.apps[0].pageUrl, CONFIG.apps[0].name),
+      measurePagePerformance(CONFIG.apps[1].pageUrl, CONFIG.apps[1].name),
+    ]);
 
-    const tanstackRouterMetrics = await measurePagePerformance(
-      "http://localhost:3000/posts",
-      "TanStack Router"
-    );
-
-    // Measure navigation performance
-    const reactRouterNav = await measureNavigationPerformance(
-      "http://localhost:5173",
-      "React Router"
-    );
-
-    const tanstackRouterNav = await measureNavigationPerformance(
-      "http://localhost:3000",
-      "TanStack Router"
-    );
+    // Measure navigation performance in parallel
+    const [reactRouterNav, tanstackRouterNav] = await Promise.all([
+      measureNavigationPerformance(CONFIG.apps[0].url, CONFIG.apps[0].name),
+      measureNavigationPerformance(CONFIG.apps[1].url, CONFIG.apps[1].name),
+    ]);
 
     // Display results
     displayResults(
@@ -509,14 +651,18 @@ async function runBrowserPerformanceTest() {
       testDuration: Date.now() - testStartTime,
       testType: "browser-based",
       reactRouter: {
-        url: "http://localhost:5173/posts",
+        url: CONFIG.apps[0].pageUrl,
         pageLoad: reactRouterMetrics,
         navigation: reactRouterNav,
+        testDescription:
+          "High-load version with 9 API requests, 2MB+ data, and heavy processing",
       },
       tanstackRouter: {
-        url: "http://localhost:3000/posts",
+        url: CONFIG.apps[1].pageUrl,
         pageLoad: tanstackRouterMetrics,
         navigation: tanstackRouterNav,
+        testDescription:
+          "High-load version with 9 API requests, 2MB+ data, and heavy processing",
       },
       comparison:
         reactRouterMetrics && tanstackRouterMetrics

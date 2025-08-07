@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-07T14:25:17.972Z",
+  "testDuration": 42712,
+  "testType": "browser-based",
+  "reactRouter": {
+    "url": "http://localhost:5173/posts",
+    "pageLoad": null,
+    "navigation": 760,
+    "testDescription": "High-load version with 9 API requests, 2MB+ data, and heavy processing"
+  },
+  "tanstackRouter": {
+    "url": "http://localhost:3000/posts",
+    "pageLoad": null,
+    "navigation": 63,
+    "testDescription": "High-load version with 9 API requests, 2MB+ data, and heavy processing"
+  },
+  "comparison": null
+}

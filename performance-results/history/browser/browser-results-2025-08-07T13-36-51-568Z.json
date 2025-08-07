@@ -1,0 +1,124 @@
+{
+  "timestamp": "2025-08-07T13:36:51.567Z",
+  "testDuration": 45199,
+  "testType": "browser-based",
+  "reactRouter": {
+    "url": "http://localhost:5173/posts",
+    "pageLoad": {
+      "domContentLoaded": 0.0333333412806193,
+      "loadComplete": 0,
+      "domInteractive": 0,
+      "firstContentfulPaint": 0,
+      "largestContentfulPaint": 0,
+      "totalLoadTime": 4996.666666666667,
+      "networkRequests": 21,
+      "totalTransferSize": 5953,
+      "jsSize": 4809,
+      "cssSize": 446,
+      "iterations": 3,
+      "rawResults": [
+        {
+          "domContentLoaded": 0.10000002384185791,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5017,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4955,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5018,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        }
+      ]
+    },
+    "navigation": 1045,
+    "testDescription": "High-load version with 9 API requests, 2MB+ data, and heavy processing"
+  },
+  "tanstackRouter": {
+    "url": "http://localhost:3000/posts",
+    "pageLoad": {
+      "domContentLoaded": 0,
+      "loadComplete": 0,
+      "domInteractive": 0,
+      "firstContentfulPaint": 0,
+      "largestContentfulPaint": 0,
+      "totalLoadTime": 5013.666666666667,
+      "networkRequests": 40,
+      "totalTransferSize": 15688,
+      "jsSize": 7543,
+      "cssSize": 448,
+      "iterations": 3,
+      "rawResults": [
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5014,
+          "networkRequests": 40,
+          "totalTransferSize": 15681,
+          "jsSize": 7543,
+          "cssSize": 446
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5013,
+          "networkRequests": 40,
+          "totalTransferSize": 15690,
+          "jsSize": 7543,
+          "cssSize": 449
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5014,
+          "networkRequests": 40,
+          "totalTransferSize": 15692,
+          "jsSize": 7543,
+          "cssSize": 448
+        }
+      ]
+    },
+    "navigation": 1075,
+    "testDescription": "High-load version with 9 API requests, 2MB+ data, and heavy processing"
+  },
+  "comparison": {
+    "loadTimeWinner": "React Router",
+    "loadTimeDifference": 17,
+    "transferSizeWinner": "React Router",
+    "transferSizeDifference": 9735,
+    "navigationWinner": "React Router"
+  }
+}
