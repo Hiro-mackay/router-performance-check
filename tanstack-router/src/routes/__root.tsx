@@ -55,7 +55,24 @@ export const Route = createRootRoute({
         </Link>
       </nav>
       <Outlet />
-      <TanStackRouterDevtools />
+      {import.meta.env.DEV && <TanStackRouterDevtools />}
     </>
   ),
+  errorComponent: ({ error }) => {
+    const message = "Oops!";
+    const details = error?.message || "An unexpected error occurred.";
+    const stack = error?.stack;
+
+    return (
+      <main className="pt-16 p-4 container mx-auto">
+        <h1>{message}</h1>
+        <p>{details}</p>
+        {stack && (
+          <pre className="w-full p-4 overflow-x-auto">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </main>
+    );
+  },
 });

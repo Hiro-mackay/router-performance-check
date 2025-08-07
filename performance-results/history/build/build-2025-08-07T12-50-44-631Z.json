@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-08-07T13:15:22.482Z",
-  "testDuration": 6037,
+  "timestamp": "2025-08-07T12:50:44.630Z",
+  "testDuration": 5835,
   "buildTimes": {
-    "reactRouter": 2705,
-    "tanstackRouter": 3329,
+    "reactRouter": 2660,
+    "tanstackRouter": 3173,
     "winner": "React Router",
-    "ratio": 1.2306839186691312
+    "ratio": 1.1928571428571428
   },
   "bundleSizes": {
     "reactRouter": {
@@ -15,15 +15,15 @@
       "statsAvailable": true
     },
     "tanstackRouter": {
-      "total": 301949,
-      "js": 266825,
-      "css": 5981,
+      "total": 295788,
+      "js": 266292,
+      "css": 734,
       "statsAvailable": true
     },
     "comparison": {
-      "totalDifference": 42864,
-      "jsDifference": 42798,
-      "cssDifference": 1896
+      "totalDifference": 49025,
+      "jsDifference": 43331,
+      "cssDifference": 7143
     }
   },
   "statsFiles": {

@@ -3,19 +3,21 @@ node_modules/
 */node_modules/
 
 # Build outputs
-build/
 dist/
 dist-ssr/
 *.tsbuildinfo
 
+# Project-specific build directories (excluding performance-results)
+react-router/build/
+tanstack-router/build/
+tanstack-router/dist/
+
 # React Router specific
 .react-router/
-react-router/build/
 react-router/dist/
 
 # Tanstack Router specific
 .tanstack/
-tanstack-router/dist/
 
 # Environment variables
 .env

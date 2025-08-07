@@ -11,7 +11,7 @@ export default defineConfig({
     tsconfigPaths(),
     // Bundle analysis
     visualizer({
-      filename: "../performance-results/react-router-stats.html",
+      filename: "../performance-results/react-router-bundle-stats.html",
       open: false,
       gzipSize: true,
       brotliSize: true,
