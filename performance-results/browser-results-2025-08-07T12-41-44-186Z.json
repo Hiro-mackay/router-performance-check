@@ -1,0 +1,122 @@
+{
+  "timestamp": "2025-08-07T12:41:44.185Z",
+  "testDuration": 44274,
+  "testType": "browser-based",
+  "reactRouter": {
+    "url": "http://localhost:5173/posts",
+    "pageLoad": {
+      "domContentLoaded": 0,
+      "loadComplete": 0,
+      "domInteractive": 0,
+      "firstContentfulPaint": 0,
+      "largestContentfulPaint": 0,
+      "totalLoadTime": 5627.333333333333,
+      "networkRequests": 21,
+      "totalTransferSize": 5953,
+      "jsSize": 4809,
+      "cssSize": 446,
+      "iterations": 3,
+      "rawResults": [
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 6909,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4964,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 5009,
+          "networkRequests": 21,
+          "totalTransferSize": 5953,
+          "jsSize": 4809,
+          "cssSize": 446
+        }
+      ]
+    },
+    "navigation": 1039
+  },
+  "tanstackRouter": {
+    "url": "http://localhost:3000/posts",
+    "pageLoad": {
+      "domContentLoaded": 0.0333333412806193,
+      "loadComplete": 0,
+      "domInteractive": 0,
+      "firstContentfulPaint": 0,
+      "largestContentfulPaint": 0,
+      "totalLoadTime": 4933.666666666667,
+      "networkRequests": 32,
+      "totalTransferSize": 10250,
+      "jsSize": 7827,
+      "cssSize": 0,
+      "iterations": 3,
+      "rawResults": [
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4924,
+          "networkRequests": 32,
+          "totalTransferSize": 10361,
+          "jsSize": 7827,
+          "cssSize": 0
+        },
+        {
+          "domContentLoaded": 0.10000002384185791,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4946,
+          "networkRequests": 32,
+          "totalTransferSize": 10029,
+          "jsSize": 7827,
+          "cssSize": 0
+        },
+        {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "domInteractive": null,
+          "firstContentfulPaint": 0,
+          "largestContentfulPaint": 0,
+          "totalLoadTime": 4931,
+          "networkRequests": 32,
+          "totalTransferSize": 10360,
+          "jsSize": 7827,
+          "cssSize": 0
+        }
+      ]
+    },
+    "navigation": 1079
+  },
+  "comparison": {
+    "loadTimeWinner": "TanStack Router",
+    "loadTimeDifference": 693.6666666666661,
+    "transferSizeWinner": "React Router",
+    "transferSizeDifference": 4297,
+    "navigationWinner": "React Router"
+  }
+}

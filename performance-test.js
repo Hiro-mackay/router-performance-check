@@ -307,11 +307,19 @@ function runPerformanceTest() {
 
   savePerformanceResults(performanceData);
 
-  log("\n🎯 Manual Performance Testing:", colors.bright);
-  log("- Use browser DevTools Performance tab");
-  log("- Test on different devices/network conditions");
-  log("- Measure Core Web Vitals (LCP, FID, CLS)");
-  log("- Compare initial page load vs navigation performance");
+  log("\n🎯 Next Steps for Complete Performance Analysis:", colors.bright);
+  log("1. Run browser-based performance test:", colors.cyan);
+  log("   npm run test:performance:browser");
+  log("\n2. Manual testing with browser DevTools:");
+  log("   - Use Performance tab for detailed analysis");
+  log("   - Test on different devices/network conditions");
+  log("   - Measure Core Web Vitals (LCP, FID, CLS)");
+  log("   - Compare initial page load vs navigation performance");
+  log("\n3. Automated browser testing includes:");
+  log("   - Real page load times");
+  log("   - Network transfer measurements");
+  log("   - Web Vitals metrics");
+  log("   - Client-side navigation performance");
 }
 
 // Run the test

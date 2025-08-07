@@ -18,6 +18,7 @@
     "install:react-router": "cd react-router && npm install",
     "install:tanstack-router": "cd tanstack-router && npm install",
     "test:performance": "node performance-test.js",
+    "test:performance:browser": "node browser-performance-test.js",
     "clean": "npm run clean:react-router && npm run clean:tanstack-router",
     "clean:react-router": "cd react-router && rm -rf build dist node_modules/.cache",
     "clean:tanstack-router": "cd tanstack-router && rm -rf build dist node_modules/.cache",
@@ -27,7 +28,8 @@
     "start": "npm run dev"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "puppeteer": "^23.10.4"
   },
   "keywords": [
     "react-router",

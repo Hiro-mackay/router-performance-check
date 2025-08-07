@@ -95,6 +95,8 @@ npm run install:all  # 両プロジェクトの依存関係を再インストー
 
 ### 自動テスト
 
+#### 1. ビルド時間・バンドルサイズ測定
+
 ```bash
 npm run test:performance
 ```
@@ -105,6 +107,28 @@ npm run test:performance
 - ビルド時間の測定・比較
 - バンドルサイズの分析・比較
 - 結果のコンソール出力
+
+#### 2. ブラウザベース実行性能測定 ⚡ **推奨**
+
+```bash
+# 開発サーバーを起動（別ターミナル）
+npm run dev
+
+# ブラウザ自動化テストを実行
+npm run test:performance:browser
+```
+
+このコマンドは**実際のブラウザ**で以下を測定します：
+
+- **実際のページロード時間**
+- **DOM Content Loaded 時間**
+- **First Contentful Paint (FCP)**
+- **Largest Contentful Paint (LCP)**
+- **ネットワーク転送サイズ**
+- **クライアントサイドナビゲーション性能**
+- **複数回測定での平均値算出**
+
+> **注意**: ブラウザテストの前に `npm run dev` で両方のサーバーを起動してください。
 
 ### 手動テスト
 
@@ -145,11 +169,15 @@ npm run build:analyze:tanstack-router
 ```bash
 # パフォーマンステスト実行後の結果ファイル
 ./performance-results/
-├── latest-results.json           # 最新の測定結果
-├── results-[timestamp].json      # タイムスタンプ付き履歴
-├── react-router-stats.html       # React Routerバンドル分析
-└── tanstack-router-stats.html    # Tanstack Routerバンドル分析
+├── latest-results.json              # ビルド時間・バンドルサイズ結果
+├── latest-browser-results.json     # ブラウザ実行性能結果 ⭐
+├── results-[timestamp].json        # ビルド結果タイムスタンプ付き履歴
+├── browser-results-[timestamp].json # ブラウザ結果タイムスタンプ付き履歴
+├── react-router-stats.html         # React Routerバンドル分析
+└── tanstack-router-stats.html      # Tanstack Routerバンドル分析
 ```
+
+**推奨**: `latest-browser-results.json` が実際のユーザー体験に最も近い結果を提供します。
 
 ## 🔍 測定対象 API
 
@@ -180,18 +208,34 @@ npm run build:analyze:tanstack-router
 
 ## 📈 パフォーマンス測定のベストプラクティス
 
+### 測定手法の比較
+
+| 測定方法                | 長所                                   | 短所                 | 使用場面         |
+| ----------------------- | -------------------------------------- | -------------------- | ---------------- |
+| **ブラウザ自動測定** ⭐ | 実際のユーザー体験、Web Vitals、自動化 | セットアップが必要   | **実用性能評価** |
+| **ビルド時測定**        | 簡単、CI/CD 統合しやすい               | 実行性能が分からない | 開発効率評価     |
+| **手動 DevTools**       | 詳細分析可能                           | 手間、再現性低い     | 詳細デバッグ     |
+
+### 推奨測定フロー
+
+1. **`npm run test:performance:browser`** - 実際の性能比較
+2. **`npm run test:performance`** - ビルド効率比較
+3. **手動 DevTools** - 問題の詳細分析
+
 ### 測定前の準備
 
-1. ブラウザキャッシュをクリア
+1. ブラウザキャッシュをクリア（自動化テストでは自動実行）
 2. ネットワーク条件を統一
-3. 複数回測定して平均値を算出
+3. 複数回測定して平均値を算出（自動化テストでは標準で 3 回実行）
 
-### 測定項目
+### 重要な測定項目
 
-- **初回ロード**: ページの初回アクセス時間
-- **リロード**: キャッシュ有効時のロード時間
-- **ナビゲーション**: SPA 内でのページ遷移時間
-- **バンドルサイズ**: 各チャンクのサイズと最適化効果
+- **Total Load Time**: 実際のページロード時間
+- **DOM Content Loaded**: DOM の読み込み完了時間
+- **First Contentful Paint (FCP)**: 最初のコンテンツ表示時間
+- **Largest Contentful Paint (LCP)**: メインコンテンツの表示時間
+- **Network Transfer Size**: 実際のデータ転送量
+- **Navigation Performance**: SPA 内でのページ遷移時間
 
 ## 🔧 トラブルシューティング
 
