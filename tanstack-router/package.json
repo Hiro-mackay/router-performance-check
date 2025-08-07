@@ -1,11 +1,12 @@
 {
-  "name": ".",
+  "name": "tanstack-router-app",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
     "start": "vite --port 3000",
     "build": "vite build && tsc",
+    "build:analyze": "vite build && tsc && echo 'Bundle analysis available at ../performance-results/tanstack-router-stats.html'",
     "serve": "vite preview",
     "test": "vitest run"
   },
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
+    "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.7.2",
     "vite": "^6.3.5",
     "vitest": "^3.0.5",

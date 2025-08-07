@@ -1,0 +1,40 @@
+{
+  "name": "router-performance-check",
+  "version": "1.0.0",
+  "description": "Performance comparison between React Router and Tanstack Router",
+  "private": true,
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "dev": "concurrently \"npm run dev:react-router\" \"npm run dev:tanstack-router\"",
+    "dev:react-router": "cd react-router && npm run dev",
+    "dev:tanstack-router": "cd tanstack-router && npm run dev",
+    "build": "npm run build:react-router && npm run build:tanstack-router",
+    "build:react-router": "cd react-router && npm run build",
+    "build:tanstack-router": "cd tanstack-router && npm run build",
+    "build:analyze": "npm run build:analyze:react-router && npm run build:analyze:tanstack-router",
+    "build:analyze:react-router": "cd react-router && npm run build:analyze",
+    "build:analyze:tanstack-router": "cd tanstack-router && npm run build:analyze",
+    "install:all": "npm run install:react-router && npm run install:tanstack-router",
+    "install:react-router": "cd react-router && npm install",
+    "install:tanstack-router": "cd tanstack-router && npm install",
+    "test:performance": "node performance-test.js",
+    "clean": "npm run clean:react-router && npm run clean:tanstack-router",
+    "clean:react-router": "cd react-router && rm -rf build dist node_modules/.cache",
+    "clean:tanstack-router": "cd tanstack-router && rm -rf build dist node_modules/.cache",
+    "typecheck": "npm run typecheck:react-router && npm run typecheck:tanstack-router",
+    "typecheck:react-router": "cd react-router && npm run typecheck",
+    "typecheck:tanstack-router": "cd tanstack-router && tsc --noEmit",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "react-router",
+    "tanstack-router",
+    "performance",
+    "comparison"
+  ],
+  "author": "",
+  "license": "MIT"
+}

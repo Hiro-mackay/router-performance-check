@@ -1,9 +1,10 @@
 {
-  "name": "react-router",
+  "name": "react-router-app",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "build:analyze": "react-router build && echo 'Bundle analysis available at ../performance-results/react-router-stats.html'",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
@@ -22,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "rollup-plugin-visualizer": "^6.0.3",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",

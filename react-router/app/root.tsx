@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  NavLink,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -42,7 +43,41 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div>
+      <nav
+        style={{
+          padding: "20px",
+          borderBottom: "1px solid #ddd",
+          backgroundColor: "#f8f9fa",
+          display: "flex",
+          gap: "20px",
+        }}
+      >
+        <NavLink
+          to="/"
+          style={({ isActive }) => ({
+            color: isActive ? "#007bff" : "#333",
+            textDecoration: "none",
+            fontWeight: isActive ? "bold" : "normal",
+          })}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/posts"
+          style={({ isActive }) => ({
+            color: isActive ? "#007bff" : "#333",
+            textDecoration: "none",
+            fontWeight: isActive ? "bold" : "normal",
+          })}
+        >
+          Posts (Performance Test)
+        </NavLink>
+      </nav>
+      <Outlet />
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
