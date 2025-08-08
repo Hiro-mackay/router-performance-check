@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2025-08-08T04:05:38.737Z",
+    "timestamp": "2025-08-08T04:20:01.857Z",
     "config": {
       "routes": [
         {
@@ -39,17 +39,17 @@
       "app": "react-router",
       "route": "posts",
       "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-08T04:00:07.045Z",
+      "timestamp": "2025-08-08T04:14:29.309Z",
       "runIndex": 0,
       "lighthouse": {
         "performance": 99,
         "metrics": {
-          "fcp": 760.967,
-          "lcp": 760.967,
+          "fcp": 824.408,
+          "lcp": 824.409,
           "cls": 0,
           "tbt": 0,
-          "si": 780,
-          "tti": 778.829
+          "si": 860,
+          "tti": 839.4920000009537
         },
         "opportunities": {
           "unusedJs": 52391,
@@ -60,10 +60,10 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 796,
-          "loadComplete": 796,
-          "firstByte": 695,
-          "domInteractive": 795
+          "domContentLoaded": 768,
+          "loadComplete": 769,
+          "firstByte": 678,
+          "domInteractive": 768
         }
       }
     },
@@ -71,49 +71,17 @@
       "app": "react-router",
       "route": "posts",
       "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-08T04:00:36.299Z",
+      "timestamp": "2025-08-08T04:14:58.499Z",
       "runIndex": 1,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 828.08,
-          "lcp": 828.08,
-          "cls": 0,
-          "tbt": 0,
-          "si": 845,
-          "tti": 845.651
-        },
-        "opportunities": {
-          "unusedJs": 52391,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 794,
-          "loadComplete": 795,
-          "firstByte": 750,
-          "domInteractive": 794
-        }
-      }
-    },
-    {
-      "app": "react-router",
-      "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-08T04:01:05.749Z",
-      "runIndex": 2,
       "lighthouse": {
         "performance": 98,
         "metrics": {
-          "fcp": 850.265,
-          "lcp": 850.265,
+          "fcp": 916.199,
+          "lcp": 916.199,
           "cls": 0,
           "tbt": 0,
-          "si": 867,
-          "tti": 867.979
+          "si": 934,
+          "tti": 934.1019999990464
         },
         "opportunities": {
           "unusedJs": 52391,
@@ -124,10 +92,10 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 788,
-          "loadComplete": 789,
-          "firstByte": 696,
-          "domInteractive": 788
+          "domContentLoaded": 749,
+          "loadComplete": 749,
+          "firstByte": 661,
+          "domInteractive": 749
         }
       }
     },
@@ -135,17 +103,49 @@
       "app": "react-router",
       "route": "posts",
       "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-08T04:01:35.033Z",
+      "timestamp": "2025-08-08T04:15:27.795Z",
+      "runIndex": 2,
+      "lighthouse": {
+        "performance": 99,
+        "metrics": {
+          "fcp": 798.569,
+          "lcp": 798.569,
+          "cls": 0,
+          "tbt": 0,
+          "si": 817,
+          "tti": 815.692
+        },
+        "opportunities": {
+          "unusedJs": 52391,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 955,
+          "loadComplete": 955,
+          "firstByte": 869,
+          "domInteractive": 955
+        }
+      }
+    },
+    {
+      "app": "react-router",
+      "route": "posts",
+      "url": "http://localhost:5173/posts",
+      "timestamp": "2025-08-08T04:15:57.134Z",
       "runIndex": 3,
       "lighthouse": {
         "performance": 99,
         "metrics": {
-          "fcp": 818.509,
-          "lcp": 818.509,
+          "fcp": 758.531,
+          "lcp": 758.531,
           "cls": 0,
           "tbt": 0,
-          "si": 837,
-          "tti": 835.967
+          "si": 775,
+          "tti": 776.573
         },
         "opportunities": {
           "unusedJs": 52391,
@@ -156,10 +156,10 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 719,
-          "loadComplete": 719,
-          "firstByte": 671,
-          "domInteractive": 719
+          "domContentLoaded": 798,
+          "loadComplete": 798,
+          "firstByte": 709,
+          "domInteractive": 798
         }
       }
     },
@@ -167,17 +167,17 @@
       "app": "react-router",
       "route": "posts",
       "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-08T04:02:04.301Z",
+      "timestamp": "2025-08-08T04:16:26.309Z",
       "runIndex": 4,
       "lighthouse": {
-        "performance": 98,
+        "performance": 99,
         "metrics": {
-          "fcp": 898.078,
-          "lcp": 898.078,
+          "fcp": 814.569,
+          "lcp": 814.569,
           "cls": 0,
           "tbt": 0,
-          "si": 934,
-          "tti": 915.62
+          "si": 832,
+          "tti": 831.846
         },
         "opportunities": {
           "unusedJs": 52391,
@@ -188,10 +188,10 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 832,
-          "loadComplete": 833,
-          "firstByte": 735,
-          "domInteractive": 832
+          "domContentLoaded": 808,
+          "loadComplete": 809,
+          "firstByte": 716,
+          "domInteractive": 808
         }
       }
     },
@@ -199,17 +199,17 @@
       "app": "tanstack-router",
       "route": "posts",
       "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-08T04:03:25.296Z",
+      "timestamp": "2025-08-08T04:17:48.319Z",
       "runIndex": 0,
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 425.484,
-          "lcp": 425.484,
+          "fcp": 429.984,
+          "lcp": 429.984,
           "cls": 0,
           "tbt": 0,
-          "si": 417,
-          "tti": 425.484
+          "si": 421,
+          "tti": 429.984
         },
         "opportunities": {
           "unusedJs": 34754,
@@ -231,113 +231,17 @@
       "app": "tanstack-router",
       "route": "posts",
       "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-08T04:03:52.487Z",
+      "timestamp": "2025-08-08T04:18:15.509Z",
       "runIndex": 1,
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 408.579,
-          "lcp": 408.579,
+          "fcp": 445.193,
+          "lcp": 445.193,
           "cls": 0,
           "tbt": 0,
-          "si": 400,
-          "tti": 408.579
-        },
-        "opportunities": {
-          "unusedJs": 34754,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 25,
-          "loadComplete": 25,
-          "firstByte": 2,
-          "domInteractive": 8
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-08T04:04:19.646Z",
-      "runIndex": 2,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 744.536,
-          "lcp": 744.536,
-          "cls": 0,
-          "tbt": 0,
-          "si": 726,
-          "tti": 744.536
-        },
-        "opportunities": {
-          "unusedJs": 34754,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 24,
-          "loadComplete": 24,
-          "firstByte": 2,
-          "domInteractive": 7
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-08T04:04:47.126Z",
-      "runIndex": 3,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 527.045,
-          "lcp": 527.045,
-          "cls": 0,
-          "tbt": 0,
-          "si": 516,
-          "tti": 527.045
-        },
-        "opportunities": {
-          "unusedJs": 34754,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 22,
-          "loadComplete": 22,
-          "firstByte": 2,
-          "domInteractive": 7
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-08T04:05:14.485Z",
-      "runIndex": 4,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 522.718,
-          "lcp": 522.718,
-          "cls": 0,
-          "tbt": 0,
-          "si": 512,
-          "tti": 522.718
+          "si": 436,
+          "tti": 445.193
         },
         "opportunities": {
           "unusedJs": 34754,
@@ -352,6 +256,102 @@
           "loadComplete": 23,
           "firstByte": 2,
           "domInteractive": 7
+        }
+      }
+    },
+    {
+      "app": "tanstack-router",
+      "route": "posts",
+      "url": "http://localhost:5174/posts",
+      "timestamp": "2025-08-08T04:18:42.692Z",
+      "runIndex": 2,
+      "lighthouse": {
+        "performance": 98,
+        "metrics": {
+          "fcp": 894.134,
+          "lcp": 894.134,
+          "cls": 0,
+          "tbt": 0,
+          "si": 871,
+          "tti": 894.134
+        },
+        "opportunities": {
+          "unusedJs": 34754,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 22,
+          "loadComplete": 23,
+          "firstByte": 2,
+          "domInteractive": 6
+        }
+      }
+    },
+    {
+      "app": "tanstack-router",
+      "route": "posts",
+      "url": "http://localhost:5174/posts",
+      "timestamp": "2025-08-08T04:19:10.309Z",
+      "runIndex": 3,
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 605.136,
+          "lcp": 605.136,
+          "cls": 0,
+          "tbt": 0,
+          "si": 591,
+          "tti": 605.136
+        },
+        "opportunities": {
+          "unusedJs": 34754,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 23,
+          "loadComplete": 24,
+          "firstByte": 2,
+          "domInteractive": 7
+        }
+      }
+    },
+    {
+      "app": "tanstack-router",
+      "route": "posts",
+      "url": "http://localhost:5174/posts",
+      "timestamp": "2025-08-08T04:19:37.674Z",
+      "runIndex": 4,
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 459.066,
+          "lcp": 459.066,
+          "cls": 0,
+          "tbt": 0,
+          "si": 449,
+          "tti": 459.066
+        },
+        "opportunities": {
+          "unusedJs": 34754,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 23,
+          "loadComplete": 23,
+          "firstByte": 2,
+          "domInteractive": 6
         }
       }
     }

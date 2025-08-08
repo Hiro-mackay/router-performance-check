@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2025-08-08T04:05:38.737Z",
+    "timestamp": "2025-08-08T04:20:01.857Z",
     "config": {
       "routes": [
         {
@@ -44,32 +44,32 @@
           "count": 5,
           "min": 98,
           "max": 99,
-          "mean": 98.6,
+          "mean": 98.8,
           "median": 99,
           "p95": 99,
-          "stdDev": 0.4898979485566356,
-          "coefficientOfVariation": 0.00496853903201456
+          "stdDev": 0.4,
+          "coefficientOfVariation": 0.004048582995951417
         },
         "metrics": {
           "fcp": {
             "count": 5,
-            "min": 760.967,
-            "max": 898.078,
-            "mean": 831.1797999999999,
-            "median": 828.08,
-            "p95": 898.078,
-            "stdDev": 44.5861172088353,
-            "coefficientOfVariation": 0.05364196436058155
+            "min": 758.531,
+            "max": 916.199,
+            "mean": 822.4552,
+            "median": 814.569,
+            "p95": 916.199,
+            "stdDev": 51.982226794934434,
+            "coefficientOfVariation": 0.06320371832403082
           },
           "lcp": {
             "count": 5,
-            "min": 760.967,
-            "max": 898.078,
-            "mean": 831.1797999999999,
-            "median": 828.08,
-            "p95": 898.078,
-            "stdDev": 44.5861172088353,
-            "coefficientOfVariation": 0.05364196436058155
+            "min": 758.531,
+            "max": 916.199,
+            "mean": 822.4554,
+            "median": 814.569,
+            "p95": 916.199,
+            "stdDev": 51.98223430981012,
+            "coefficientOfVariation": 0.06320371209163453
           },
           "cls": {
             "count": 5,
@@ -93,23 +93,23 @@
           },
           "tti": {
             "count": 5,
-            "min": 778.829,
-            "max": 915.62,
-            "mean": 848.8092,
-            "median": 845.651,
-            "p95": 915.62,
-            "stdDev": 44.5045816715538,
-            "coefficientOfVariation": 0.0524317852251764
+            "min": 776.573,
+            "max": 934.1019999990464,
+            "mean": 839.5409999999999,
+            "median": 831.846,
+            "p95": 934.1019999990464,
+            "stdDev": 52.028342221945834,
+            "coefficientOfVariation": 0.06197236611665879
           },
           "si": {
             "count": 5,
-            "min": 780,
+            "min": 775,
             "max": 934,
-            "mean": 852.6,
-            "median": 845,
+            "mean": 843.6,
+            "median": 832,
             "p95": 934,
-            "stdDev": 49.81003914874992,
-            "coefficientOfVariation": 0.05842134547120563
+            "stdDev": 52.89461220200031,
+            "coefficientOfVariation": 0.06270105761261298
           }
         },
         "opportunities": {
@@ -153,43 +153,43 @@
       "pagePerformance": {
         "domContentLoaded": {
           "count": 5,
-          "min": 719,
-          "max": 832,
-          "mean": 785.8,
-          "median": 794,
-          "p95": 832,
-          "stdDev": 36.804347569275016,
-          "coefficientOfVariation": 0.04683678743862944
+          "min": 749,
+          "max": 955,
+          "mean": 815.6,
+          "median": 798,
+          "p95": 955,
+          "stdDev": 72.80274720091269,
+          "coefficientOfVariation": 0.08926280922132503
         },
         "loadComplete": {
           "count": 5,
-          "min": 719,
-          "max": 833,
-          "mean": 786.4,
-          "median": 795,
-          "p95": 833,
-          "stdDev": 37.11387880564359,
-          "coefficientOfVariation": 0.047194657687746173
+          "min": 749,
+          "max": 955,
+          "mean": 816,
+          "median": 798,
+          "p95": 955,
+          "stdDev": 72.65259802649868,
+          "coefficientOfVariation": 0.08903504660110133
         },
         "firstByte": {
           "count": 5,
-          "min": 671,
-          "max": 750,
-          "mean": 709.4,
-          "median": 696,
-          "p95": 750,
-          "stdDev": 28.862432329933668,
-          "coefficientOfVariation": 0.04068569541857016
+          "min": 661,
+          "max": 869,
+          "mean": 726.6,
+          "median": 709,
+          "p95": 869,
+          "stdDev": 73.9799972965666,
+          "coefficientOfVariation": 0.10181667670873465
         },
         "domInteractive": {
           "count": 5,
-          "min": 719,
-          "max": 832,
-          "mean": 785.6,
-          "median": 794,
-          "p95": 832,
-          "stdDev": 36.75105440664254,
-          "coefficientOfVariation": 0.04678087373554295
+          "min": 749,
+          "max": 955,
+          "mean": 815.6,
+          "median": 798,
+          "p95": 955,
+          "stdDev": 72.80274720091269,
+          "coefficientOfVariation": 0.08926280922132503
         }
       }
     },
@@ -200,34 +200,34 @@
       "lighthouse": {
         "performanceScore": {
           "count": 5,
-          "min": 99,
+          "min": 98,
           "max": 100,
-          "mean": 99.8,
+          "mean": 99.6,
           "median": 100,
           "p95": 100,
-          "stdDev": 0.4,
-          "coefficientOfVariation": 0.004008016032064129
+          "stdDev": 0.8,
+          "coefficientOfVariation": 0.008032128514056226
         },
         "metrics": {
           "fcp": {
             "count": 5,
-            "min": 408.579,
-            "max": 744.536,
-            "mean": 525.6723999999999,
-            "median": 522.718,
-            "p95": 744.536,
-            "stdDev": 119.71672208442727,
-            "coefficientOfVariation": 0.2277401706546269
+            "min": 429.984,
+            "max": 894.134,
+            "mean": 566.7026,
+            "median": 459.066,
+            "p95": 894.134,
+            "stdDev": 175.34574079754546,
+            "coefficientOfVariation": 0.3094140397406779
           },
           "lcp": {
             "count": 5,
-            "min": 408.579,
-            "max": 744.536,
-            "mean": 525.6723999999999,
-            "median": 522.718,
-            "p95": 744.536,
-            "stdDev": 119.71672208442727,
-            "coefficientOfVariation": 0.2277401706546269
+            "min": 429.984,
+            "max": 894.134,
+            "mean": 566.7026,
+            "median": 459.066,
+            "p95": 894.134,
+            "stdDev": 175.34574079754546,
+            "coefficientOfVariation": 0.3094140397406779
           },
           "cls": {
             "count": 5,
@@ -251,23 +251,23 @@
           },
           "tti": {
             "count": 5,
-            "min": 408.579,
-            "max": 744.536,
-            "mean": 525.6723999999999,
-            "median": 522.718,
-            "p95": 744.536,
-            "stdDev": 119.71672208442727,
-            "coefficientOfVariation": 0.2277401706546269
+            "min": 429.984,
+            "max": 894.134,
+            "mean": 566.7026,
+            "median": 459.066,
+            "p95": 894.134,
+            "stdDev": 175.34574079754546,
+            "coefficientOfVariation": 0.3094140397406779
           },
           "si": {
             "count": 5,
-            "min": 400,
-            "max": 726,
-            "mean": 514.2,
-            "median": 512,
-            "p95": 726,
-            "stdDev": 116.06618801356406,
-            "coefficientOfVariation": 0.22572187478328287
+            "min": 421,
+            "max": 871,
+            "mean": 553.6,
+            "median": 449,
+            "p95": 871,
+            "stdDev": 169.99717644713985,
+            "coefficientOfVariation": 0.3070758245071168
           }
         },
         "opportunities": {
@@ -312,22 +312,22 @@
         "domContentLoaded": {
           "count": 5,
           "min": 22,
-          "max": 25,
-          "mean": 23.2,
+          "max": 23,
+          "mean": 22.6,
           "median": 23,
-          "p95": 25,
-          "stdDev": 1.1661903789690602,
-          "coefficientOfVariation": 0.05026682667970087
+          "p95": 23,
+          "stdDev": 0.4898979485566356,
+          "coefficientOfVariation": 0.021676900378612193
         },
         "loadComplete": {
           "count": 5,
           "min": 22,
-          "max": 25,
-          "mean": 23.2,
+          "max": 24,
+          "mean": 23,
           "median": 23,
-          "p95": 25,
-          "stdDev": 1.1661903789690602,
-          "coefficientOfVariation": 0.05026682667970087
+          "p95": 24,
+          "stdDev": 0.6324555320336759,
+          "coefficientOfVariation": 0.02749806661015982
         },
         "firstByte": {
           "count": 5,
@@ -342,12 +342,12 @@
         "domInteractive": {
           "count": 5,
           "min": 6,
-          "max": 8,
-          "mean": 7,
-          "median": 7,
-          "p95": 8,
-          "stdDev": 0.6324555320336759,
-          "coefficientOfVariation": 0.09035079029052513
+          "max": 7,
+          "mean": 6.4,
+          "median": 6,
+          "p95": 7,
+          "stdDev": 0.48989794855663565,
+          "coefficientOfVariation": 0.07654655446197432
         }
       }
     }
@@ -364,32 +364,32 @@
             "count": 5,
             "min": 98,
             "max": 99,
-            "mean": 98.6,
+            "mean": 98.8,
             "median": 99,
             "p95": 99,
-            "stdDev": 0.4898979485566356,
-            "coefficientOfVariation": 0.00496853903201456
+            "stdDev": 0.4,
+            "coefficientOfVariation": 0.004048582995951417
           },
           "metrics": {
             "fcp": {
               "count": 5,
-              "min": 760.967,
-              "max": 898.078,
-              "mean": 831.1797999999999,
-              "median": 828.08,
-              "p95": 898.078,
-              "stdDev": 44.5861172088353,
-              "coefficientOfVariation": 0.05364196436058155
+              "min": 758.531,
+              "max": 916.199,
+              "mean": 822.4552,
+              "median": 814.569,
+              "p95": 916.199,
+              "stdDev": 51.982226794934434,
+              "coefficientOfVariation": 0.06320371832403082
             },
             "lcp": {
               "count": 5,
-              "min": 760.967,
-              "max": 898.078,
-              "mean": 831.1797999999999,
-              "median": 828.08,
-              "p95": 898.078,
-              "stdDev": 44.5861172088353,
-              "coefficientOfVariation": 0.05364196436058155
+              "min": 758.531,
+              "max": 916.199,
+              "mean": 822.4554,
+              "median": 814.569,
+              "p95": 916.199,
+              "stdDev": 51.98223430981012,
+              "coefficientOfVariation": 0.06320371209163453
             },
             "cls": {
               "count": 5,
@@ -413,23 +413,23 @@
             },
             "tti": {
               "count": 5,
-              "min": 778.829,
-              "max": 915.62,
-              "mean": 848.8092,
-              "median": 845.651,
-              "p95": 915.62,
-              "stdDev": 44.5045816715538,
-              "coefficientOfVariation": 0.0524317852251764
+              "min": 776.573,
+              "max": 934.1019999990464,
+              "mean": 839.5409999999999,
+              "median": 831.846,
+              "p95": 934.1019999990464,
+              "stdDev": 52.028342221945834,
+              "coefficientOfVariation": 0.06197236611665879
             },
             "si": {
               "count": 5,
-              "min": 780,
+              "min": 775,
               "max": 934,
-              "mean": 852.6,
-              "median": 845,
+              "mean": 843.6,
+              "median": 832,
               "p95": 934,
-              "stdDev": 49.81003914874992,
-              "coefficientOfVariation": 0.05842134547120563
+              "stdDev": 52.89461220200031,
+              "coefficientOfVariation": 0.06270105761261298
             }
           },
           "opportunities": {
@@ -473,43 +473,43 @@
         "pagePerformance": {
           "domContentLoaded": {
             "count": 5,
-            "min": 719,
-            "max": 832,
-            "mean": 785.8,
-            "median": 794,
-            "p95": 832,
-            "stdDev": 36.804347569275016,
-            "coefficientOfVariation": 0.04683678743862944
+            "min": 749,
+            "max": 955,
+            "mean": 815.6,
+            "median": 798,
+            "p95": 955,
+            "stdDev": 72.80274720091269,
+            "coefficientOfVariation": 0.08926280922132503
           },
           "loadComplete": {
             "count": 5,
-            "min": 719,
-            "max": 833,
-            "mean": 786.4,
-            "median": 795,
-            "p95": 833,
-            "stdDev": 37.11387880564359,
-            "coefficientOfVariation": 0.047194657687746173
+            "min": 749,
+            "max": 955,
+            "mean": 816,
+            "median": 798,
+            "p95": 955,
+            "stdDev": 72.65259802649868,
+            "coefficientOfVariation": 0.08903504660110133
           },
           "firstByte": {
             "count": 5,
-            "min": 671,
-            "max": 750,
-            "mean": 709.4,
-            "median": 696,
-            "p95": 750,
-            "stdDev": 28.862432329933668,
-            "coefficientOfVariation": 0.04068569541857016
+            "min": 661,
+            "max": 869,
+            "mean": 726.6,
+            "median": 709,
+            "p95": 869,
+            "stdDev": 73.9799972965666,
+            "coefficientOfVariation": 0.10181667670873465
           },
           "domInteractive": {
             "count": 5,
-            "min": 719,
-            "max": 832,
-            "mean": 785.6,
-            "median": 794,
-            "p95": 832,
-            "stdDev": 36.75105440664254,
-            "coefficientOfVariation": 0.04678087373554295
+            "min": 749,
+            "max": 955,
+            "mean": 815.6,
+            "median": 798,
+            "p95": 955,
+            "stdDev": 72.80274720091269,
+            "coefficientOfVariation": 0.08926280922132503
           }
         }
       },
@@ -520,34 +520,34 @@
         "lighthouse": {
           "performanceScore": {
             "count": 5,
-            "min": 99,
+            "min": 98,
             "max": 100,
-            "mean": 99.8,
+            "mean": 99.6,
             "median": 100,
             "p95": 100,
-            "stdDev": 0.4,
-            "coefficientOfVariation": 0.004008016032064129
+            "stdDev": 0.8,
+            "coefficientOfVariation": 0.008032128514056226
           },
           "metrics": {
             "fcp": {
               "count": 5,
-              "min": 408.579,
-              "max": 744.536,
-              "mean": 525.6723999999999,
-              "median": 522.718,
-              "p95": 744.536,
-              "stdDev": 119.71672208442727,
-              "coefficientOfVariation": 0.2277401706546269
+              "min": 429.984,
+              "max": 894.134,
+              "mean": 566.7026,
+              "median": 459.066,
+              "p95": 894.134,
+              "stdDev": 175.34574079754546,
+              "coefficientOfVariation": 0.3094140397406779
             },
             "lcp": {
               "count": 5,
-              "min": 408.579,
-              "max": 744.536,
-              "mean": 525.6723999999999,
-              "median": 522.718,
-              "p95": 744.536,
-              "stdDev": 119.71672208442727,
-              "coefficientOfVariation": 0.2277401706546269
+              "min": 429.984,
+              "max": 894.134,
+              "mean": 566.7026,
+              "median": 459.066,
+              "p95": 894.134,
+              "stdDev": 175.34574079754546,
+              "coefficientOfVariation": 0.3094140397406779
             },
             "cls": {
               "count": 5,
@@ -571,23 +571,23 @@
             },
             "tti": {
               "count": 5,
-              "min": 408.579,
-              "max": 744.536,
-              "mean": 525.6723999999999,
-              "median": 522.718,
-              "p95": 744.536,
-              "stdDev": 119.71672208442727,
-              "coefficientOfVariation": 0.2277401706546269
+              "min": 429.984,
+              "max": 894.134,
+              "mean": 566.7026,
+              "median": 459.066,
+              "p95": 894.134,
+              "stdDev": 175.34574079754546,
+              "coefficientOfVariation": 0.3094140397406779
             },
             "si": {
               "count": 5,
-              "min": 400,
-              "max": 726,
-              "mean": 514.2,
-              "median": 512,
-              "p95": 726,
-              "stdDev": 116.06618801356406,
-              "coefficientOfVariation": 0.22572187478328287
+              "min": 421,
+              "max": 871,
+              "mean": 553.6,
+              "median": 449,
+              "p95": 871,
+              "stdDev": 169.99717644713985,
+              "coefficientOfVariation": 0.3070758245071168
             }
           },
           "opportunities": {
@@ -632,22 +632,22 @@
           "domContentLoaded": {
             "count": 5,
             "min": 22,
-            "max": 25,
-            "mean": 23.2,
+            "max": 23,
+            "mean": 22.6,
             "median": 23,
-            "p95": 25,
-            "stdDev": 1.1661903789690602,
-            "coefficientOfVariation": 0.05026682667970087
+            "p95": 23,
+            "stdDev": 0.4898979485566356,
+            "coefficientOfVariation": 0.021676900378612193
           },
           "loadComplete": {
             "count": 5,
             "min": 22,
-            "max": 25,
-            "mean": 23.2,
+            "max": 24,
+            "mean": 23,
             "median": 23,
-            "p95": 25,
-            "stdDev": 1.1661903789690602,
-            "coefficientOfVariation": 0.05026682667970087
+            "p95": 24,
+            "stdDev": 0.6324555320336759,
+            "coefficientOfVariation": 0.02749806661015982
           },
           "firstByte": {
             "count": 5,
@@ -662,23 +662,23 @@
           "domInteractive": {
             "count": 5,
             "min": 6,
-            "max": 8,
-            "mean": 7,
-            "median": 7,
-            "p95": 8,
-            "stdDev": 0.6324555320336759,
-            "coefficientOfVariation": 0.09035079029052513
+            "max": 7,
+            "mean": 6.4,
+            "median": 6,
+            "p95": 7,
+            "stdDev": 0.48989794855663565,
+            "coefficientOfVariation": 0.07654655446197432
           }
         }
       },
       "improvements": {
-        "fcp": -36.75587399982531,
-        "lcp": -36.75587399982531,
-        "tti": -38.06942714570013,
-        "si": -39.69035890218156,
-        "performanceScore": 1.2170385395537555
+        "fcp": -31.096234785797456,
+        "lcp": -31.096251541420976,
+        "tti": -32.498520024632505,
+        "si": -34.3764817449028,
+        "performanceScore": 0.8097165991902806
       }
     }
   },
-  "timestamp": "2025-08-08T04:05:38.943Z"
+  "timestamp": "2025-08-08T04:20:02.024Z"
 }

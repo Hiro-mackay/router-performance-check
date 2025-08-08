@@ -472,10 +472,31 @@ function displayAnalysis(analysis, comparison) {
       for (const [metric, improvement] of Object.entries(comp.improvements)) {
         if (improvement !== null && improvement !== undefined) {
           totalComparisons++;
-          if (improvement > 0) {
-            tanstackWins++;
+          // For metrics where lower is better (fcp, lcp, tbt, tti, si), negative improvement means TanStack is better
+          // For metrics where higher is better (performanceScore), positive improvement means TanStack is better
+          const isLowerBetter = [
+            "fcp",
+            "lcp",
+            "tbt",
+            "tti",
+            "si",
+            "cls",
+          ].includes(metric);
+
+          if (isLowerBetter) {
+            // Negative improvement means TanStack Router is better (faster/lower)
+            if (improvement < 0) {
+              tanstackWins++;
+            } else {
+              reactWins++;
+            }
           } else {
-            reactWins++;
+            // Positive improvement means TanStack Router is better (higher score)
+            if (improvement > 0) {
+              tanstackWins++;
+            } else {
+              reactWins++;
+            }
           }
         }
       }
@@ -494,6 +515,78 @@ function displayAnalysis(analysis, comparison) {
         100
       ).toFixed(1)}%)`
     );
+
+    // Detailed breakdown
+    console.log("\n" + chalk.bold("📊 Detailed Performance Breakdown:"));
+    for (const [route, comp] of Object.entries(comparison)) {
+      console.log(`\n${chalk.bold(route.toUpperCase())} Route:`);
+
+      const metrics = [
+        {
+          key: "performanceScore",
+          name: "Performance Score",
+          unit: "/100",
+          higherBetter: true,
+        },
+        {
+          key: "fcp",
+          name: "First Contentful Paint",
+          unit: "ms",
+          higherBetter: false,
+        },
+        {
+          key: "lcp",
+          name: "Largest Contentful Paint",
+          unit: "ms",
+          higherBetter: false,
+        },
+        {
+          key: "cls",
+          name: "Cumulative Layout Shift",
+          unit: "",
+          higherBetter: false,
+        },
+        {
+          key: "tbt",
+          name: "Total Blocking Time",
+          unit: "ms",
+          higherBetter: false,
+        },
+        {
+          key: "tti",
+          name: "Time to Interactive",
+          unit: "ms",
+          higherBetter: false,
+        },
+      ];
+
+      for (const metric of metrics) {
+        const improvement = comp.improvements[metric.key];
+        if (improvement !== null && improvement !== undefined) {
+          const reactValue =
+            metric.key === "performanceScore"
+              ? comp.reactRouter.lighthouse?.performanceScore?.mean
+              : comp.reactRouter.lighthouse?.metrics?.[metric.key]?.mean;
+          const tanstackValue =
+            metric.key === "performanceScore"
+              ? comp.tanstackRouter.lighthouse?.performanceScore?.mean
+              : comp.tanstackRouter.lighthouse?.metrics?.[metric.key]?.mean;
+
+          const isTanstackBetter = metric.higherBetter
+            ? improvement > 0
+            : improvement < 0;
+          const winner = isTanstackBetter ? "TanStack Router" : "React Router";
+          const winnerColor = isTanstackBetter ? chalk.green : chalk.blue;
+
+          console.log(
+            `  ${metric.name}: ${winnerColor.bold(winner)} ` +
+              `(React: ${formatNumber(reactValue, 1)}${metric.unit}, ` +
+              `TanStack: ${formatNumber(tanstackValue, 1)}${metric.unit}, ` +
+              `${formatImprovement(improvement, !metric.higherBetter)})`
+          );
+        }
+      }
+    }
 
     if (tanstackWins > reactWins) {
       console.log(

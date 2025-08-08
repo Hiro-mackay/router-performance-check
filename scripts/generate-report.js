@@ -361,10 +361,32 @@ function generateSummarySection(comparison) {
       if (improvement !== null && improvement !== undefined) {
         totalComparisons++;
         avgImprovement += Math.abs(improvement);
-        if (improvement > 0) {
-          tanstackWins++;
+
+        // For metrics where lower is better (fcp, lcp, tbt, tti, si), negative improvement means TanStack is better
+        // For metrics where higher is better (performanceScore), positive improvement means TanStack is better
+        const isLowerBetter = [
+          "fcp",
+          "lcp",
+          "tbt",
+          "tti",
+          "si",
+          "cls",
+        ].includes(metric);
+
+        if (isLowerBetter) {
+          // Negative improvement means TanStack Router is better (faster/lower)
+          if (improvement < 0) {
+            tanstackWins++;
+          } else {
+            reactWins++;
+          }
         } else {
-          reactWins++;
+          // Positive improvement means TanStack Router is better (higher score)
+          if (improvement > 0) {
+            tanstackWins++;
+          } else {
+            reactWins++;
+          }
         }
       }
     }
