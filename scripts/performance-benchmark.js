@@ -17,31 +17,7 @@ import http from "http";
 import https from "https";
 import { URL } from "url";
 import { lighthouseConfig, chromeFlags } from "./lighthouse-config.js";
-
-// Configuration
-const CONFIG = {
-  routes: [{ name: "posts", path: "/posts", description: "Posts list page" }],
-  apps: [
-    {
-      name: "react-router",
-      url: "http://localhost:5173",
-      port: 5173,
-      buildCommand: "npm run build:react-router",
-      startCommand: "npm run dev:react-router",
-    },
-    {
-      name: "tanstack-router",
-      url: "http://localhost:5174",
-      port: 5174,
-      buildCommand: "npm run build:tanstack-router",
-      startCommand: "npm run dev:tanstack-router",
-    },
-  ],
-  warmupRuns: 2,
-  measurementRuns: 5,
-  waitTime: 3000, // Wait time between measurements
-  outputDir: "./reports",
-};
+import { CONFIG as DEFAULT_CONFIG, validateConfig } from "./config.js";
 
 // Utility functions
 const log = {
@@ -320,17 +296,29 @@ async function runPerformanceTest(
 }
 
 // Main benchmark function
-async function runBenchmark(options = {}) {
-  const {
-    apps = CONFIG.apps,
-    routes = CONFIG.routes,
-    runs = CONFIG.measurementRuns,
-  } = options;
+async function runBenchmark(options) {
+  // config は必須パラメータとして処理
+  if (!options.config) {
+    throw new Error("config parameter is required in options");
+  }
+
+  const config = options.config;
+
+  // Validate configuration
+  const validation = validateConfig(options);
+  if (!validation.isValid) {
+    log.error("Configuration validation failed:");
+    validation.errors.forEach((error) => log.error(`  - ${error}`));
+    throw new Error("Invalid configuration");
+  }
+
+  // CONFIGから直接値を取得
+  const { apps, routes, runs } = config;
 
   log.header("Router Performance Benchmark");
 
   // Ensure output directory exists
-  await fs.ensureDir(CONFIG.outputDir);
+  await fs.ensureDir(config.outputDir);
 
   const allResults = [];
   let chrome;
@@ -397,7 +385,7 @@ async function runBenchmark(options = {}) {
 
         // Warmup runs
         log.info("Running warmup...");
-        for (let i = 0; i < CONFIG.warmupRuns; i++) {
+        for (let i = 0; i < config.warmupRuns; i++) {
           await runPerformanceTest(
             testUrl,
             app.name,
@@ -406,7 +394,7 @@ async function runBenchmark(options = {}) {
             browser,
             -1
           );
-          await sleep(CONFIG.waitTime);
+          await sleep(config.waitTime);
         }
 
         // Measurement runs
@@ -423,21 +411,21 @@ async function runBenchmark(options = {}) {
           allResults.push(result);
 
           if (i < runs - 1) {
-            await sleep(CONFIG.waitTime);
+            await sleep(config.waitTime);
           }
         }
       }
     }
 
     // Save results (fixed filename to keep only latest)
-    const resultsFile = path.join(CONFIG.outputDir, "benchmark-results.json");
+    const resultsFile = path.join(config.outputDir, "benchmark-results.json");
     await fs.writeJson(
       resultsFile,
       {
         metadata: {
           timestamp: new Date().toISOString(),
-          config: CONFIG,
-          runs: runs,
+          config,
+          runs,
           lighthouseVersion: "11.4.0", // Fixed version
           puppeteerVersion: "21.11.0", // Fixed version
         },
@@ -466,10 +454,12 @@ async function runBenchmark(options = {}) {
 
 // CLI interface
 async function main() {
+  const CONFIG = DEFAULT_CONFIG;
+
   const argv = yargs(process.argv.slice(2))
     .option("apps", {
       type: "array",
-      description: "Apps to test (react-router, tanstack-router)",
+      description: "Apps to test (react-router, tanstack-router, next)",
       default: CONFIG.apps.map((app) => app.name),
     })
     .option("routes", {
@@ -480,7 +470,7 @@ async function main() {
     .option("runs", {
       type: "number",
       description: "Number of measurement runs per test",
-      default: CONFIG.measurementRuns,
+      default: CONFIG.runs,
     })
     .help()
     .parseSync();
@@ -493,10 +483,16 @@ async function main() {
       argv.routes.includes(route.name)
     );
 
-    const resultsFile = await runBenchmark({
+    // コマンドライン引数に基づいてCONFIGを整形
+    const customConfig = {
+      ...CONFIG,
       apps: selectedApps,
       routes: selectedRoutes,
       runs: argv.runs,
+    };
+
+    const resultsFile = await runBenchmark({
+      config: customConfig,
     });
 
     log.header("Benchmark Complete!");
@@ -513,4 +509,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { runBenchmark, CONFIG };
+export { runBenchmark, DEFAULT_CONFIG };

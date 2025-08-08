@@ -9,30 +9,9 @@ import { spawn, exec } from "child_process";
 import { promisify } from "util";
 import chalk from "chalk";
 import { runBenchmark } from "./performance-benchmark.js";
+import { CONFIG, validateConfig, getAllPorts } from "./config.js";
 
 const execAsync = promisify(exec);
-
-// Configuration
-const CONFIG = {
-  reactRouter: {
-    name: "react-router",
-    port: 5173,
-    buildCommand: "npm run build",
-    startCommand: "npm run serve:prod",
-    directory: "./react-router",
-    healthUrl: "http://localhost:5173",
-  },
-  tanstackRouter: {
-    name: "tanstack-router",
-    port: 5174,
-    buildCommand: "npm run build",
-    startCommand: "npm run serve:prod",
-    directory: "./tanstack-router",
-    healthUrl: "http://localhost:5174",
-  },
-  waitForServer: 10000, // 10 seconds
-  maxHealthChecks: 30,
-};
 
 // Utility functions
 const log = {
@@ -58,10 +37,10 @@ async function killExistingServers() {
 
   try {
     // Kill any existing servers on our ports
-    const killCommands = [
-      `lsof -ti:${CONFIG.reactRouter.port} | xargs kill -9 2>/dev/null || true`,
-      `lsof -ti:${CONFIG.tanstackRouter.port} | xargs kill -9 2>/dev/null || true`,
-    ];
+    const ports = getAllPorts();
+    const killCommands = ports.map(
+      (port) => `lsof -ti:${port} | xargs kill -9 2>/dev/null || true`
+    );
 
     for (const cmd of killCommands) {
       try {
@@ -80,28 +59,16 @@ async function killExistingServers() {
 async function buildApps() {
   log.header("Building Applications for Production");
 
-  // Build React Router
-  log.info("Building React Router...");
-  try {
-    await execAsync(
-      `cd ${CONFIG.reactRouter.directory} && ${CONFIG.reactRouter.buildCommand}`
-    );
-    log.success("React Router build completed");
-  } catch (error) {
-    log.error(`React Router build failed: ${error.message}`);
-    throw error;
-  }
-
-  // Build TanStack Router
-  log.info("Building TanStack Router...");
-  try {
-    await execAsync(
-      `cd ${CONFIG.tanstackRouter.directory} && ${CONFIG.tanstackRouter.buildCommand}`
-    );
-    log.success("TanStack Router build completed");
-  } catch (error) {
-    log.error(`TanStack Router build failed: ${error.message}`);
-    throw error;
+  // Build all applications from config
+  for (const app of CONFIG.apps) {
+    log.info(`Building ${app.name}...`);
+    try {
+      await execAsync(`cd ${app.directory} && ${app.buildCommand}`);
+      log.success(`${app.name} build completed`);
+    } catch (error) {
+      log.error(`${app.name} build failed: ${error.message}`);
+      throw error;
+    }
   }
 }
 
@@ -144,7 +111,9 @@ async function startServer(config) {
     // Give server time to start
     setTimeout(async () => {
       try {
-        const isHealthy = await checkServerHealth(config.healthUrl);
+        const isHealthy = await checkServerHealth(
+          config.healthUrl || config.url
+        );
         if (isHealthy) {
           log.success(`${config.name} server started successfully`);
           resolve(serverProcess);
@@ -224,9 +193,19 @@ async function runAnalysisAndReporting() {
 }
 
 async function main() {
+  // Validate configuration
+  const validation = validateConfig();
+  if (!validation.isValid) {
+    log.error("Configuration validation failed:");
+    validation.errors.forEach((error) => log.error(`  - ${error}`));
+    process.exit(1);
+  }
+
   log.header("🚀 Full Performance Testing Suite");
   log.info(
-    "This will build, test, and analyze both React Router and TanStack Router"
+    `This will build, test, and analyze ${CONFIG.apps
+      .map((app) => app.name)
+      .join(", ")}`
   );
 
   try {
@@ -238,17 +217,16 @@ async function main() {
 
     // Start servers
     log.header("Starting Production Servers");
-    await Promise.all([
-      startServer(CONFIG.reactRouter),
-      startServer(CONFIG.tanstackRouter),
-    ]);
+    await Promise.all(CONFIG.apps.map((app) => startServer(app)));
 
     // Wait a bit more to ensure servers are fully ready
     await sleep(3000);
 
     // Run performance benchmark
     log.header("Running Performance Benchmark");
-    const resultsFile = await runBenchmark();
+    const resultsFile = await runBenchmark({
+      config: CONFIG,
+    });
     log.success(`Performance testing completed: ${resultsFile}`);
 
     // Generate analysis and reports

@@ -322,10 +322,6 @@ function generateHTMLReport(data, analysis, comparison) {
             </div>
         </div>
 
-        ${generateSummarySection(comparison)}
-        
-        ${generateComparisonSection(comparison)}
-        
         ${generateDetailedResultsSection(analysis)}
         
         ${generateChartsSection(data.results, comparison)}

@@ -1,61 +1,89 @@
 import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <nav
         style={{
-          padding: "20px",
-          borderBottom: "1px solid #ddd",
-          backgroundColor: "#f8f9fa",
-          display: "flex",
-          gap: "20px",
+          backgroundColor: "#2c3e50",
+          padding: "15px 20px",
+          color: "white",
+          borderBottom: "3px solid #3498db",
         }}
       >
-        <Link
-          to="/"
-          activeProps={{
-            style: {
-              color: "#007bff",
-              fontWeight: "bold",
-            },
-          }}
-          inactiveProps={{
-            style: {
-              color: "#333",
-              fontWeight: "normal",
-            },
-          }}
+        <div
           style={{
-            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            maxWidth: "1200px",
+            margin: "0 auto",
           }}
         >
-          Home
-        </Link>
-        <Link
-          to="/posts"
-          activeProps={{
-            style: {
-              color: "#007bff",
-              fontWeight: "bold",
-            },
-          }}
-          inactiveProps={{
-            style: {
-              color: "#333",
-              fontWeight: "normal",
-            },
-          }}
-          style={{
-            textDecoration: "none",
-          }}
-        >
-          Posts (Performance Test)
-        </Link>
+          <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "bold" }}>
+            🚀 TanStack Router Performance Test
+          </h1>
+          <div style={{ display: "flex", gap: "20px" }}>
+            <Link
+              to="/"
+              activeProps={{
+                style: {
+                  color: "#ecf0f1",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  border: "1px solid #34495e",
+                  backgroundColor: "#3498db",
+                  transition: "all 0.3s ease",
+                },
+              }}
+              inactiveProps={{
+                style: {
+                  color: "#ecf0f1",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  border: "1px solid #34495e",
+                  backgroundColor: "#34495e",
+                  transition: "all 0.3s ease",
+                },
+              }}
+              className="nav-link"
+            >
+              🏠 Home
+            </Link>
+            <Link
+              to="/posts"
+              activeProps={{
+                style: {
+                  color: "#ecf0f1",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  border: "1px solid #34495e",
+                  backgroundColor: "#3498db",
+                  transition: "all 0.3s ease",
+                },
+              }}
+              inactiveProps={{
+                style: {
+                  color: "#ecf0f1",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  border: "1px solid #34495e",
+                  backgroundColor: "#34495e",
+                  transition: "all 0.3s ease",
+                },
+              }}
+              className="nav-link"
+            >
+              📝 Posts
+            </Link>
+          </div>
+        </div>
       </nav>
       <Outlet />
-      {import.meta.env.DEV && <TanStackRouterDevtools />}
     </>
   ),
   errorComponent: ({ error }) => {

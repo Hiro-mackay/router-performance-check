@@ -134,7 +134,7 @@ const CONFIG = {
     },
   ],
   warmupRuns: 2, // Warmup runs before measurement
-  measurementRuns: 5, // Number of measurement runs
+  runs: 5, // Number of measurement runs
   waitTime: 3000, // Wait time between measurements (ms)
   outputDir: "./reports",
 };
