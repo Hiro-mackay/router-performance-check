@@ -12,7 +12,7 @@ export default defineConfig({
     tailwindcss(),
     // Bundle analysis
     visualizer({
-      filename: "../performance-results/tanstack-router-bundle-stats.html",
+      filename: "../reports/tanstack-router-bundle-stats.html",
       open: false,
       gzipSize: true,
       brotliSize: true,

@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "vite --port 3000",
     "start": "vite --port 3000",
-    "build": "vite build && tsc",
-    "build:analyze": "vite build && tsc && echo 'Bundle analysis available at ../performance-results/tanstack-router-stats.html'",
+    "build": "vite build",
+    "build:analyze": "vite build && echo 'Bundle analysis available at ../reports/tanstack-router-bundle-stats.html'",
     "serve": "vite preview",
+    "serve:prod": "vite preview --port 5174 --host 0.0.0.0",
     "test": "vitest run"
   },
   "dependencies": {

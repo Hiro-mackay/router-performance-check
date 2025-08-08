@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "build:analyze": "react-router build && echo 'Bundle analysis available at ../performance-results/react-router-stats.html'",
+    "build:analyze": "react-router build && echo 'Bundle analysis available at ../reports/react-router-bundle-stats.html'",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
+    "serve:prod": "HOST=0.0.0.0 PORT=5173 NODE_ENV=production react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

@@ -1,0 +1,684 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-08T04:05:38.737Z",
+    "config": {
+      "routes": [
+        {
+          "name": "posts",
+          "path": "/posts",
+          "description": "Posts list page"
+        }
+      ],
+      "apps": [
+        {
+          "name": "react-router",
+          "url": "http://localhost:5173",
+          "port": 5173,
+          "buildCommand": "npm run build:react-router",
+          "startCommand": "npm run dev:react-router"
+        },
+        {
+          "name": "tanstack-router",
+          "url": "http://localhost:5174",
+          "port": 5174,
+          "buildCommand": "npm run build:tanstack-router",
+          "startCommand": "npm run dev:tanstack-router"
+        }
+      ],
+      "warmupRuns": 2,
+      "measurementRuns": 5,
+      "waitTime": 3000,
+      "outputDir": "./reports"
+    },
+    "runs": 5,
+    "lighthouseVersion": "11.4.0",
+    "puppeteerVersion": "21.11.0"
+  },
+  "analysis": {
+    "react-router-posts": {
+      "app": "react-router",
+      "route": "posts",
+      "runs": 5,
+      "lighthouse": {
+        "performanceScore": {
+          "count": 5,
+          "min": 98,
+          "max": 99,
+          "mean": 98.6,
+          "median": 99,
+          "p95": 99,
+          "stdDev": 0.4898979485566356,
+          "coefficientOfVariation": 0.00496853903201456
+        },
+        "metrics": {
+          "fcp": {
+            "count": 5,
+            "min": 760.967,
+            "max": 898.078,
+            "mean": 831.1797999999999,
+            "median": 828.08,
+            "p95": 898.078,
+            "stdDev": 44.5861172088353,
+            "coefficientOfVariation": 0.05364196436058155
+          },
+          "lcp": {
+            "count": 5,
+            "min": 760.967,
+            "max": 898.078,
+            "mean": 831.1797999999999,
+            "median": 828.08,
+            "p95": 898.078,
+            "stdDev": 44.5861172088353,
+            "coefficientOfVariation": 0.05364196436058155
+          },
+          "cls": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "tbt": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "tti": {
+            "count": 5,
+            "min": 778.829,
+            "max": 915.62,
+            "mean": 848.8092,
+            "median": 845.651,
+            "p95": 915.62,
+            "stdDev": 44.5045816715538,
+            "coefficientOfVariation": 0.0524317852251764
+          },
+          "si": {
+            "count": 5,
+            "min": 780,
+            "max": 934,
+            "mean": 852.6,
+            "median": 845,
+            "p95": 934,
+            "stdDev": 49.81003914874992,
+            "coefficientOfVariation": 0.05842134547120563
+          }
+        },
+        "opportunities": {
+          "unusedJs": {
+            "count": 5,
+            "min": 52391,
+            "max": 52391,
+            "mean": 52391,
+            "median": 52391,
+            "p95": 52391,
+            "stdDev": 0,
+            "coefficientOfVariation": 0
+          },
+          "unusedCss": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "unminifiedJs": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          }
+        }
+      },
+      "webVitals": {
+        "fcp": null,
+        "lcp": null,
+        "cls": null
+      },
+      "pagePerformance": {
+        "domContentLoaded": {
+          "count": 5,
+          "min": 719,
+          "max": 832,
+          "mean": 785.8,
+          "median": 794,
+          "p95": 832,
+          "stdDev": 36.804347569275016,
+          "coefficientOfVariation": 0.04683678743862944
+        },
+        "loadComplete": {
+          "count": 5,
+          "min": 719,
+          "max": 833,
+          "mean": 786.4,
+          "median": 795,
+          "p95": 833,
+          "stdDev": 37.11387880564359,
+          "coefficientOfVariation": 0.047194657687746173
+        },
+        "firstByte": {
+          "count": 5,
+          "min": 671,
+          "max": 750,
+          "mean": 709.4,
+          "median": 696,
+          "p95": 750,
+          "stdDev": 28.862432329933668,
+          "coefficientOfVariation": 0.04068569541857016
+        },
+        "domInteractive": {
+          "count": 5,
+          "min": 719,
+          "max": 832,
+          "mean": 785.6,
+          "median": 794,
+          "p95": 832,
+          "stdDev": 36.75105440664254,
+          "coefficientOfVariation": 0.04678087373554295
+        }
+      }
+    },
+    "tanstack-router-posts": {
+      "app": "tanstack-router",
+      "route": "posts",
+      "runs": 5,
+      "lighthouse": {
+        "performanceScore": {
+          "count": 5,
+          "min": 99,
+          "max": 100,
+          "mean": 99.8,
+          "median": 100,
+          "p95": 100,
+          "stdDev": 0.4,
+          "coefficientOfVariation": 0.004008016032064129
+        },
+        "metrics": {
+          "fcp": {
+            "count": 5,
+            "min": 408.579,
+            "max": 744.536,
+            "mean": 525.6723999999999,
+            "median": 522.718,
+            "p95": 744.536,
+            "stdDev": 119.71672208442727,
+            "coefficientOfVariation": 0.2277401706546269
+          },
+          "lcp": {
+            "count": 5,
+            "min": 408.579,
+            "max": 744.536,
+            "mean": 525.6723999999999,
+            "median": 522.718,
+            "p95": 744.536,
+            "stdDev": 119.71672208442727,
+            "coefficientOfVariation": 0.2277401706546269
+          },
+          "cls": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "tbt": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "tti": {
+            "count": 5,
+            "min": 408.579,
+            "max": 744.536,
+            "mean": 525.6723999999999,
+            "median": 522.718,
+            "p95": 744.536,
+            "stdDev": 119.71672208442727,
+            "coefficientOfVariation": 0.2277401706546269
+          },
+          "si": {
+            "count": 5,
+            "min": 400,
+            "max": 726,
+            "mean": 514.2,
+            "median": 512,
+            "p95": 726,
+            "stdDev": 116.06618801356406,
+            "coefficientOfVariation": 0.22572187478328287
+          }
+        },
+        "opportunities": {
+          "unusedJs": {
+            "count": 5,
+            "min": 34754,
+            "max": 34754,
+            "mean": 34754,
+            "median": 34754,
+            "p95": 34754,
+            "stdDev": 0,
+            "coefficientOfVariation": 0
+          },
+          "unusedCss": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          },
+          "unminifiedJs": {
+            "count": 5,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "stdDev": 0,
+            "coefficientOfVariation": null
+          }
+        }
+      },
+      "webVitals": {
+        "fcp": null,
+        "lcp": null,
+        "cls": null
+      },
+      "pagePerformance": {
+        "domContentLoaded": {
+          "count": 5,
+          "min": 22,
+          "max": 25,
+          "mean": 23.2,
+          "median": 23,
+          "p95": 25,
+          "stdDev": 1.1661903789690602,
+          "coefficientOfVariation": 0.05026682667970087
+        },
+        "loadComplete": {
+          "count": 5,
+          "min": 22,
+          "max": 25,
+          "mean": 23.2,
+          "median": 23,
+          "p95": 25,
+          "stdDev": 1.1661903789690602,
+          "coefficientOfVariation": 0.05026682667970087
+        },
+        "firstByte": {
+          "count": 5,
+          "min": 2,
+          "max": 2,
+          "mean": 2,
+          "median": 2,
+          "p95": 2,
+          "stdDev": 0,
+          "coefficientOfVariation": 0
+        },
+        "domInteractive": {
+          "count": 5,
+          "min": 6,
+          "max": 8,
+          "mean": 7,
+          "median": 7,
+          "p95": 8,
+          "stdDev": 0.6324555320336759,
+          "coefficientOfVariation": 0.09035079029052513
+        }
+      }
+    }
+  },
+  "comparison": {
+    "posts": {
+      "route": "posts",
+      "reactRouter": {
+        "app": "react-router",
+        "route": "posts",
+        "runs": 5,
+        "lighthouse": {
+          "performanceScore": {
+            "count": 5,
+            "min": 98,
+            "max": 99,
+            "mean": 98.6,
+            "median": 99,
+            "p95": 99,
+            "stdDev": 0.4898979485566356,
+            "coefficientOfVariation": 0.00496853903201456
+          },
+          "metrics": {
+            "fcp": {
+              "count": 5,
+              "min": 760.967,
+              "max": 898.078,
+              "mean": 831.1797999999999,
+              "median": 828.08,
+              "p95": 898.078,
+              "stdDev": 44.5861172088353,
+              "coefficientOfVariation": 0.05364196436058155
+            },
+            "lcp": {
+              "count": 5,
+              "min": 760.967,
+              "max": 898.078,
+              "mean": 831.1797999999999,
+              "median": 828.08,
+              "p95": 898.078,
+              "stdDev": 44.5861172088353,
+              "coefficientOfVariation": 0.05364196436058155
+            },
+            "cls": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "tbt": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "tti": {
+              "count": 5,
+              "min": 778.829,
+              "max": 915.62,
+              "mean": 848.8092,
+              "median": 845.651,
+              "p95": 915.62,
+              "stdDev": 44.5045816715538,
+              "coefficientOfVariation": 0.0524317852251764
+            },
+            "si": {
+              "count": 5,
+              "min": 780,
+              "max": 934,
+              "mean": 852.6,
+              "median": 845,
+              "p95": 934,
+              "stdDev": 49.81003914874992,
+              "coefficientOfVariation": 0.05842134547120563
+            }
+          },
+          "opportunities": {
+            "unusedJs": {
+              "count": 5,
+              "min": 52391,
+              "max": 52391,
+              "mean": 52391,
+              "median": 52391,
+              "p95": 52391,
+              "stdDev": 0,
+              "coefficientOfVariation": 0
+            },
+            "unusedCss": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "unminifiedJs": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            }
+          }
+        },
+        "webVitals": {
+          "fcp": null,
+          "lcp": null,
+          "cls": null
+        },
+        "pagePerformance": {
+          "domContentLoaded": {
+            "count": 5,
+            "min": 719,
+            "max": 832,
+            "mean": 785.8,
+            "median": 794,
+            "p95": 832,
+            "stdDev": 36.804347569275016,
+            "coefficientOfVariation": 0.04683678743862944
+          },
+          "loadComplete": {
+            "count": 5,
+            "min": 719,
+            "max": 833,
+            "mean": 786.4,
+            "median": 795,
+            "p95": 833,
+            "stdDev": 37.11387880564359,
+            "coefficientOfVariation": 0.047194657687746173
+          },
+          "firstByte": {
+            "count": 5,
+            "min": 671,
+            "max": 750,
+            "mean": 709.4,
+            "median": 696,
+            "p95": 750,
+            "stdDev": 28.862432329933668,
+            "coefficientOfVariation": 0.04068569541857016
+          },
+          "domInteractive": {
+            "count": 5,
+            "min": 719,
+            "max": 832,
+            "mean": 785.6,
+            "median": 794,
+            "p95": 832,
+            "stdDev": 36.75105440664254,
+            "coefficientOfVariation": 0.04678087373554295
+          }
+        }
+      },
+      "tanstackRouter": {
+        "app": "tanstack-router",
+        "route": "posts",
+        "runs": 5,
+        "lighthouse": {
+          "performanceScore": {
+            "count": 5,
+            "min": 99,
+            "max": 100,
+            "mean": 99.8,
+            "median": 100,
+            "p95": 100,
+            "stdDev": 0.4,
+            "coefficientOfVariation": 0.004008016032064129
+          },
+          "metrics": {
+            "fcp": {
+              "count": 5,
+              "min": 408.579,
+              "max": 744.536,
+              "mean": 525.6723999999999,
+              "median": 522.718,
+              "p95": 744.536,
+              "stdDev": 119.71672208442727,
+              "coefficientOfVariation": 0.2277401706546269
+            },
+            "lcp": {
+              "count": 5,
+              "min": 408.579,
+              "max": 744.536,
+              "mean": 525.6723999999999,
+              "median": 522.718,
+              "p95": 744.536,
+              "stdDev": 119.71672208442727,
+              "coefficientOfVariation": 0.2277401706546269
+            },
+            "cls": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "tbt": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "tti": {
+              "count": 5,
+              "min": 408.579,
+              "max": 744.536,
+              "mean": 525.6723999999999,
+              "median": 522.718,
+              "p95": 744.536,
+              "stdDev": 119.71672208442727,
+              "coefficientOfVariation": 0.2277401706546269
+            },
+            "si": {
+              "count": 5,
+              "min": 400,
+              "max": 726,
+              "mean": 514.2,
+              "median": 512,
+              "p95": 726,
+              "stdDev": 116.06618801356406,
+              "coefficientOfVariation": 0.22572187478328287
+            }
+          },
+          "opportunities": {
+            "unusedJs": {
+              "count": 5,
+              "min": 34754,
+              "max": 34754,
+              "mean": 34754,
+              "median": 34754,
+              "p95": 34754,
+              "stdDev": 0,
+              "coefficientOfVariation": 0
+            },
+            "unusedCss": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            },
+            "unminifiedJs": {
+              "count": 5,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdDev": 0,
+              "coefficientOfVariation": null
+            }
+          }
+        },
+        "webVitals": {
+          "fcp": null,
+          "lcp": null,
+          "cls": null
+        },
+        "pagePerformance": {
+          "domContentLoaded": {
+            "count": 5,
+            "min": 22,
+            "max": 25,
+            "mean": 23.2,
+            "median": 23,
+            "p95": 25,
+            "stdDev": 1.1661903789690602,
+            "coefficientOfVariation": 0.05026682667970087
+          },
+          "loadComplete": {
+            "count": 5,
+            "min": 22,
+            "max": 25,
+            "mean": 23.2,
+            "median": 23,
+            "p95": 25,
+            "stdDev": 1.1661903789690602,
+            "coefficientOfVariation": 0.05026682667970087
+          },
+          "firstByte": {
+            "count": 5,
+            "min": 2,
+            "max": 2,
+            "mean": 2,
+            "median": 2,
+            "p95": 2,
+            "stdDev": 0,
+            "coefficientOfVariation": 0
+          },
+          "domInteractive": {
+            "count": 5,
+            "min": 6,
+            "max": 8,
+            "mean": 7,
+            "median": 7,
+            "p95": 8,
+            "stdDev": 0.6324555320336759,
+            "coefficientOfVariation": 0.09035079029052513
+          }
+        }
+      },
+      "improvements": {
+        "fcp": -36.75587399982531,
+        "lcp": -36.75587399982531,
+        "tti": -38.06942714570013,
+        "si": -39.69035890218156,
+        "performanceScore": 1.2170385395537555
+      }
+    }
+  },
+  "timestamp": "2025-08-08T04:05:38.943Z"
+}

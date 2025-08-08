@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Performance comparison between React Router and Tanstack Router",
   "private": true,
+  "type": "module",
   "scripts": {
     "setup": "node scripts/setup.js",
     "dev": "concurrently \"npm run dev:react-router\" \"npm run dev:tanstack-router\"",
@@ -23,10 +24,21 @@
     "typecheck": "npm run typecheck:react-router && npm run typecheck:tanstack-router",
     "typecheck:react-router": "cd react-router && npm run typecheck",
     "typecheck:tanstack-router": "cd tanstack-router && tsc --noEmit",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "perf": "node scripts/performance-full.js",
+    "perf:measure": "node scripts/performance-benchmark.js",
+    "perf:analyze": "node scripts/analyze-results.js",
+    "perf:report": "node scripts/generate-report.js"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "lighthouse": "^11.4.0",
+    "puppeteer": "^21.6.1",
+    "chrome-launcher": "^1.1.0",
+    "fs-extra": "^11.2.0",
+    "yargs": "^17.7.2",
+    "chalk": "^4.1.2",
+    "table": "^6.8.1"
   },
   "keywords": [
     "react-router",
