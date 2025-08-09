@@ -1,33 +1,33 @@
 {
-  "name": "react-router-app",
+  "name": "react-router",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "build:analyze": "react-router build && echo 'Bundle analysis available at ../reports/react-router-bundle-stats.html'",
+    "cf-typegen": "wrangler types",
+    "deploy": "pnpm run build && wrangler deploy",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "serve:prod": "HOST=0.0.0.0 PORT=5173 NODE_ENV=production react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "postinstall": "npm run cf-typegen",
+    "preview": "pnpm run build && vite preview",
+    "typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
   },
   "dependencies": {
-    "@react-router/node": "^7.7.1",
-    "@react-router/serve": "^7.7.1",
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.1"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.0.12",
     "@react-router/dev": "^7.7.1",
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "rollup-plugin-visualizer": "^6.0.3",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.28.1"
   }
 }

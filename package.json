@@ -5,50 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "setup": "node scripts/setup.js",
-    "dev": "concurrently \"npm run dev:react-router\" \"npm run dev:tanstack-router\" \"npm run dev:next\"",
-    "dev:react-router": "cd react-router && npm run dev",
-    "dev:tanstack-router": "cd tanstack-router && npm run dev",
-    "dev:next": "cd next && npm run dev -- --port 3001",
-    "build": "npm run build:react-router && npm run build:tanstack-router && npm run build:next",
-    "build:react-router": "cd react-router && npm run build",
-    "build:tanstack-router": "cd tanstack-router && npm run build",
-    "build:next": "cd next && npm run build",
-    "build:analyze": "npm run build:analyze:react-router && npm run build:analyze:tanstack-router && npm run build:analyze:next",
-    "build:analyze:react-router": "cd react-router && npm run build:analyze",
-    "build:analyze:tanstack-router": "cd tanstack-router && npm run build:analyze",
-    "build:analyze:next": "cd next && npm run build",
-    "install:all": "npm run install:react-router && npm run install:tanstack-router && npm run install:next",
-    "install:react-router": "cd react-router && npm install",
-    "install:tanstack-router": "cd tanstack-router && npm install",
-    "install:next": "cd next && npm install",
-    "clean": "npm run clean:react-router && npm run clean:tanstack-router && npm run clean:next",
-    "clean:react-router": "cd react-router && rm -rf build dist node_modules/.cache",
-    "clean:tanstack-router": "cd tanstack-router && rm -rf build dist node_modules/.cache",
-    "clean:next": "cd next && rm -rf .next build dist node_modules/.cache",
-    "typecheck": "npm run typecheck:react-router && npm run typecheck:tanstack-router && npm run typecheck:next",
-    "typecheck:react-router": "cd react-router && npm run typecheck",
-    "typecheck:tanstack-router": "cd tanstack-router && tsc --noEmit",
-    "typecheck:next": "cd next && npm run lint",
-    "start": "npm run dev",
-    "start:prod": "concurrently \"npm run start:prod:react-router\" \"npm run start:prod:tanstack-router\" \"npm run start:prod:next\"",
-    "start:prod:react-router": "cd react-router && npm run serve:prod",
-    "start:prod:tanstack-router": "cd tanstack-router && npm run serve:prod",
-    "start:prod:next": "cd next && npm run start:prod",
     "perf": "node scripts/performance-full.js",
     "perf:measure": "node scripts/performance-benchmark.js",
     "perf:analyze": "node scripts/analyze-results.js",
     "perf:report": "node scripts/generate-report.js"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "lighthouse": "^11.4.0",
-    "puppeteer": "^21.6.1",
-    "chrome-launcher": "^1.1.0",
-    "fs-extra": "^11.2.0",
-    "yargs": "^17.7.2",
-    "chalk": "^4.1.2",
-    "table": "^6.8.1"
   },
   "keywords": [
     "react-router",
@@ -60,5 +20,15 @@
     "benchmarking"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chalk": "^5.5.0",
+    "chrome-launcher": "^1.2.0",
+    "concurrently": "^9.2.0",
+    "fs-extra": "^11.3.1",
+    "lighthouse": "^12.8.1",
+    "puppeteer": "^24.16.0",
+    "table": "^6.9.0",
+    "yargs": "^18.0.0"
+  }
 }
