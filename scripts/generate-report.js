@@ -10,6 +10,10 @@ import path from "path";
 import yargs from "yargs";
 import chalk from "chalk";
 import { findLatestResults, loadResults } from "./analyze-results.js";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Logging utilities
 const log = {

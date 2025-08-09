@@ -43,7 +43,7 @@ pnpm rnn deploy
 ### 基本操作
 
 ```bash
-pnpm run setup     # すべてのアプリの依存関係を解決し、セットアップを完了
+pnpm run setup     # すべてのアプリの依存関係を解決し、セットアップを実行
 pnpm run dev       # ホットリロード付き、開発環境
 pnpm run preview   # Cloudflare Workerのローカル環境を立ち上げ
 ```
@@ -79,6 +79,21 @@ pnpm run perf:cloudflare        # Cloudflare Workerでのパフォーマンス�
 pnpm run perf:cloudflare:analyze # Cloudflare結果の分析
 pnpm run perf:cloudflare:report  # Cloudflare用HTMLレポート生成
 ```
+
+### 🔐 Cloudflare Worker URL 設定
+
+Cloudflare Worker でのパフォーマンス測定を実行する前に、あなたの Cloudflare Worker URL を設定する必要があります：
+
+```bash
+# 対話式セットアップ（推奨）
+pnpm run setup:config
+
+# または手動で設定
+cp .env.example .env
+# .envファイルを編集して実際のURLを設定
+```
+
+**セキュリティ**: あなたの個人 URL は自動的に Git から除外され、誤ってコミットされることはありません。
 
 ### デプロイ
 

@@ -11,7 +11,12 @@ import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer";
 import chalk from "chalk";
-import { lighthouseConfig, chromeFlags } from "./lighthouse-config.js";
+import { lighthouseConfig } from "./lighthouse-config.js";
+import { getConfig } from "./config.js";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Utility functions
 const log = {
@@ -29,48 +34,8 @@ const log = {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Cloudflare Worker URLs configuration
-const CLOUDFLARE_CONFIG = {
-  routes: [
-    {
-      name: "posts",
-      path: "/posts",
-      description: "Posts list page",
-    },
-  ],
-  apps: [
-    {
-      name: "react-router",
-      url: "https://react-router.johnmackay150.workers.dev",
-      description: "React Router on Cloudflare Workers",
-    },
-    {
-      name: "tanstack-router",
-      url: "https://tanstack-router.johnmackay150.workers.dev",
-      description: "TanStack Router on Cloudflare Workers",
-    },
-    {
-      name: "next",
-      url: "https://next.johnmackay150.workers.dev",
-      description: "Next.js on Cloudflare Workers",
-    },
-  ],
-  warmupRuns: 1,
-  runs: 3,
-  waitTime: 3000,
-  outputDir: "./reports/cloudflare",
-  // Cloudflare-specific settings
-  cloudflare: {
-    // Simulate different geographic locations
-    locations: [{ name: "japan", cfRay: "japan" }],
-    // Network conditions for Cloudflare edge
-    networkConditions: {
-      rttMs: 100, // Higher RTT for edge locations
-      throughputKbps: 5 * 1024, // 5 Mbps for more realistic conditions
-      cpuSlowdownMultiplier: 1.5, // Slightly slower CPU
-    },
-  },
-};
+// Get Cloudflare configuration
+const CLOUDFLARE_CONFIG = getConfig("cloudflare");
 
 // Launch Chrome for Lighthouse
 async function launchChrome(userDataDir = null, portOffset = 0) {

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2025-08-09T15:30:07.704Z",
+    "timestamp": "2025-08-09T16:00:01.283Z",
     "config": {
       "routes": [
         {
@@ -12,17 +12,17 @@
       "apps": [
         {
           "name": "react-router",
-          "url": "https://react-router.johnmackay150.workers.dev",
+          "url": "https://react-router.example.workers.dev",
           "description": "React Router on Cloudflare Workers"
         },
         {
           "name": "tanstack-router",
-          "url": "https://tanstack-router.johnmackay150.workers.dev",
+          "url": "https://tanstack-router.example.workers.dev",
           "description": "TanStack Router on Cloudflare Workers"
         },
         {
           "name": "next",
-          "url": "https://next.johnmackay150.workers.dev",
+          "url": "https://next.example.workers.dev",
           "description": "Next.js on Cloudflare Workers"
         }
       ],
@@ -53,297 +53,153 @@
     {
       "app": "react-router",
       "route": "posts",
-      "url": "https://react-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:25:12.354Z",
+      "url": "https://react-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:56:10.423Z",
       "runIndex": 0,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 299.928,
-          "lcp": 299.929,
-          "cls": 0,
-          "tbt": 0,
-          "si": 300,
-          "tti": 315.781
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 53840,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 240,
-          "loadComplete": 242,
-          "firstByte": 156,
-          "domInteractive": 240
         }
       }
     },
     {
       "app": "react-router",
       "route": "posts",
-      "url": "https://react-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:25:39.988Z",
+      "url": "https://react-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:56:32.244Z",
       "runIndex": 1,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 268.412,
-          "lcp": 268.412,
-          "cls": 0,
-          "tbt": 0,
-          "si": 269,
-          "tti": 287.044
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 53840,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 294,
-          "loadComplete": 295,
-          "firstByte": 209,
-          "domInteractive": 294
         }
       }
     },
     {
       "app": "react-router",
       "route": "posts",
-      "url": "https://react-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:26:07.610Z",
+      "url": "https://react-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:56:54.046Z",
       "runIndex": 2,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 277.939,
-          "lcp": 277.939,
-          "cls": 0,
-          "tbt": 0,
-          "si": 278,
-          "tti": 289.098
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 53853,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 284,
-          "loadComplete": 285,
-          "firstByte": 190,
-          "domInteractive": 284
         }
       }
     },
     {
       "app": "tanstack-router",
       "route": "posts",
-      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:26:59.527Z",
+      "url": "https://tanstack-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:57:34.699Z",
       "runIndex": 0,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 277.045,
-          "lcp": 277.045,
-          "cls": 0,
-          "tbt": 0,
-          "si": 275,
-          "tti": 277.045
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 35418,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 111,
-          "loadComplete": 112,
-          "firstByte": 47,
-          "domInteractive": 51
         }
       }
     },
     {
       "app": "tanstack-router",
       "route": "posts",
-      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:27:26.512Z",
+      "url": "https://tanstack-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:57:56.495Z",
       "runIndex": 1,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 292.278,
-          "lcp": 292.278,
-          "cls": 0,
-          "tbt": 0,
-          "si": 290,
-          "tti": 292.278
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 35417,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 82,
-          "loadComplete": 82,
-          "firstByte": 35,
-          "domInteractive": 39
         }
       }
     },
     {
       "app": "tanstack-router",
       "route": "posts",
-      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:27:53.480Z",
+      "url": "https://tanstack-router.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:58:18.315Z",
       "runIndex": 2,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 305.531,
-          "lcp": 305.532,
-          "cls": 0,
-          "tbt": 0,
-          "si": 303,
-          "tti": 305.531
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 35423,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 93,
-          "loadComplete": 93,
-          "firstByte": 31,
-          "domInteractive": 36
         }
       }
     },
     {
       "app": "next",
       "route": "posts",
-      "url": "https://next.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:28:46.121Z",
+      "url": "https://next.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:58:58.938Z",
       "runIndex": 0,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 238.344,
-          "lcp": 238.344,
-          "cls": 0,
-          "tbt": 0,
-          "si": 238,
-          "tti": 238.344
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 20557,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 189,
-          "loadComplete": 197,
-          "firstByte": 151,
-          "domInteractive": 189
         }
       }
     },
     {
       "app": "next",
       "route": "posts",
-      "url": "https://next.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:29:14.267Z",
+      "url": "https://next.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:59:20.697Z",
       "runIndex": 1,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 241.569,
-          "lcp": 241.569,
-          "cls": 0,
-          "tbt": 0,
-          "si": 242,
-          "tti": 241.56899999809266
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 20559,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 192,
-          "loadComplete": 197,
-          "firstByte": 151,
-          "domInteractive": 192
         }
       }
     },
     {
       "app": "next",
       "route": "posts",
-      "url": "https://next.johnmackay150.workers.dev/posts",
-      "timestamp": "2025-08-09T15:29:42.474Z",
+      "url": "https://next.example.workers.dev/posts",
+      "timestamp": "2025-08-09T15:59:42.505Z",
       "runIndex": 2,
       "location": "japan",
       "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 209.728,
-          "lcp": 209.728,
-          "cls": 0,
-          "tbt": 0,
-          "si": 210,
-          "tti": 209.728
-        },
+        "performance": 0,
+        "metrics": {},
         "opportunities": {
-          "unusedJs": 20557,
+          "unusedJs": 0,
           "unusedCss": 0,
           "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 166,
-          "loadComplete": 176,
-          "firstByte": 131,
-          "domInteractive": 166
         }
       }
     }

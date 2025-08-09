@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "setup": "pnpm install && concurrently \"(cd react-router && pnpm install)\" \"(cd tanstack-router && pnpm install)\" \"(cd next && pnpm install)\"",
+    "setup": "pnpm install && concurrently \"(cd react-router && pnpm install)\" \"(cd tanstack-router && pnpm install)\" \"(cd next && pnpm install)\" && pnpm run setup:config",
+    "setup:config": "node scripts/setup-config.js",
     "dev": "concurrently \"pnpm --filter react-router dev\" \"pnpm --filter tanstack-router dev\" \"pnpm --filter next dev\"",
     "dev:react-router": "pnpm --filter react-router dev",
     "dev:tanstack-router": "pnpm --filter tanstack-router dev",
@@ -51,5 +52,8 @@
     "puppeteer": "^24.16.0",
     "table": "^6.9.0",
     "yargs": "^18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1"
   }
 }

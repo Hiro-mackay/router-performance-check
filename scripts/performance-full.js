@@ -9,7 +9,11 @@ import { spawn, exec } from "child_process";
 import { promisify } from "util";
 import chalk from "chalk";
 import { runBenchmark } from "./performance-benchmark.js";
-import { CONFIG, validateConfig, getAllPorts } from "./config.js";
+import { getConfig, getAllPorts } from "./config.js";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const execAsync = promisify(exec);
 
@@ -37,7 +41,7 @@ async function killExistingServers() {
 
   try {
     // Kill any existing servers on our ports
-    const ports = getAllPorts();
+    const ports = getAllPorts("local");
     const killCommands = ports.map(
       (port) => `lsof -ti:${port} | xargs kill -9 2>/dev/null || true`
     );
@@ -57,22 +61,16 @@ async function killExistingServers() {
 }
 
 async function startServer(config) {
-  log.info(`Starting ${config.name} server on port ${config.port}...`);
+  log.info(`Starting servers...`);
 
-  return new Promise((resolve, reject) => {
-    const serverProcess = spawn(
-      "sh",
-      ["-c", `cd ${config.directory} && ${config.startCommand}`],
-      {
-        stdio: ["ignore", "pipe", "pipe"],
-        env: {
-          ...process.env,
-          PORT: config.port.toString(),
-          HOST: "0.0.0.0",
-          NODE_ENV: "production",
-        },
-      }
-    );
+  return new Promise(async (resolve, reject) => {
+    const serverProcess = spawn("sh", ["-c", `pnpm run preview`], {
+      stdio: ["ignore", "pipe", "pipe"],
+      env: {
+        ...process.env,
+        NODE_ENV: "production",
+      },
+    });
 
     serverProcesses.push(serverProcess);
 
@@ -88,34 +86,41 @@ async function startServer(config) {
     });
 
     serverProcess.on("error", (error) => {
-      log.error(`Failed to start ${config.name}: ${error.message}`);
+      log.error(`Failed to start server: ${error.message}`);
       reject(error);
     });
 
-    // Give server time to start
-    setTimeout(async () => {
-      try {
-        const isHealthy = await checkServerHealth(
-          config.healthUrl || config.url
-        );
-        if (isHealthy) {
-          log.success(`${config.name} server started successfully`);
-          resolve(serverProcess);
-        } else {
-          log.error(`${config.name} server failed health check`);
-          log.error(`Output: ${output}`);
-          log.error(`Error: ${errorOutput}`);
-          reject(new Error(`${config.name} server not responding`));
+    await Promise.all(
+      config.apps.map(async (app) => {
+        try {
+          const isHealthy = await checkServerHealth(
+            app.url,
+            config.waitForServer,
+            config.maxHealthChecks
+          );
+          if (isHealthy) {
+            log.success(`${app.name} server started successfully`);
+          } else {
+            log.error(`${app.name} server failed health check`);
+            log.error(`Output: ${output}`);
+            log.error(`Error: ${errorOutput}`);
+            reject(new Error(`${app.name} server not responding`));
+          }
+        } catch (error) {
+          log.error(`${app.name} health check failed: ${error.message}`);
+          reject(error);
         }
-      } catch (error) {
-        log.error(`${config.name} health check failed: ${error.message}`);
-        reject(error);
-      }
-    }, CONFIG.waitForServer);
+      })
+    ).catch((error) => {
+      log.error(`Failed to start server: ${error.message}`);
+      reject(error);
+    });
+
+    resolve(serverProcess);
   });
 }
 
-async function checkServerHealth(url, maxRetries = CONFIG.maxHealthChecks) {
+async function checkServerHealth(url, waitTime, maxRetries) {
   for (let i = 0; i < maxRetries; i++) {
     try {
       const response = await fetch(url);
@@ -125,7 +130,7 @@ async function checkServerHealth(url, maxRetries = CONFIG.maxHealthChecks) {
     } catch (error) {
       // Server not ready yet
     }
-    await sleep(1000);
+    await sleep(waitTime);
   }
   return false;
 }
@@ -156,7 +161,7 @@ async function stopServers() {
 
   // Additional cleanup to ensure no hanging processes
   try {
-    const ports = getAllPorts();
+    const ports = getAllPorts("local");
     for (const port of ports) {
       await execAsync(`lsof -ti:${port} | xargs kill -9 2>/dev/null || true`);
     }
@@ -187,13 +192,9 @@ async function runAnalysisAndReporting() {
 }
 
 async function main() {
-  // Validate configuration
-  const validation = validateConfig();
-  if (!validation.isValid) {
-    log.error("Configuration validation failed:");
-    validation.errors.forEach((error) => log.error(`  - ${error}`));
-    process.exit(1);
-  }
+  const CONFIG = getConfig("local");
+
+  console.log("CONFIG", CONFIG);
 
   log.header("🚀 Full Performance Testing Suite");
   log.info(
@@ -208,7 +209,7 @@ async function main() {
 
     // Start servers
     log.header("Starting Production Servers");
-    await Promise.all(CONFIG.apps.map((app) => startServer(app)));
+    await startServer(CONFIG);
 
     // Wait a bit more to ensure servers are fully ready
     await sleep(3000);

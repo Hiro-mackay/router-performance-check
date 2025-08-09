@@ -8,6 +8,12 @@ legacy-*
 .env*
 !.env.example
 
+# Local configuration files
+scripts/local-config.json
+
+# Generated reports (contain sensitive URLs)
+reports/
+
 # System files
 .DS_Store
 .DS_Store?

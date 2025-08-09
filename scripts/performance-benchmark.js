@@ -18,7 +18,11 @@ import https from "https";
 import { URL } from "url";
 import { spawn } from "child_process";
 import { lighthouseConfig, chromeFlags } from "./lighthouse-config.js";
-import { CONFIG as DEFAULT_CONFIG, validateConfig } from "./config.js";
+import { getConfig } from "./config.js";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Utility functions
 const log = {
@@ -488,14 +492,6 @@ async function runBenchmark(options) {
 
   const config = options.config;
 
-  // Validate configuration
-  const validation = validateConfig(options);
-  if (!validation.isValid) {
-    log.error("Configuration validation failed:");
-    validation.errors.forEach((error) => log.error(`  - ${error}`));
-    throw new Error("Invalid configuration");
-  }
-
   // CONFIGから直接値を取得
   const { apps, routes, runs } = config;
 
@@ -683,7 +679,7 @@ async function runBenchmark(options) {
 
 // CLI interface
 async function main() {
-  const CONFIG = DEFAULT_CONFIG;
+  const CONFIG = getConfig("local");
 
   const argv = yargs(process.argv.slice(2))
     .option("apps", {
@@ -744,4 +740,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { runBenchmark, DEFAULT_CONFIG };
+export { runBenchmark };

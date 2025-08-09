@@ -98,6 +98,17 @@ pnpm run perf:report
 node scripts/generate-report.js --output ./my-report.html
 ```
 
+#### 4. Cloudflare Worker Testing
+
+Test deployed applications on Cloudflare Workers:
+
+```bash
+# Make sure you've set up your URLs first (see Configuration section)
+node scripts/cloudflare-worker-benchmark.js
+```
+
+This will test your deployed applications with Cloudflare-specific optimizations and geographic location simulation.
+
 ## Measured Metrics
 
 ### Core Web Vitals (Lighthouse)
@@ -118,39 +129,61 @@ node scripts/generate-report.js --output ./my-report.html
 
 ## Configuration
 
+### Environment-Specific URLs
+
+The scripts now support environment-specific URLs to avoid hardcoding personal Cloudflare Worker URLs. This prevents accidental exposure of your personal URLs when pushing to GitHub.
+
+#### Option 1: Environment Variables (Recommended)
+
+Create a `.env` file in the project root:
+
+```bash
+# Copy the example file
+cp .env.example .env
+
+# Edit .env with your actual URLs
+REACT_ROUTER_URL=https://your-react-router.workers.dev
+TANSTACK_ROUTER_URL=https://your-tanstack-router.workers.dev
+NEXT_URL=https://your-next.workers.dev
+```
+
+#### Option 2: Local Configuration File
+
+Create a `scripts/local-config.json` file:
+
+```bash
+# Copy the template
+cp scripts/local-config.template.json scripts/local-config.json
+
+# Edit with your actual URLs
+{
+  "cloudflare": {
+    "apps": [
+      {
+        "name": "react-router",
+        "url": "https://your-react-router.workers.dev",
+        "description": "React Router on Cloudflare Workers"
+      },
+      {
+        "name": "tanstack-router",
+        "url": "https://your-tanstack-router.workers.dev",
+        "description": "TanStack Router on Cloudflare Workers"
+      },
+      {
+        "name": "next",
+        "url": "https://your-next.workers.dev",
+        "description": "Next.js on Cloudflare Workers"
+      }
+    ]
+  }
+}
+```
+
+**Security Note**: The `.env` and `scripts/local-config.json` files are automatically excluded from Git commits via `.gitignore`.
+
 ### Test Configuration
 
 Edit `CONFIG` object in `performance-benchmark.js`:
-
-```javascript
-const CONFIG = {
-  routes: [
-    { name: "posts", path: "/posts", description: "Posts list page" },
-    // Add more routes as needed
-  ],
-  apps: [
-    {
-      name: "react-router",
-      url: "http://localhost:5173",
-      port: 5173,
-    },
-    {
-      name: "tanstack-router",
-      url: "http://localhost:5174",
-      port: 5174,
-    },
-    {
-      name: "next",
-      url: "http://localhost:5175",
-      port: 5175,
-    },
-  ],
-  warmupRuns: 2, // Warmup runs before measurement
-  runs: 5, // Number of measurement runs
-  waitTime: 3000, // Wait time between measurements (ms)
-  outputDir: "./reports",
-};
-```
 
 ### Lighthouse Configuration
 

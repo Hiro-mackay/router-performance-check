@@ -1,115 +1,205 @@
+#!/usr/bin/env node
+
 /**
- * Shared Configuration for Performance Testing
- * This file contains all configuration settings used by both
- * performance-benchmark.js and performance-full.js
+ * Configuration management for router performance tests
+ * Handles environment-specific settings and URLs
  */
 
-// Performance testing configuration
-export const CONFIG = {
-  // Routes to test
-  routes: [
-    {
-      name: "posts",
-      path: "/posts",
-      description: "Posts list page",
-    },
-  ],
+import fs from "fs-extra";
+import path from "path";
+import dotenv from "dotenv";
 
-  // Applications to test
-  apps: [
-    {
-      name: "react-router",
-      url: "http://localhost:5173",
-      port: 5173,
-      buildCommand: "pnpm run build",
-      startCommand: "pnpm run preview",
-      directory: "./react-router",
-      healthUrl: "http://localhost:5173",
-    },
-    {
-      name: "tanstack-router",
-      url: "http://localhost:5174",
-      port: 5174,
-      buildCommand: "pnpm run build",
-      startCommand: "pnpm run preview",
-      directory: "./tanstack-router",
-      healthUrl: "http://localhost:5174",
-    },
-    {
-      name: "next",
-      url: "http://localhost:5175",
-      port: 5175,
-      buildCommand: "pnpm run build",
-      startCommand: "pnpm run preview",
-      directory: "./next",
-      healthUrl: "http://localhost:5175",
-    },
-  ],
+// Load environment variables from .env file
+dotenv.config();
 
-  // Testing parameters
-  warmupRuns: 2,
-  runs: 5,
-  waitTime: 3000, // Wait time between measurements (ms)
-  parallel: true, // Enable parallel execution for faster testing
+// Default configuration with placeholder URLs
+const DEFAULT_CONFIG = {
+  cloudflare: {
+    routes: [
+      {
+        name: "posts",
+        path: "/posts",
+        description: "Posts list page",
+      },
+    ],
+    apps: [
+      {
+        name: "react-router",
+        url: process.env.REACT_ROUTER_URL,
+        description: "React Router on Cloudflare Workers",
+      },
+      {
+        name: "tanstack-router",
+        url: process.env.TANSTACK_ROUTER_URL,
+        description: "TanStack Router on Cloudflare Workers",
+      },
+      {
+        name: "next",
+        url: process.env.NEXT_URL,
+        description: "Next.js on Cloudflare Workers",
+      },
+    ],
+    warmupRuns: 1,
+    runs: 3,
+    waitTime: 3000,
+    outputDir: "./reports/cloudflare",
+    // Cloudflare-specific settings
+    cloudflare: {
+      // Simulate different geographic locations
+      locations: [{ name: "japan", cfRay: "japan" }],
+      // Network conditions for Cloudflare edge
+      networkConditions: {
+        rttMs: 100, // Higher RTT for edge locations
+        throughputKbps: 5 * 1024, // 5 Mbps for more realistic conditions
+        cpuSlowdownMultiplier: 1.5, // Slightly slower CPU
+      },
+    },
+  },
+  local: {
+    routes: [
+      {
+        name: "posts",
+        path: "/posts",
+        description: "Posts list page",
+      },
+    ],
+    apps: [
+      {
+        name: "react-router",
+        url: process.env.LOCAL_REACT_ROUTER_URL,
+        port: process.env.LOCAL_REACT_ROUTER_URL.split(":").at(-1),
+        startCommand: "pnpm run preview:react-router",
+        description: "React Router (Local)",
+      },
+      {
+        name: "tanstack-router",
+        url: process.env.LOCAL_TANSTACK_ROUTER_URL,
+        port: process.env.LOCAL_TANSTACK_ROUTER_URL.split(":").at(-1),
+        startCommand: "pnpm run preview:tanstack-router",
+        description: "TanStack Router (Local)",
+      },
+      {
+        name: "next",
+        url: process.env.LOCAL_NEXT_URL,
+        port: process.env.LOCAL_NEXT_URL.split(":").at(-1),
+        startCommand: "pnpm run preview:next",
+        description: "Next.js (Local)",
+      },
+    ],
 
-  // Server management
-  waitForServer: 10000, // Time to wait for server startup (ms)
-  maxHealthChecks: 30, // Maximum health check attempts
+    // Testing parameters
+    warmupRuns: 2,
+    runs: 5,
+    waitTime: 3000, // Wait time between measurements (ms)
+    parallel: true, // Enable parallel execution for faster testing
 
-  // Output configuration
-  outputDir: "./reports",
+    // Server management
+    waitForServer: 10000, // Time to wait for server startup (ms)
+    maxHealthChecks: 10, // Maximum health check attempts
+
+    // Output configuration
+    outputDir: "./reports",
+  },
 };
 
+// Load local configuration if it exists
+function loadLocalConfig() {
+  const configPath = path.join(process.cwd(), "scripts", "local-config.json");
+
+  try {
+    if (fs.existsSync(configPath)) {
+      const localConfig = fs.readJsonSync(configPath);
+      return { ...DEFAULT_CONFIG, ...localConfig };
+    }
+  } catch (error) {
+    console.warn("Warning: Could not load local-config.json:", error.message);
+  }
+
+  return DEFAULT_CONFIG;
+}
+
+// Get configuration based on environment
+function getConfig(environment) {
+  if (!environment) {
+    console.error("Config: Environment is not set");
+    process.exit(1);
+  }
+
+  const config = loadLocalConfig();
+
+  // Validate that URLs are set
+  const apps = config[environment]?.apps || [];
+
+  for (const app of apps) {
+    if (!app.url) {
+      console.error(`Config: ${app.name} URL is not set`);
+      process.exit(1);
+    }
+  }
+
+  return config[environment] || config.cloudflare;
+}
+
 // Utility function to get app configuration by name
-export function getAppConfig(appName) {
-  return CONFIG.apps.find((app) => app.name === appName);
+export function getAppConfig(environment, appName) {
+  return getConfig(environment).apps.find((app) => app.name === appName);
 }
 
 // Utility function to get all app names
-export function getAppNames() {
-  return CONFIG.apps.map((app) => app.name);
+export function getAppNames(environment) {
+  return getConfig(environment).apps.map((app) => app.name);
 }
 
 // Utility function to get all ports
-export function getAllPorts() {
-  return CONFIG.apps.map((app) => app.port);
+export function getAllPorts(environment) {
+  return getConfig(environment).apps.map((app) => app.port);
 }
 
-// Utility function to validate configuration
-export function validateConfig() {
-  const errors = [];
-
-  // Check required fields
-  if (!CONFIG.apps || CONFIG.apps.length === 0) {
-    errors.push("No applications configured");
-  }
-
-  if (!CONFIG.routes || CONFIG.routes.length === 0) {
-    errors.push("No routes configured");
-  }
-
-  // Check for duplicate ports
-  const ports = CONFIG.apps.map((app) => app.port);
-  const duplicatePorts = ports.filter(
-    (port, index) => ports.indexOf(port) !== index
+// Create a template for local configuration
+function createLocalConfigTemplate() {
+  const templatePath = path.join(
+    process.cwd(),
+    "scripts",
+    "local-config.template.json"
   );
-  if (duplicatePorts.length > 0) {
-    errors.push(`Duplicate ports found: ${duplicatePorts.join(", ")}`);
-  }
-
-  // Check for duplicate app names
-  const names = CONFIG.apps.map((app) => app.name);
-  const duplicateNames = names.filter(
-    (name, index) => names.indexOf(name) !== index
-  );
-  if (duplicateNames.length > 0) {
-    errors.push(`Duplicate app names found: ${duplicateNames.join(", ")}`);
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
+  const template = {
+    cloudflare: {
+      apps: [
+        {
+          name: "react-router",
+          url: "https://your-react-router.workers.dev",
+          description: "React Router on Cloudflare Workers",
+        },
+        {
+          name: "tanstack-router",
+          url: "https://your-tanstack-router.workers.dev",
+          description: "TanStack Router on Cloudflare Workers",
+        },
+        {
+          name: "next",
+          url: "https://your-next.workers.dev",
+          description: "Next.js on Cloudflare Workers",
+        },
+      ],
+    },
   };
+
+  fs.writeJsonSync(templatePath, template, { spaces: 2 });
+  console.log("Created local-config.template.json");
+  console.log(
+    "Copy this file to local-config.json and update with your actual URLs"
+  );
 }
 
-export default CONFIG;
+// Export functions and default config
+export { getConfig, createLocalConfigTemplate, DEFAULT_CONFIG };
+
+// If called directly, create template
+if (import.meta.url === `file://${process.argv[1]}`) {
+  if (process.argv[2] === "init") {
+    createLocalConfigTemplate();
+  } else {
+    console.log("Usage: node config.js init");
+    console.log("This will create a local-config.template.json file");
+  }
+}
