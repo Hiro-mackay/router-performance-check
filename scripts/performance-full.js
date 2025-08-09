@@ -93,6 +93,7 @@ async function startServer(config) {
     await Promise.all(
       config.apps.map(async (app) => {
         try {
+          log.info(`Waiting for ${app.name} to start...`);
           const isHealthy = await checkServerHealth(
             app.url,
             config.waitForServer,
@@ -193,8 +194,6 @@ async function runAnalysisAndReporting() {
 
 async function main() {
   const CONFIG = getConfig("local");
-
-  console.log("CONFIG", CONFIG);
 
   log.header("🚀 Full Performance Testing Suite");
   log.info(
