@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "setup": "pnpm install && concurrently \"(cd react-router && pnpm install)\" \"(cd tanstack-router && pnpm install)\" \"(cd next && pnpm install)\"",
     "dev": "concurrently \"pnpm --filter react-router dev\" \"pnpm --filter tanstack-router dev\" \"pnpm --filter next dev\"",
     "dev:react-router": "pnpm --filter react-router dev",
     "dev:tanstack-router": "pnpm --filter tanstack-router dev",

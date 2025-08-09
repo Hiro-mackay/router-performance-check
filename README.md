@@ -20,7 +20,7 @@ router-performance-check/
 
 ```bash
 # 1. 依存関係をインストール
-pnpm install
+pnpm setup
 
 # 2. 開発サーバーを同時起動
 pnpm run dev
@@ -43,6 +43,7 @@ pnpm rnn deploy
 ### 基本操作
 
 ```bash
+pnpm run setup     # すべてのアプリの依存関係を解決し、セットアップを完了
 pnpm run dev       # ホットリロード付き、開発環境
 pnpm run preview   # Cloudflare Workerのローカル環境を立ち上げ
 ```

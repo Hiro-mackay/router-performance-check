@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "pnpm run build && wrangler dev --port 5174",
     "deploy": "pnpm run build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "postinstall": "pnpm run cf-typegen"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.131.2",
