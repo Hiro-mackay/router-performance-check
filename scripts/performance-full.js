@@ -153,6 +153,16 @@ async function stopServers() {
 
   serverProcesses = [];
   log.success("All servers stopped");
+
+  // Additional cleanup to ensure no hanging processes
+  try {
+    const ports = getAllPorts();
+    for (const port of ports) {
+      await execAsync(`lsof -ti:${port} | xargs kill -9 2>/dev/null || true`);
+    }
+  } catch (error) {
+    // Ignore cleanup errors
+  }
 }
 
 async function runAnalysisAndReporting() {
@@ -225,6 +235,9 @@ async function main() {
     // Always clean up servers
     await stopServers();
   }
+
+  // Ensure process exits after completion
+  process.exit(0);
 }
 
 // Handle process termination
@@ -238,6 +251,19 @@ process.on("SIGTERM", async () => {
   log.warn("\nReceived SIGTERM, cleaning up...");
   await stopServers();
   process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on("uncaughtException", async (error) => {
+  log.error(`Uncaught Exception: ${error.message}`);
+  await stopServers();
+  process.exit(1);
+});
+
+process.on("unhandledRejection", async (reason, promise) => {
+  log.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`);
+  await stopServers();
+  process.exit(1);
 });
 
 // Run if called directly

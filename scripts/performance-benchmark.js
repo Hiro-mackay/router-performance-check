@@ -16,6 +16,7 @@ import chalk from "chalk";
 import http from "http";
 import https from "https";
 import { URL } from "url";
+import { spawn } from "child_process";
 import { lighthouseConfig, chromeFlags } from "./lighthouse-config.js";
 import { CONFIG as DEFAULT_CONFIG, validateConfig } from "./config.js";
 
@@ -67,24 +68,135 @@ async function checkServerHealth(url, maxRetries = 30) {
 }
 
 // Launch Chrome for Lighthouse
-async function launchChrome() {
-  return await chromeLauncher.launch({
-    chromeFlags,
+async function launchChrome(userDataDir = null, portOffset = 0) {
+  const chromeOptions = {
+    chromeFlags: [
+      ...chromeFlags,
+      ...(userDataDir ? [`--user-data-dir=${userDataDir}`] : []),
+      "--disable-features=VizDisplayCompositor", // Additional isolation
+      "--disable-shared-storage", // Prevent shared storage conflicts
+      "--disable-dev-shm-usage", // Prevent shared memory conflicts
+      "--no-zygote", // Disable zygote process for better isolation
+      `--remote-debugging-port=${9222 + portOffset}`, // Explicit port assignment
+    ],
     logLevel: "error",
+    port: 9222 + portOffset, // Explicit port for chrome-launcher
+  };
+
+  return await chromeLauncher.launch(chromeOptions);
+}
+
+// Run Lighthouse audit in child process for parallel execution
+async function runLighthouseInChildProcess(
+  url,
+  chromePort,
+  isParallel = false
+) {
+  return new Promise((resolve, reject) => {
+    const childProcess = spawn(
+      "node",
+      [
+        "--input-type=module",
+        "-e",
+        `
+        import lighthouse from 'lighthouse';
+        import { lighthouseConfig } from './scripts/lighthouse-config.js';
+        
+        const options = {
+          logLevel: "error",
+          output: "json",
+          onlyCategories: ["performance"],
+          port: ${chromePort},
+          settings: {
+            ...lighthouseConfig.settings,
+            ${
+              isParallel
+                ? `
+            maxWaitForLoad: 45000,
+            pauseAfterFcpMs: 5000,
+            pauseAfterLoadMs: 5000,
+            networkQuietThresholdMs: 5000,
+            cpuQuietThresholdMs: 5000,
+            skipAboutBlank: true,
+            disableStorageReset: false,
+            `
+                : ""
+            }
+          },
+        };
+        
+        try {
+          const runnerResult = await lighthouse('${url}', options, lighthouseConfig);
+          if (runnerResult && runnerResult.lhr) {
+            console.log(JSON.stringify(runnerResult.lhr));
+          } else {
+            console.error('No results');
+            process.exit(1);
+          }
+        } catch (error) {
+          console.error(error.message);
+          process.exit(1);
+        }
+      `,
+      ],
+      {
+        cwd: process.cwd(),
+        stdio: ["pipe", "pipe", "pipe"],
+      }
+    );
+
+    let output = "";
+    let errorOutput = "";
+
+    childProcess.stdout.on("data", (data) => {
+      output += data.toString();
+    });
+
+    childProcess.stderr.on("data", (data) => {
+      errorOutput += data.toString();
+    });
+
+    childProcess.on("close", (code) => {
+      if (code === 0 && output.trim()) {
+        try {
+          const result = JSON.parse(output.trim());
+          resolve(result);
+        } catch (error) {
+          reject(
+            new Error(`Failed to parse Lighthouse output: ${error.message}`)
+          );
+        }
+      } else {
+        reject(new Error(`Lighthouse child process failed: ${errorOutput}`));
+      }
+    });
+
+    childProcess.on("error", (error) => {
+      reject(
+        new Error(`Failed to start Lighthouse child process: ${error.message}`)
+      );
+    });
   });
 }
 
 // Run Lighthouse audit
-async function runLighthouseAudit(url, chrome) {
-  const options = {
-    logLevel: "error",
-    output: "json",
-    onlyCategories: ["performance"],
-    port: chrome.port,
-    settings: lighthouseConfig.settings,
-  };
-
+async function runLighthouseAudit(url, chrome, isParallel = false) {
   try {
+    // Use child process for parallel execution to avoid performance mark conflicts
+    if (isParallel) {
+      log.info(`Running Lighthouse in child process for ${url}`);
+      return await runLighthouseInChildProcess(url, chrome.port, true);
+    }
+
+    // Use direct execution for sequential mode
+    const options = {
+      logLevel: "error",
+      output: "json",
+      onlyCategories: ["performance"],
+      port: chrome.port,
+      settings: lighthouseConfig.settings,
+    };
+
     const runnerResult = await lighthouse(url, options, lighthouseConfig);
 
     if (!runnerResult || !runnerResult.lhr) {
@@ -235,7 +347,9 @@ async function runPerformanceTest(
   routeName,
   chrome,
   browser,
-  runIndex
+  runIndex,
+  isParallel = false,
+  config = {}
 ) {
   log.info(`Running test ${runIndex + 1} for ${appName}/${routeName}`);
 
@@ -249,7 +363,7 @@ async function runPerformanceTest(
 
   try {
     // Run Lighthouse audit
-    const lighthouseResult = await runLighthouseAudit(url, chrome);
+    const lighthouseResult = await runLighthouseAudit(url, chrome, isParallel);
     if (lighthouseResult) {
       const performanceCategory = lighthouseResult.categories?.performance;
       const audits = lighthouseResult.audits || {};
@@ -293,6 +407,76 @@ async function runPerformanceTest(
     log.error(`Test failed for ${appName}/${routeName}: ${error.message}`);
     return { ...results, error: error.message };
   }
+}
+
+// Test a single app with all routes
+async function testSingleApp(
+  app,
+  routes,
+  config,
+  chrome,
+  browser,
+  isParallel = false
+) {
+  log.header(`Testing ${app.name.toUpperCase()}`);
+
+  // Check if server is running
+  log.info(`Checking if ${app.name} server is running on ${app.url}...`);
+  const isServerRunning = await checkServerHealth(app.url);
+
+  if (!isServerRunning) {
+    log.error(
+      `Server for ${app.name} is not running on ${app.url}. Please start the development server.`
+    );
+    return [];
+  }
+
+  log.success(`Server for ${app.name} is running`);
+
+  const appResults = [];
+
+  for (const route of routes) {
+    const testUrl = `${app.url}${route.path}`;
+    log.info(`Testing route: ${route.name} (${testUrl})`);
+
+    // Warmup runs
+    log.info("Running warmup...");
+    for (let i = 0; i < config.warmupRuns; i++) {
+      await runPerformanceTest(
+        testUrl,
+        app.name,
+        route.name,
+        chrome,
+        browser,
+        -1,
+        isParallel,
+        config
+      );
+      await sleep(config.waitTime);
+    }
+
+    // Measurement runs
+    log.info("Running measurements...");
+    for (let i = 0; i < config.runs; i++) {
+      const result = await runPerformanceTest(
+        testUrl,
+        app.name,
+        route.name,
+        chrome,
+        browser,
+        i,
+        isParallel,
+        config
+      );
+      appResults.push(result);
+
+      if (i < config.runs - 1) {
+        await sleep(config.waitTime);
+      }
+    }
+  }
+
+  return appResults;
 }
 
 // Main benchmark function
@@ -362,58 +546,103 @@ async function runBenchmark(options) {
       }
     }
 
-    // Run tests for each app and route combination
-    for (const app of apps) {
-      log.header(`Testing ${app.name.toUpperCase()}`);
+    // Check if parallel execution is requested (default: true for performance)
+    const useParallel = config.parallel !== false;
 
-      // Check if server is running
-      log.info(`Checking if ${app.name} server is running on ${app.url}...`);
-      const isServerRunning = await checkServerHealth(app.url);
+    if (useParallel) {
+      log.header("Running tests in PARALLEL mode for faster execution");
 
-      if (!isServerRunning) {
-        log.error(
-          `Server for ${app.name} is not running on ${app.url}. Please start the development server.`
+      // Create separate browser instances for each app to avoid conflicts
+      const browsers = [];
+      const chromes = [];
+
+      try {
+        // Launch Chrome instances for each app with isolated user data directories and ports
+        for (let i = 0; i < apps.length; i++) {
+          const userDataDir = `/tmp/chrome-${
+            apps[i].name
+          }-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+          log.info(
+            `Launching Chrome instance ${i + 1}/${apps.length} for ${
+              apps[i].name
+            }...`
+          );
+
+          // Sequential Chrome launches with proper port isolation
+          await sleep(2000); // Always wait to ensure clean separation
+
+          const appChrome = await launchChrome(userDataDir, i);
+          chromes.push(appChrome);
+
+          log.info(
+            `Chrome launched on port ${appChrome.port} for ${apps[i].name}`
+          );
+
+          const appBrowser = await puppeteer.connect({
+            browserURL: `http://localhost:${appChrome.port}`,
+            defaultViewport: null, // Prevent viewport conflicts
+          });
+          browsers.push(appBrowser);
+        }
+
+        log.success(
+          `Launched ${browsers.length} browser instances for parallel testing`
         );
-        continue;
+
+        // Run tests for all apps in parallel
+        const appPromises = apps.map((app, index) =>
+          testSingleApp(
+            app,
+            routes,
+            config,
+            chromes[index],
+            browsers[index],
+            true
+          )
+        );
+
+        log.info("Waiting for all app tests to complete...");
+        const appResults = await Promise.all(appPromises);
+
+        // Flatten results from all apps
+        appResults.forEach((results) => {
+          allResults.push(...results);
+        });
+
+        // Clean up additional browsers and user data directories
+        await Promise.all(browsers.map((browser) => browser.close()));
+        await Promise.all(chromes.map((chrome) => chrome.kill()));
+
+        // Note: User data directories will be automatically cleaned up by OS
+      } catch (error) {
+        log.error(`Parallel execution failed: ${error.message}`);
+        // Clean up on error
+        await Promise.all(
+          browsers.map((browser) => browser.close().catch(() => {}))
+        );
+        await Promise.all(
+          chromes.map((chrome) => chrome.kill().catch(() => {}))
+        );
+
+        // Note: User data directories will be automatically cleaned up by OS
+
+        throw error;
       }
+    } else {
+      log.header("Running tests in SEQUENTIAL mode");
 
-      log.success(`Server for ${app.name} is running`);
-
-      for (const route of routes) {
-        const testUrl = `${app.url}${route.path}`;
-        log.info(`Testing route: ${route.name} (${testUrl})`);
-
-        // Warmup runs
-        log.info("Running warmup...");
-        for (let i = 0; i < config.warmupRuns; i++) {
-          await runPerformanceTest(
-            testUrl,
-            app.name,
-            route.name,
-            chrome,
-            browser,
-            -1
-          );
-          await sleep(config.waitTime);
-        }
-
-        // Measurement runs
-        log.info("Running measurements...");
-        for (let i = 0; i < runs; i++) {
-          const result = await runPerformanceTest(
-            testUrl,
-            app.name,
-            route.name,
-            chrome,
-            browser,
-            i
-          );
-          allResults.push(result);
-
-          if (i < runs - 1) {
-            await sleep(config.waitTime);
-          }
-        }
+      // Sequential execution (original behavior)
+      for (const app of apps) {
+        const appResults = await testSingleApp(
+          app,
+          routes,
+          config,
+          chrome,
+          browser,
+          false
+        );
+        allResults.push(...appResults);
       }
     }
 
@@ -472,6 +701,11 @@ async function main() {
       description: "Number of measurement runs per test",
       default: CONFIG.runs,
     })
+    .option("parallel", {
+      type: "boolean",
+      description: "Enable parallel execution for faster testing",
+      default: CONFIG.parallel,
+    })
     .help()
     .parseSync();
 
@@ -489,6 +723,7 @@ async function main() {
       apps: selectedApps,
       routes: selectedRoutes,
       runs: argv.runs,
+      parallel: argv.parallel,
     };
 
     const resultsFile = await runBenchmark({

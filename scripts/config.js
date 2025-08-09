@@ -50,6 +50,7 @@ export const CONFIG = {
   warmupRuns: 2,
   runs: 5,
   waitTime: 3000, // Wait time between measurements (ms)
+  parallel: true, // Enable parallel execution for faster testing
 
   // Server management
   waitForServer: 10000, // Time to wait for server startup (ms)

@@ -5,6 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "concurrently \"pnpm --filter react-router dev\" \"pnpm --filter tanstack-router dev\" \"pnpm --filter next dev\"",
+    "dev:react-router": "pnpm --filter react-router dev",
+    "dev:tanstack-router": "pnpm --filter tanstack-router dev",
+    "dev:next": "pnpm --filter next dev",
     "build": "concurrently \"pnpm --filter react-router build\" \"pnpm --filter tanstack-router build\" \"pnpm --filter next build\"",
     "build:react-router": "pnpm --filter react-router build",
     "build:tanstack-router": "pnpm --filter tanstack-router build",
@@ -16,7 +20,15 @@
     "perf": "node scripts/performance-full.js",
     "perf:measure": "node scripts/performance-benchmark.js",
     "perf:analyze": "node scripts/analyze-results.js",
-    "perf:report": "node scripts/generate-report.js"
+    "perf:report": "node scripts/generate-report.js",
+    "perf:cloudflare": "pnpm run perf:cloudflare:measure && pnpm run perf:cloudflare:analyze && pnpm run perf:cloudflare:report",
+    "perf:cloudflare:measure": "node scripts/cloudflare-worker-benchmark.js",
+    "perf:cloudflare:analyze": "node scripts/analyze-results.js --file ./reports/cloudflare/cloudflare-benchmark-results.json",
+    "perf:cloudflare:report": "node scripts/generate-report.js --file ./reports/cloudflare/cloudflare-benchmark-results.json --output ./reports/cloudflare/cloudflare-report.html",
+    "deploy:react-router": "(cd react-router && pnpm run deploy)",
+    "deploy:tanstack-router": "(cd tanstack-router && pnpm run deploy)",
+    "deploy:next": "(cd next && pnpm run deploy)",
+    "deploy": "concurrently \"pnpm run deploy:react-router\" \"pnpm run deploy:tanstack-router\" \"pnpm run deploy:next\""
   },
   "keywords": [
     "react-router",

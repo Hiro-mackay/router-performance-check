@@ -146,66 +146,65 @@ export const Route = createFileRoute("/posts")({
   loader: async (): Promise<LoaderData> => {
     const startTime = performance.now();
 
-    console.log("TanStack Router - Starting high-load data fetching...");
+    console.log("TanStack Router - Starting optimized data fetching...");
 
-    // 大量の並行APIリクエストを実行
-    const [
-      postsResponse,
-      usersResponse,
-      commentsResponse,
-      albumsResponse,
-      photosResponse,
-      todosResponse,
-      // 同じAPIを複数回呼び出してより多くの負荷をかける
-      postsResponse2,
-      commentsResponse2,
-      photosResponse2,
-    ] = await Promise.all([
-      fetch("https://jsonplaceholder.typicode.com/posts"),
-      fetch("https://jsonplaceholder.typicode.com/users"),
-      fetch("https://jsonplaceholder.typicode.com/comments"),
-      fetch("https://jsonplaceholder.typicode.com/albums"),
-      fetch("https://jsonplaceholder.typicode.com/photos"),
-      fetch("https://jsonplaceholder.typicode.com/todos"),
-      // 追加のリクエストで負荷を増加
-      fetch("https://jsonplaceholder.typicode.com/posts"),
-      fetch("https://jsonplaceholder.typicode.com/comments"),
-      fetch("https://jsonplaceholder.typicode.com/photos"),
-    ]);
+    // 直列でAPIリクエストを実行してconnection limitを回避
+    const postsResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    const usersResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    const commentsResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    );
+    const albumsResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/albums"
+    );
+    const photosResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/photos"
+    );
+    const todosResponse = await fetch(
+      "https://jsonplaceholder.typicode.com/todos"
+    );
+
+    // 負荷軽減のため重複リクエストをコメントアウト
+    // const postsResponse2 = await fetch(
+    //   "https://jsonplaceholder.typicode.com/posts"
+    // );
+    // const commentsResponse2 = await fetch(
+    //   "https://jsonplaceholder.typicode.com/comments"
+    // );
+    // const photosResponse2 = await fetch(
+    //   "https://jsonplaceholder.typicode.com/photos"
+    // );
 
     const fetchEndTime = performance.now();
 
-    // 全データの並行パース
-    const [
-      posts,
-      users,
-      comments,
-      albums,
-      photos,
-      todos,
-      posts2,
-      comments2,
-      photos2,
-    ] = await Promise.all([
-      postsResponse.json() as Promise<Post[]>,
-      usersResponse.json() as Promise<User[]>,
-      commentsResponse.json() as Promise<Comment[]>,
-      albumsResponse.json() as Promise<Album[]>,
-      photosResponse.json() as Promise<Photo[]>,
-      todosResponse.json() as Promise<Todo[]>,
-      postsResponse2.json() as Promise<Post[]>,
-      commentsResponse2.json() as Promise<Comment[]>,
-      photosResponse2.json() as Promise<Photo[]>,
-    ]);
+    // 直列でデータをパース
+    const posts = (await postsResponse.json()) as Post[];
+    const users = (await usersResponse.json()) as User[];
+    const comments = (await commentsResponse.json()) as Comment[];
+    const albums = (await albumsResponse.json()) as Album[];
+    const photos = (await photosResponse.json()) as Photo[];
+    const todos = (await todosResponse.json()) as Todo[];
+
+    // 負荷軽減のため重複データのパースをコメントアウト
+    // const posts2 = (await postsResponse2.json()) as Post[];
+    // const comments2 = (await commentsResponse2.json()) as Comment[];
+    // const photos2 = (await photosResponse2.json()) as Photo[];
 
     const parseEndTime = performance.now();
 
-    // データを結合してより大きなデータセットを作成
-    const allPosts = [...posts, ...posts2];
-    const allComments = [...comments, ...comments2];
-    const allPhotos = [...photos, ...photos2];
+    // 負荷軽減のためデータ結合をコメントアウトし、元のデータのみ使用
+    // const allPosts = [...posts, ...posts2];
+    // const allComments = [...comments, ...comments2];
+    // const allPhotos = [...photos, ...photos2];
+    const allPosts = posts;
+    const allComments = comments;
+    const allPhotos = photos;
 
-    // 重いデータ処理を実行
+    // 重いデータ処理を実行（転送データ量は元の状態に戻す）
     const processedData = processHeavyData(allPosts, allComments, users);
 
     const endTime = performance.now();
@@ -220,13 +219,13 @@ export const Route = createFileRoute("/posts")({
     }).length;
 
     const fetchStats = {
-      totalRequests: 9,
+      totalRequests: 6, // 重複リクエストを除いた数
       totalDataSize,
       processingTime: endTime - parseEndTime,
       totalTime: endTime - startTime,
     };
 
-    console.log(`TanStack Router - High-load data fetching completed:`);
+    console.log(`TanStack Router - Optimized data fetching completed:`);
     console.log(`  - Total requests: ${fetchStats.totalRequests}`);
     console.log(`  - Fetch time: ${fetchEndTime - startTime}ms`);
     console.log(`  - Parse time: ${parseEndTime - fetchEndTime}ms`);
@@ -251,6 +250,18 @@ export const Route = createFileRoute("/posts")({
     };
   },
   component: Posts,
+  head: () => ({
+    meta: [
+      {
+        name: "title",
+        content: "Posts - TanStack Router",
+      },
+      {
+        name: "description",
+        content: "Posts page with TanStack Router",
+      },
+    ],
+  }),
 });
 
 function Posts() {
@@ -286,54 +297,46 @@ function Posts() {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Posts (TanStack Router) - High Load Version</h1>
+    <div className="p-5 font-sans text-gray-800">
+      <h1>Posts (TanStack Router) - Optimized Version</h1>
 
       {/* パフォーマンス統計 */}
-      <div
-        style={{
-          backgroundColor: "#f0f8ff",
-          padding: "20px",
-          borderRadius: "8px",
-          marginBottom: "20px",
-          border: "2px solid #4682b4",
-        }}
-      >
-        <h2 style={{ margin: "0 0 15px 0", color: "#2c3e50" }}>
-          📊 High-Load Performance Stats
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "15px",
-          }}
-        >
+      <div className="bg-blue-50 p-5 rounded-lg mb-5 border-2 border-blue-600">
+        <h2 className="m-0 mb-4 ">📊 Optimized Performance Stats</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <strong>🚀 Fetch Performance:</strong>
-            <p>Total Requests: {fetchStats.totalRequests}</p>
-            <p>Total Time: {fetchStats.totalTime.toFixed(2)}ms</p>
-            <p>Processing Time: {fetchStats.processingTime.toFixed(2)}ms</p>
+            <p className="my-1">Total Requests: {fetchStats.totalRequests}</p>
+            <p className="my-1">
+              Total Time: {fetchStats.totalTime.toFixed(2)}ms
+            </p>
+            <p className="my-1">
+              Processing Time: {fetchStats.processingTime.toFixed(2)}ms
+            </p>
           </div>
           <div>
             <strong>📈 Data Volume:</strong>
-            <p>Posts: {displayStats.totalPosts}</p>
-            <p>Comments: {displayStats.totalComments}</p>
-            <p>Photos: {displayStats.totalPhotos}</p>
-            <p>Total Size: {displayStats.dataSizeMB}MB</p>
+            <p className="my-1">Posts: {displayStats.totalPosts}</p>
+            <p className="my-1">Comments: {displayStats.totalComments}</p>
+            <p className="my-1">Photos: {displayStats.totalPhotos}</p>
+            <p className="my-1">Total Size: {displayStats.dataSizeMB}MB</p>
           </div>
           <div>
             <strong>⚡ Processing:</strong>
-            <p>Processed Items: {displayStats.processedItems}</p>
-            <p>Avg Comments/Post: {displayStats.averageCommentsPerPost}</p>
-            <p>Albums: {displayStats.totalAlbums}</p>
-            <p>Todos: {displayStats.totalTodos}</p>
+            <p className="my-1">
+              Processed Items: {displayStats.processedItems}
+            </p>
+            <p className="my-1">
+              Avg Comments/Post: {displayStats.averageCommentsPerPost}
+            </p>
+            <p className="my-1">Albums: {displayStats.totalAlbums}</p>
+            <p className="my-1">Todos: {displayStats.totalTodos}</p>
           </div>
         </div>
       </div>
 
       {/* データ表示 */}
-      <div style={{ display: "grid", gap: "20px", marginTop: "20px" }}>
+      <div className="grid gap-5 mt-5">
         {posts.slice(0, 15).map((post) => {
           const user = userMap[post.userId];
           const postComments = comments.filter((c) => c.postId === post.id);
@@ -342,70 +345,46 @@ function Posts() {
           return (
             <div
               key={post.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "16px",
-                backgroundColor: "#f9f9f9",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
+              className="border border-gray-300 rounded-lg p-4 bg-gray-50 shadow-sm"
             >
-              <h3 style={{ margin: "0 0 8px 0", color: "#333" }}>
+              <h3 className="m-0 mb-2 ">
                 {post.title} #{post.id}
               </h3>
-              <p
-                style={{
-                  margin: "0 0 12px 0",
-                  color: "#666",
-                  lineHeight: "1.5",
-                }}
-              >
+              <p className="m-0 mb-3 text-gray-600 leading-relaxed">
                 {post.body}
               </p>
 
               {user && (
-                <div
-                  style={{
-                    fontSize: "14px",
-                    color: "#888",
-                    marginBottom: "12px",
-                  }}
-                >
-                  <p style={{ margin: "4px 0" }}>
+                <div className="text-sm text-gray-500 mb-3">
+                  <p className="my-1">
                     <strong>Author:</strong> {user.name} ({user.email})
                   </p>
-                  <p style={{ margin: "4px 0" }}>
+                  <p className="my-1">
                     <strong>Website:</strong> {user.website}
                   </p>
                 </div>
               )}
 
               {/* コメント情報 */}
-              <div
-                style={{
-                  backgroundColor: "#e8f4f8",
-                  padding: "10px",
-                  borderRadius: "4px",
-                  fontSize: "12px",
-                  marginTop: "10px",
-                }}
-              >
+              <div className="bg-blue-100 p-3 rounded text-xs mt-3">
                 <strong>💬 Comments Analysis:</strong>
-                <p>Total Comments: {postComments.length}</p>
+                <p className="my-1">Total Comments: {postComments.length}</p>
                 {processedItem && (
                   <>
-                    <p>Word Count: {processedItem.postWordCount}</p>
-                    <p>
+                    <p className="my-1">
+                      Word Count: {processedItem.postWordCount}
+                    </p>
+                    <p className="my-1">
                       Avg Comment Length:{" "}
                       {processedItem.commentsAnalysis.averageLength.toFixed(1)}
                     </p>
-                    <p>
+                    <p className="my-1">
                       Total Engagement:{" "}
                       {processedItem.commentsAnalysis.totalEngagement.toFixed(
                         1
                       )}
                     </p>
-                    <p>
+                    <p className="my-1">
                       Sentiment: Positive:{" "}
                       {processedItem.commentsAnalysis.sentimentDistribution
                         .positive || 0}
@@ -424,38 +403,29 @@ function Posts() {
         })}
       </div>
 
-      <div
-        style={{
-          marginTop: "40px",
-          padding: "20px",
-          backgroundColor: "#fff3cd",
-          borderRadius: "8px",
-          border: "1px solid #ffeaa7",
-        }}
-      >
-        <h2>⚡ High-Load Performance Testing</h2>
+      <div className="mt-10 p-5 bg-yellow-50 rounded-lg border border-yellow-300">
+        <h2>⚡ Optimized Performance Testing</h2>
         <p>
           <strong>
-            This page now performs intensive data fetching and processing:
+            This page now performs optimized data fetching and processing:
           </strong>
         </p>
         <ul>
           <li>
             🔥{" "}
             <strong>
-              {fetchStats.totalRequests} simultaneous API requests
+              {fetchStats.totalRequests} API requests (reduced from 9)
             </strong>
           </li>
           <li>
             📊 <strong>{displayStats.dataSizeMB}MB of data</strong> downloaded
-            and processed
+            and processed (optimized)
           </li>
           <li>
-            ⚙️ <strong>Heavy CPU processing</strong> for data transformation
+            ⚙️ <strong>Optimized CPU processing</strong> for data transformation
           </li>
           <li>
-            🚀 <strong>Complex sentiment analysis</strong> and statistics
-            calculation
+            🚀 <strong>Limited sentiment analysis</strong> (first 10 posts only)
           </li>
           <li>
             📈 <strong>Real-time performance metrics</strong> tracking
@@ -465,9 +435,29 @@ function Posts() {
           Check the browser console for detailed fetch timing and processing
           information.
         </p>
-        <p style={{ color: "#d63031", fontWeight: "bold" }}>
+        <p className="text-red-600 font-bold">
           Total processing time: {fetchStats.totalTime.toFixed(2)}ms
         </p>
+
+        <div className="mt-5 p-4 bg-green-50 rounded border border-green-500">
+          <h3>🔄 負荷軽減のための変更点（コメントアウト済み）:</h3>
+          <ul>
+            <li>
+              <strong>重複APIリクエスト:</strong> posts, comments,
+              photosの2回目の取得をコメントアウト
+            </li>
+            <li>
+              <strong>データ処理量:</strong> 全データ処理（元の状態）
+            </li>
+            <li>
+              <strong>表示件数:</strong> 15件のposts表示（元の状態）
+            </li>
+          </ul>
+          <p>
+            <strong>元に戻す場合:</strong>{" "}
+            コメントアウトされた部分のコメントを外して、slice制限を削除してください。
+          </p>
+        </div>
       </div>
     </div>
   );

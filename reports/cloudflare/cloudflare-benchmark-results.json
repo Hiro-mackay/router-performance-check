@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-09T14:49:59.000Z",
+    "config": {
+      "routes": [
+        {
+          "name": "posts",
+          "path": "/posts",
+          "description": "Posts list page"
+        }
+      ],
+      "apps": [
+        {
+          "name": "react-router",
+          "url": "https://react-router.johnmackay150.workers.dev",
+          "description": "React Router on Cloudflare Workers"
+        },
+        {
+          "name": "tanstack-router",
+          "url": "https://tanstack-router.johnmackay150.workers.dev",
+          "description": "TanStack Router on Cloudflare Workers"
+        },
+        {
+          "name": "next",
+          "url": "https://next.johnmackay150.workers.dev",
+          "description": "Next.js on Cloudflare Workers"
+        }
+      ],
+      "warmupRuns": 1,
+      "runs": 2,
+      "waitTime": 3000,
+      "outputDir": "./reports/cloudflare",
+      "cloudflare": {
+        "locations": [
+          {
+            "name": "japan",
+            "cfRay": "japan"
+          }
+        ],
+        "networkConditions": {
+          "rttMs": 100,
+          "throughputKbps": 5120,
+          "cpuSlowdownMultiplier": 1.5
+        }
+      }
+    },
+    "runs": 2,
+    "lighthouseVersion": "11.4.0",
+    "puppeteerVersion": "21.11.0",
+    "environment": "cloudflare-workers"
+  },
+  "results": [
+    {
+      "app": "react-router",
+      "route": "posts",
+      "url": "https://react-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:46:23.799Z",
+      "runIndex": 0,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 487.266,
+          "lcp": 487.266,
+          "cls": 0,
+          "tbt": 0,
+          "si": 487,
+          "tti": 506.823
+        },
+        "opportunities": {
+          "unusedJs": 53840,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 339,
+          "loadComplete": 339,
+          "firstByte": 214,
+          "domInteractive": 339
+        }
+      }
+    },
+    {
+      "app": "react-router",
+      "route": "posts",
+      "url": "https://react-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:46:51.964Z",
+      "runIndex": 1,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 323.925,
+          "lcp": 323.925,
+          "cls": 0,
+          "tbt": 0,
+          "si": 359,
+          "tti": 344.256
+        },
+        "opportunities": {
+          "unusedJs": 53840,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 328,
+          "loadComplete": 329,
+          "firstByte": 201,
+          "domInteractive": 328
+        }
+      }
+    },
+    {
+      "app": "tanstack-router",
+      "route": "posts",
+      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:47:44.411Z",
+      "runIndex": 0,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 392.632,
+          "lcp": 392.632,
+          "cls": 0,
+          "tbt": 0,
+          "si": 384,
+          "tti": 392.632
+        },
+        "opportunities": {
+          "unusedJs": 35427,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 104,
+          "loadComplete": 104,
+          "firstByte": 52,
+          "domInteractive": 57
+        }
+      }
+    },
+    {
+      "app": "tanstack-router",
+      "route": "posts",
+      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:48:11.704Z",
+      "runIndex": 1,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 458.274,
+          "lcp": 458.274,
+          "cls": 0,
+          "tbt": 0,
+          "si": 449,
+          "tti": 458.274
+        },
+        "opportunities": {
+          "unusedJs": 35427,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 92,
+          "loadComplete": 92,
+          "firstByte": 35,
+          "domInteractive": 40
+        }
+      }
+    },
+    {
+      "app": "next",
+      "route": "posts",
+      "url": "https://next.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:49:05.067Z",
+      "runIndex": 0,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 306.866,
+          "lcp": 306.866,
+          "cls": 0,
+          "tbt": 0,
+          "si": 307,
+          "tti": 306.866
+        },
+        "opportunities": {
+          "unusedJs": 20554,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 222,
+          "loadComplete": 231,
+          "firstByte": 212,
+          "domInteractive": 222
+        }
+      }
+    },
+    {
+      "app": "next",
+      "route": "posts",
+      "url": "https://next.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:49:33.509Z",
+      "runIndex": 1,
+      "location": "japan",
+      "lighthouse": {
+        "performance": 100,
+        "metrics": {
+          "fcp": 309.594,
+          "lcp": 309.594,
+          "cls": 0,
+          "tbt": 0,
+          "si": 310,
+          "tti": 309.594
+        },
+        "opportunities": {
+          "unusedJs": 20554,
+          "unusedCss": 0,
+          "unminifiedJs": 0
+        }
+      },
+      "webVitals": {},
+      "pagePerformance": {
+        "performanceTiming": {
+          "domContentLoaded": 212,
+          "loadComplete": 221,
+          "firstByte": 202,
+          "domInteractive": 212
+        }
+      }
+    }
+  ]
+}

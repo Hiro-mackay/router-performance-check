@@ -264,7 +264,7 @@
             <h1>🚀 Router Performance Benchmark</h1>
             <div class="subtitle">React Router vs TanStack Router Performance Comparison</div>
             <div style="margin-top: 15px; font-size: 0.9em;">
-                Generated on 8/9/2025, 11:55:21 PM
+                Generated on 8/9/2025, 11:50:24 PM
             </div>
         </div>
 
@@ -273,7 +273,7 @@
             <div class="metadata-grid">
                 <div class="metadata-item">
                     <div class="metadata-label">Test Runs</div>
-                    <div>5</div>
+                    <div>2</div>
                 </div>
                 <div class="metadata-item">
                     <div class="metadata-label">Lighthouse Version</div>
@@ -285,7 +285,7 @@
                 </div>
                 <div class="metadata-item">
                     <div class="metadata-label">Total Tests</div>
-                    <div>15</div>
+                    <div>6</div>
                 </div>
             </div>
         </div>
@@ -295,21 +295,21 @@
         <div class="section-header">📋 Detailed Results</div>
         <div class="section-content">
             <div class="tabs"><button class="tab active" onclick="showTab('react-router')">REACT-ROUTER</button><button class="tab " onclick="showTab('tanstack-router')">TANSTACK-ROUTER</button><button class="tab " onclick="showTab('next')">NEXT</button></div><div class="tab-content active" id="react-router">
-        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (5 runs)</h4>
+        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (2 runs)</h4>
         <div class="comparison-grid">
           <div class="metric-card">
               <div class="metric-title">Performance Score</div>
-              <div class="metric-value">99.6/100</div>
-              <div>Range: 99.0 - 100.0</div>
+              <div class="metric-value">100.0/100</div>
+              <div>Range: 100.0 - 100.0</div>
           </div>
             <div class="metric-card">
                 <div class="metric-title">First Contentful Paint</div>
-                <div class="metric-value">675ms</div>
+                <div class="metric-value">406ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
                 <div class="metric-title">Largest Contentful Paint</div>
-                <div class="metric-value">675ms</div>
+                <div class="metric-value">406ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
@@ -322,7 +322,7 @@
                 <div class="metric-value">0ms</div>
                 <div class="grade-good">Good</div>
             </div></div></div><div class="tab-content " id="tanstack-router">
-        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (5 runs)</h4>
+        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (2 runs)</h4>
         <div class="comparison-grid">
           <div class="metric-card">
               <div class="metric-title">Performance Score</div>
@@ -331,12 +331,12 @@
           </div>
             <div class="metric-card">
                 <div class="metric-title">First Contentful Paint</div>
-                <div class="metric-value">261ms</div>
+                <div class="metric-value">425ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
                 <div class="metric-title">Largest Contentful Paint</div>
-                <div class="metric-value">261ms</div>
+                <div class="metric-value">425ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
@@ -349,21 +349,21 @@
                 <div class="metric-value">0ms</div>
                 <div class="grade-good">Good</div>
             </div></div></div><div class="tab-content " id="next">
-        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (5 runs)</h4>
+        <h4 style="margin: 20px 0; color: #2d3748;">POSTS Route (2 runs)</h4>
         <div class="comparison-grid">
           <div class="metric-card">
               <div class="metric-title">Performance Score</div>
-              <div class="metric-value">99.4/100</div>
-              <div>Range: 99.0 - 100.0</div>
+              <div class="metric-value">100.0/100</div>
+              <div>Range: 100.0 - 100.0</div>
           </div>
             <div class="metric-card">
                 <div class="metric-title">First Contentful Paint</div>
-                <div class="metric-value">684ms</div>
+                <div class="metric-value">308ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
                 <div class="metric-title">Largest Contentful Paint</div>
-                <div class="metric-value">684ms</div>
+                <div class="metric-value">308ms</div>
                 <div class="grade-good">Good</div>
             </div>
             <div class="metric-card">
@@ -403,7 +403,7 @@
                 <div class="raw-data">
                     <pre>{
   "metadata": {
-    "timestamp": "2025-08-09T14:55:20.890Z",
+    "timestamp": "2025-08-09T14:49:59.000Z",
     "config": {
       "routes": [
         {
@@ -415,63 +415,63 @@
       "apps": [
         {
           "name": "react-router",
-          "url": "http://localhost:5173",
-          "port": 5173,
-          "buildCommand": "pnpm run build",
-          "startCommand": "pnpm run preview",
-          "directory": "./react-router",
-          "healthUrl": "http://localhost:5173"
+          "url": "https://react-router.johnmackay150.workers.dev",
+          "description": "React Router on Cloudflare Workers"
         },
         {
           "name": "tanstack-router",
-          "url": "http://localhost:5174",
-          "port": 5174,
-          "buildCommand": "pnpm run build",
-          "startCommand": "pnpm run preview",
-          "directory": "./tanstack-router",
-          "healthUrl": "http://localhost:5174"
+          "url": "https://tanstack-router.johnmackay150.workers.dev",
+          "description": "TanStack Router on Cloudflare Workers"
         },
         {
           "name": "next",
-          "url": "http://localhost:5175",
-          "port": 5175,
-          "buildCommand": "pnpm run build",
-          "startCommand": "pnpm run preview",
-          "directory": "./next",
-          "healthUrl": "http://localhost:5175"
+          "url": "https://next.johnmackay150.workers.dev",
+          "description": "Next.js on Cloudflare Workers"
         }
       ],
-      "warmupRuns": 2,
-      "runs": 5,
+      "warmupRuns": 1,
+      "runs": 2,
       "waitTime": 3000,
-      "parallel": true,
-      "waitForServer": 10000,
-      "maxHealthChecks": 30,
-      "outputDir": "./reports"
+      "outputDir": "./reports/cloudflare",
+      "cloudflare": {
+        "locations": [
+          {
+            "name": "japan",
+            "cfRay": "japan"
+          }
+        ],
+        "networkConditions": {
+          "rttMs": 100,
+          "throughputKbps": 5120,
+          "cpuSlowdownMultiplier": 1.5
+        }
+      }
     },
-    "runs": 5,
+    "runs": 2,
     "lighthouseVersion": "11.4.0",
-    "puppeteerVersion": "21.11.0"
+    "puppeteerVersion": "21.11.0",
+    "environment": "cloudflare-workers"
   },
   "results": [
     {
       "app": "react-router",
       "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-09T14:52:37.285Z",
+      "url": "https://react-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:46:23.799Z",
       "runIndex": 0,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 643.876,
-          "lcp": 643.876,
+          "fcp": 487.266,
+          "lcp": 487.266,
           "cls": 0,
           "tbt": 0,
-          "si": 644,
-          "tti": 664.088
+          "si": 487,
+          "tti": 506.823
         },
         "opportunities": {
-          "unusedJs": 52144,
+          "unusedJs": 53840,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -479,31 +479,32 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 580,
-          "loadComplete": 580,
-          "firstByte": 468,
-          "domInteractive": 579
+          "domContentLoaded": 339,
+          "loadComplete": 339,
+          "firstByte": 214,
+          "domInteractive": 339
         }
       }
     },
     {
       "app": "react-router",
       "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-09T14:53:09.552Z",
+      "url": "https://react-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:46:51.964Z",
       "runIndex": 1,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 643.351,
-          "lcp": 643.351,
+          "fcp": 323.925,
+          "lcp": 323.925,
           "cls": 0,
           "tbt": 0,
-          "si": 644,
-          "tti": 662.838
+          "si": 359,
+          "tti": 344.256
         },
         "opportunities": {
-          "unusedJs": 52144,
+          "unusedJs": 53840,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -511,127 +512,32 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 652,
-          "loadComplete": 653,
-          "firstByte": 533,
-          "domInteractive": 652
-        }
-      }
-    },
-    {
-      "app": "react-router",
-      "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-09T14:53:41.866Z",
-      "runIndex": 2,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 630.845,
-          "lcp": 630.845,
-          "cls": 0,
-          "tbt": 0,
-          "si": 643,
-          "tti": 651.03
-        },
-        "opportunities": {
-          "unusedJs": 52144,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 691,
-          "loadComplete": 692,
-          "firstByte": 575,
-          "domInteractive": 691
-        }
-      }
-    },
-    {
-      "app": "react-router",
-      "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-09T14:54:14.238Z",
-      "runIndex": 3,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 750.453,
-          "lcp": 750.453,
-          "cls": 0,
-          "tbt": 0,
-          "si": 751,
-          "tti": 769.912
-        },
-        "opportunities": {
-          "unusedJs": 52144,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 736,
-          "loadComplete": 736,
-          "firstByte": 621,
-          "domInteractive": 736
-        }
-      }
-    },
-    {
-      "app": "react-router",
-      "route": "posts",
-      "url": "http://localhost:5173/posts",
-      "timestamp": "2025-08-09T14:54:46.688Z",
-      "runIndex": 4,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 704.347,
-          "lcp": 704.347,
-          "cls": 0,
-          "tbt": 0,
-          "si": 716,
-          "tti": 725.211
-        },
-        "opportunities": {
-          "unusedJs": 52144,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 719,
-          "loadComplete": 720,
-          "firstByte": 595,
-          "domInteractive": 719
+          "domContentLoaded": 328,
+          "loadComplete": 329,
+          "firstByte": 201,
+          "domInteractive": 328
         }
       }
     },
     {
       "app": "tanstack-router",
       "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-09T14:52:33.367Z",
+      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:47:44.411Z",
       "runIndex": 0,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 281,
-          "lcp": 281,
+          "fcp": 392.632,
+          "lcp": 392.632,
           "cls": 0,
           "tbt": 0,
-          "si": 274,
-          "tti": 281
+          "si": 384,
+          "tti": 392.632
         },
         "opportunities": {
-          "unusedJs": 34310,
+          "unusedJs": 35427,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -639,31 +545,32 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 24,
-          "loadComplete": 25,
-          "firstByte": 4,
-          "domInteractive": 8
+          "domContentLoaded": 104,
+          "loadComplete": 104,
+          "firstByte": 52,
+          "domInteractive": 57
         }
       }
     },
     {
       "app": "tanstack-router",
       "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-09T14:53:03.888Z",
+      "url": "https://tanstack-router.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:48:11.704Z",
       "runIndex": 1,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 264.248,
-          "lcp": 264.248,
+          "fcp": 458.274,
+          "lcp": 458.274,
           "cls": 0,
           "tbt": 0,
-          "si": 257,
-          "tti": 264.248
+          "si": 449,
+          "tti": 458.274
         },
         "opportunities": {
-          "unusedJs": 34310,
+          "unusedJs": 35427,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -671,127 +578,32 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 24,
-          "loadComplete": 24,
-          "firstByte": 4,
-          "domInteractive": 7
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-09T14:53:34.312Z",
-      "runIndex": 2,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 258.413,
-          "lcp": 258.413,
-          "cls": 0,
-          "tbt": 0,
-          "si": 252,
-          "tti": 258.413
-        },
-        "opportunities": {
-          "unusedJs": 34310,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 23,
-          "loadComplete": 24,
-          "firstByte": 3,
-          "domInteractive": 7
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-09T14:54:04.731Z",
-      "runIndex": 3,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 249.403,
-          "lcp": 249.403,
-          "cls": 0,
-          "tbt": 0,
-          "si": 244,
-          "tti": 249.403
-        },
-        "opportunities": {
-          "unusedJs": 34310,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 26,
-          "loadComplete": 27,
-          "firstByte": 4,
-          "domInteractive": 8
-        }
-      }
-    },
-    {
-      "app": "tanstack-router",
-      "route": "posts",
-      "url": "http://localhost:5174/posts",
-      "timestamp": "2025-08-09T14:54:35.159Z",
-      "runIndex": 4,
-      "lighthouse": {
-        "performance": 100,
-        "metrics": {
-          "fcp": 253.028,
-          "lcp": 253.028,
-          "cls": 0,
-          "tbt": 0,
-          "si": 247,
-          "tti": 253.028
-        },
-        "opportunities": {
-          "unusedJs": 34310,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 25,
-          "loadComplete": 25,
-          "firstByte": 4,
-          "domInteractive": 7
+          "domContentLoaded": 92,
+          "loadComplete": 92,
+          "firstByte": 35,
+          "domInteractive": 40
         }
       }
     },
     {
       "app": "next",
       "route": "posts",
-      "url": "http://localhost:5175/posts",
-      "timestamp": "2025-08-09T14:52:38.269Z",
+      "url": "https://next.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:49:05.067Z",
       "runIndex": 0,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 629.034,
-          "lcp": 629.034,
+          "fcp": 306.866,
+          "lcp": 306.866,
           "cls": 0,
           "tbt": 0,
-          "si": 629,
-          "tti": 629.034
+          "si": 307,
+          "tti": 306.866
         },
         "opportunities": {
-          "unusedJs": 0,
+          "unusedJs": 20554,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -799,95 +611,32 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 560,
-          "loadComplete": 568,
-          "firstByte": 554,
-          "domInteractive": 560
+          "domContentLoaded": 222,
+          "loadComplete": 231,
+          "firstByte": 212,
+          "domInteractive": 222
         }
       }
     },
     {
       "app": "next",
       "route": "posts",
-      "url": "http://localhost:5175/posts",
-      "timestamp": "2025-08-09T14:53:11.362Z",
+      "url": "https://next.johnmackay150.workers.dev/posts",
+      "timestamp": "2025-08-09T14:49:33.509Z",
       "runIndex": 1,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 770.415,
-          "lcp": 770.415,
-          "cls": 0,
-          "tbt": 0,
-          "si": 771,
-          "tti": 770.415
-        },
-        "opportunities": {
-          "unusedJs": 0,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 593,
-          "loadComplete": 601,
-          "firstByte": 587,
-          "domInteractive": 593
-        }
-      }
-    },
-    {
-      "app": "next",
-      "route": "posts",
-      "url": "http://localhost:5175/posts",
-      "timestamp": "2025-08-09T14:53:44.515Z",
-      "runIndex": 2,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 717.191,
-          "lcp": 717.191,
-          "cls": 0,
-          "tbt": 0,
-          "si": 717,
-          "tti": 717.191
-        },
-        "opportunities": {
-          "unusedJs": 0,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 518,
-          "loadComplete": 526,
-          "firstByte": 512,
-          "domInteractive": 518
-        }
-      }
-    },
-    {
-      "app": "next",
-      "route": "posts",
-      "url": "http://localhost:5175/posts",
-      "timestamp": "2025-08-09T14:54:17.582Z",
-      "runIndex": 3,
+      "location": "japan",
       "lighthouse": {
         "performance": 100,
         "metrics": {
-          "fcp": 564.581,
-          "lcp": 564.581,
+          "fcp": 309.594,
+          "lcp": 309.594,
           "cls": 0,
           "tbt": 0,
-          "si": 565,
-          "tti": 564.581
+          "si": 310,
+          "tti": 309.594
         },
         "opportunities": {
-          "unusedJs": 0,
+          "unusedJs": 20554,
           "unusedCss": 0,
           "unminifiedJs": 0
         }
@@ -895,42 +644,10 @@
       "webVitals": {},
       "pagePerformance": {
         "performanceTiming": {
-          "domContentLoaded": 511,
-          "loadComplete": 518,
-          "firstByte": 504,
-          "domInteractive": 511
-        }
-      }
-    },
-    {
-      "app": "next",
-      "route": "posts",
-      "url": "http://localhost:5175/posts",
-      "timestamp": "2025-08-09T14:54:50.480Z",
-      "runIndex": 4,
-      "lighthouse": {
-        "performance": 99,
-        "metrics": {
-          "fcp": 737.201,
-          "lcp": 737.201,
-          "cls": 0,
-          "tbt": 0,
-          "si": 737,
-          "tti": 737.201
-        },
-        "opportunities": {
-          "unusedJs": 0,
-          "unusedCss": 0,
-          "unminifiedJs": 0
-        }
-      },
-      "webVitals": {},
-      "pagePerformance": {
-        "performanceTiming": {
-          "domContentLoaded": 584,
-          "loadComplete": 592,
-          "firstByte": 578,
-          "domInteractive": 584
+          "domContentLoaded": 212,
+          "loadComplete": 221,
+          "firstByte": 202,
+          "domInteractive": 212
         }
       }
     }
@@ -966,8 +683,8 @@
     });
 
     function initializeCharts() {
-        const results = [{"app":"react-router","route":"posts","url":"http://localhost:5173/posts","timestamp":"2025-08-09T14:52:37.285Z","runIndex":0,"lighthouse":{"performance":100,"metrics":{"fcp":643.876,"lcp":643.876,"cls":0,"tbt":0,"si":644,"tti":664.088},"opportunities":{"unusedJs":52144,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":580,"loadComplete":580,"firstByte":468,"domInteractive":579}}},{"app":"react-router","route":"posts","url":"http://localhost:5173/posts","timestamp":"2025-08-09T14:53:09.552Z","runIndex":1,"lighthouse":{"performance":100,"metrics":{"fcp":643.351,"lcp":643.351,"cls":0,"tbt":0,"si":644,"tti":662.838},"opportunities":{"unusedJs":52144,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":652,"loadComplete":653,"firstByte":533,"domInteractive":652}}},{"app":"react-router","route":"posts","url":"http://localhost:5173/posts","timestamp":"2025-08-09T14:53:41.866Z","runIndex":2,"lighthouse":{"performance":100,"metrics":{"fcp":630.845,"lcp":630.845,"cls":0,"tbt":0,"si":643,"tti":651.03},"opportunities":{"unusedJs":52144,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":691,"loadComplete":692,"firstByte":575,"domInteractive":691}}},{"app":"react-router","route":"posts","url":"http://localhost:5173/posts","timestamp":"2025-08-09T14:54:14.238Z","runIndex":3,"lighthouse":{"performance":99,"metrics":{"fcp":750.453,"lcp":750.453,"cls":0,"tbt":0,"si":751,"tti":769.912},"opportunities":{"unusedJs":52144,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":736,"loadComplete":736,"firstByte":621,"domInteractive":736}}},{"app":"react-router","route":"posts","url":"http://localhost:5173/posts","timestamp":"2025-08-09T14:54:46.688Z","runIndex":4,"lighthouse":{"performance":99,"metrics":{"fcp":704.347,"lcp":704.347,"cls":0,"tbt":0,"si":716,"tti":725.211},"opportunities":{"unusedJs":52144,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":719,"loadComplete":720,"firstByte":595,"domInteractive":719}}},{"app":"tanstack-router","route":"posts","url":"http://localhost:5174/posts","timestamp":"2025-08-09T14:52:33.367Z","runIndex":0,"lighthouse":{"performance":100,"metrics":{"fcp":281,"lcp":281,"cls":0,"tbt":0,"si":274,"tti":281},"opportunities":{"unusedJs":34310,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":24,"loadComplete":25,"firstByte":4,"domInteractive":8}}},{"app":"tanstack-router","route":"posts","url":"http://localhost:5174/posts","timestamp":"2025-08-09T14:53:03.888Z","runIndex":1,"lighthouse":{"performance":100,"metrics":{"fcp":264.248,"lcp":264.248,"cls":0,"tbt":0,"si":257,"tti":264.248},"opportunities":{"unusedJs":34310,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":24,"loadComplete":24,"firstByte":4,"domInteractive":7}}},{"app":"tanstack-router","route":"posts","url":"http://localhost:5174/posts","timestamp":"2025-08-09T14:53:34.312Z","runIndex":2,"lighthouse":{"performance":100,"metrics":{"fcp":258.413,"lcp":258.413,"cls":0,"tbt":0,"si":252,"tti":258.413},"opportunities":{"unusedJs":34310,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":23,"loadComplete":24,"firstByte":3,"domInteractive":7}}},{"app":"tanstack-router","route":"posts","url":"http://localhost:5174/posts","timestamp":"2025-08-09T14:54:04.731Z","runIndex":3,"lighthouse":{"performance":100,"metrics":{"fcp":249.403,"lcp":249.403,"cls":0,"tbt":0,"si":244,"tti":249.403},"opportunities":{"unusedJs":34310,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":26,"loadComplete":27,"firstByte":4,"domInteractive":8}}},{"app":"tanstack-router","route":"posts","url":"http://localhost:5174/posts","timestamp":"2025-08-09T14:54:35.159Z","runIndex":4,"lighthouse":{"performance":100,"metrics":{"fcp":253.028,"lcp":253.028,"cls":0,"tbt":0,"si":247,"tti":253.028},"opportunities":{"unusedJs":34310,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":25,"loadComplete":25,"firstByte":4,"domInteractive":7}}},{"app":"next","route":"posts","url":"http://localhost:5175/posts","timestamp":"2025-08-09T14:52:38.269Z","runIndex":0,"lighthouse":{"performance":100,"metrics":{"fcp":629.034,"lcp":629.034,"cls":0,"tbt":0,"si":629,"tti":629.034},"opportunities":{"unusedJs":0,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":560,"loadComplete":568,"firstByte":554,"domInteractive":560}}},{"app":"next","route":"posts","url":"http://localhost:5175/posts","timestamp":"2025-08-09T14:53:11.362Z","runIndex":1,"lighthouse":{"performance":99,"metrics":{"fcp":770.415,"lcp":770.415,"cls":0,"tbt":0,"si":771,"tti":770.415},"opportunities":{"unusedJs":0,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":593,"loadComplete":601,"firstByte":587,"domInteractive":593}}},{"app":"next","route":"posts","url":"http://localhost:5175/posts","timestamp":"2025-08-09T14:53:44.515Z","runIndex":2,"lighthouse":{"performance":99,"metrics":{"fcp":717.191,"lcp":717.191,"cls":0,"tbt":0,"si":717,"tti":717.191},"opportunities":{"unusedJs":0,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":518,"loadComplete":526,"firstByte":512,"domInteractive":518}}},{"app":"next","route":"posts","url":"http://localhost:5175/posts","timestamp":"2025-08-09T14:54:17.582Z","runIndex":3,"lighthouse":{"performance":100,"metrics":{"fcp":564.581,"lcp":564.581,"cls":0,"tbt":0,"si":565,"tti":564.581},"opportunities":{"unusedJs":0,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":511,"loadComplete":518,"firstByte":504,"domInteractive":511}}},{"app":"next","route":"posts","url":"http://localhost:5175/posts","timestamp":"2025-08-09T14:54:50.480Z","runIndex":4,"lighthouse":{"performance":99,"metrics":{"fcp":737.201,"lcp":737.201,"cls":0,"tbt":0,"si":737,"tti":737.201},"opportunities":{"unusedJs":0,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":584,"loadComplete":592,"firstByte":578,"domInteractive":584}}}];
-        const comparison = {"posts":{"route":"posts","reactRouter":{"app":"react-router","route":"posts","runs":5,"lighthouse":{"performanceScore":{"count":5,"min":99,"max":100,"mean":99.6,"median":100},"metrics":{"fcp":{"count":5,"min":630.845,"max":750.453,"mean":674.5743999999999,"median":643.876},"lcp":{"count":5,"min":630.845,"max":750.453,"mean":674.5743999999999,"median":643.876},"cls":{"count":5,"min":0,"max":0,"mean":0,"median":0},"tbt":{"count":5,"min":0,"max":0,"mean":0,"median":0},"tti":{"count":5,"min":651.03,"max":769.912,"mean":694.6157999999999,"median":664.088},"si":{"count":5,"min":643,"max":751,"mean":679.6,"median":644}}}},"tanstackRouter":{"app":"tanstack-router","route":"posts","runs":5,"lighthouse":{"performanceScore":{"count":5,"min":100,"max":100,"mean":100,"median":100},"metrics":{"fcp":{"count":5,"min":249.403,"max":281,"mean":261.21840000000003,"median":258.413},"lcp":{"count":5,"min":249.403,"max":281,"mean":261.21840000000003,"median":258.413},"cls":{"count":5,"min":0,"max":0,"mean":0,"median":0},"tbt":{"count":5,"min":0,"max":0,"mean":0,"median":0},"tti":{"count":5,"min":249.403,"max":281,"mean":261.21840000000003,"median":258.413},"si":{"count":5,"min":244,"max":274,"mean":254.8,"median":252}}}},"improvements":{"fcp":-61.2765619329758,"lcp":-61.2765619329758,"tti":-62.39382979770974,"si":-62.50735726898176,"performanceScore":0.4016064257028169}}};
+        const results = [{"app":"react-router","route":"posts","url":"https://react-router.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:46:23.799Z","runIndex":0,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":487.266,"lcp":487.266,"cls":0,"tbt":0,"si":487,"tti":506.823},"opportunities":{"unusedJs":53840,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":339,"loadComplete":339,"firstByte":214,"domInteractive":339}}},{"app":"react-router","route":"posts","url":"https://react-router.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:46:51.964Z","runIndex":1,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":323.925,"lcp":323.925,"cls":0,"tbt":0,"si":359,"tti":344.256},"opportunities":{"unusedJs":53840,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":328,"loadComplete":329,"firstByte":201,"domInteractive":328}}},{"app":"tanstack-router","route":"posts","url":"https://tanstack-router.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:47:44.411Z","runIndex":0,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":392.632,"lcp":392.632,"cls":0,"tbt":0,"si":384,"tti":392.632},"opportunities":{"unusedJs":35427,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":104,"loadComplete":104,"firstByte":52,"domInteractive":57}}},{"app":"tanstack-router","route":"posts","url":"https://tanstack-router.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:48:11.704Z","runIndex":1,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":458.274,"lcp":458.274,"cls":0,"tbt":0,"si":449,"tti":458.274},"opportunities":{"unusedJs":35427,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":92,"loadComplete":92,"firstByte":35,"domInteractive":40}}},{"app":"next","route":"posts","url":"https://next.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:49:05.067Z","runIndex":0,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":306.866,"lcp":306.866,"cls":0,"tbt":0,"si":307,"tti":306.866},"opportunities":{"unusedJs":20554,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":222,"loadComplete":231,"firstByte":212,"domInteractive":222}}},{"app":"next","route":"posts","url":"https://next.johnmackay150.workers.dev/posts","timestamp":"2025-08-09T14:49:33.509Z","runIndex":1,"location":"japan","lighthouse":{"performance":100,"metrics":{"fcp":309.594,"lcp":309.594,"cls":0,"tbt":0,"si":310,"tti":309.594},"opportunities":{"unusedJs":20554,"unusedCss":0,"unminifiedJs":0}},"webVitals":{},"pagePerformance":{"performanceTiming":{"domContentLoaded":212,"loadComplete":221,"firstByte":202,"domInteractive":212}}}];
+        const comparison = {"posts":{"route":"posts","reactRouter":{"app":"react-router","route":"posts","runs":2,"lighthouse":{"performanceScore":{"count":2,"min":100,"max":100,"mean":100,"median":100},"metrics":{"fcp":{"count":2,"min":323.925,"max":487.266,"mean":405.5955,"median":487.266},"lcp":{"count":2,"min":323.925,"max":487.266,"mean":405.5955,"median":487.266},"cls":{"count":2,"min":0,"max":0,"mean":0,"median":0},"tbt":{"count":2,"min":0,"max":0,"mean":0,"median":0},"tti":{"count":2,"min":344.256,"max":506.823,"mean":425.5395,"median":506.823},"si":{"count":2,"min":359,"max":487,"mean":423,"median":487}}}},"tanstackRouter":{"app":"tanstack-router","route":"posts","runs":2,"lighthouse":{"performanceScore":{"count":2,"min":100,"max":100,"mean":100,"median":100},"metrics":{"fcp":{"count":2,"min":392.632,"max":458.274,"mean":425.453,"median":458.274},"lcp":{"count":2,"min":392.632,"max":458.274,"mean":425.453,"median":458.274},"cls":{"count":2,"min":0,"max":0,"mean":0,"median":0},"tbt":{"count":2,"min":0,"max":0,"mean":0,"median":0},"tti":{"count":2,"min":392.632,"max":458.274,"mean":425.453,"median":458.274},"si":{"count":2,"min":384,"max":449,"mean":416.5,"median":449}}}},"improvements":{"fcp":4.8958876516134815,"lcp":4.8958876516134815,"tti":-0.02032713766877127,"si":-1.5366430260047281,"performanceScore":0}}};
         
         // Performance Score Chart
         const performanceCtx = document.getElementById('performanceChart').getContext('2d');

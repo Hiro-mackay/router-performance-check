@@ -59,6 +59,30 @@ npm run build:tanstack-router    # Tanstack Routerのみビルド
 npm run build:analyze            # バンドル分析付きビルド
 ```
 
+### パフォーマンス測定
+
+```bash
+# ローカル環境での測定
+npm run perf                    # 完全なパフォーマンステスト（ビルド + 測定 + 分析）
+npm run perf:measure           # パフォーマンス測定のみ
+npm run perf:analyze           # 結果の分析
+npm run perf:report            # HTMLレポート生成
+
+# Cloudflare Worker環境での測定
+npm run perf:cloudflare        # Cloudflare Workerでのパフォーマンス測定
+npm run perf:cloudflare:analyze # Cloudflare結果の分析
+npm run perf:cloudflare:report  # Cloudflare用HTMLレポート生成
+```
+
+### デプロイ
+
+```bash
+npm run deploy                 # 全アプリケーションをCloudflare Workersにデプロイ
+npm run deploy:react-router    # React Routerのみデプロイ
+npm run deploy:tanstack-router # Tanstack Routerのみデプロイ
+npm run deploy:next            # Next.jsのみデプロイ
+```
+
 ### メンテナンス
 
 ```bash
@@ -74,12 +98,46 @@ npm run install:all  # 両プロジェクトの依存関係を再インストー
 - **特徴**: サーバーサイドレンダリング、自動コード分割、型安全性
 - **ポート**: 5173
 - **ビルドツール**: Vite
+- **デプロイ**: Cloudflare Workers
 
 ### Tanstack Router
 
 - **特徴**: 高度な型推論、柔軟なローダー設計、自動コード分割
-- **ポート**: 3000
+- **ポート**: 5174
 - **ビルドツール**: Vite
+- **デプロイ**: Cloudflare Workers
+
+### Next.js
+
+- **特徴**: App Router、サーバーサイドレンダリング、自動最適化
+- **ポート**: 5175
+- **ビルドツール**: OpenNext + Cloudflare
+- **デプロイ**: Cloudflare Workers
+
+## 📊 パフォーマンス測定について
+
+### 測定環境の違い
+
+このプロジェクトでは 2 つの異なる環境でパフォーマンスを測定しています：
+
+#### 1. ローカル環境測定
+
+- **目的**: 開発時の最適化指標
+- **特徴**: ネットワーク遅延が最小限、リソースが豊富
+- **結果**: TanStack Router > Next.js > React Router
+
+#### 2. Cloudflare Worker 環境測定
+
+- **目的**: 実際のユーザー体験指標
+- **特徴**: 実際の CDN エッジでの実行、ネットワーク遅延が含まれる
+- **結果**: React Router > TanStack Router > Next.js
+
+### 測定結果の解釈
+
+- **ローカル環境**: フレームワークの純粋なパフォーマンスを測定
+- **Cloudflare Worker 環境**: 実際の本番環境でのユーザー体験を測定
+
+両方の測定結果を考慮して、プロジェクトの要件に応じた選択を行うことを推奨します。
 
 ## 🔧 トラブルシューティング
 
