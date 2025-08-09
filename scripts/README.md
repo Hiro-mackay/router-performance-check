@@ -1,44 +1,51 @@
 # Router Performance Benchmark Scripts
 
-This directory contains comprehensive performance measurement scripts for comparing React Router and TanStack Router implementations using Lighthouse and Puppeteer.
+This directory contains comprehensive performance measurement scripts for comparing React Router, TanStack Router, and Next.js implementations using Lighthouse and Puppeteer.
 
 ## Overview
 
-These scripts are based on best practices from [puppeteer-webperf](https://github.com/addyosmani/puppeteer-webperf) and provide reliable, automated performance testing for router implementations.
+These scripts provide reliable, automated performance testing for router implementations.
 
 ## Files
 
 - `lighthouse-config.js` - Lighthouse configuration for consistent measurements
-- `performance-benchmark.js` - Main benchmark script that measures both router implementations
+- `performance-benchmark.js` - Main benchmark script that measures all router implementations
+- `performance-full.js` - Complete performance testing workflow
+- `cloudflare-worker-benchmark.js` - Cloudflare Worker environment testing
 - `analyze-results.js` - Analysis script to process and compare results
 - `generate-report.js` - HTML report generator with charts and visualizations
+- `config.js` - Shared configuration for all scripts
 
 ## Prerequisites
 
 1. **Install Dependencies**
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. **Start Development Servers**
 
-   Before running benchmarks, ensure both router implementations are running:
+   Before running benchmarks, ensure all router implementations are running:
 
    ```bash
    # Terminal 1: React Router (port 5173)
-   npm run dev:react-router
+   pnpm run dev:react-router
 
    # Terminal 2: TanStack Router (port 5174)
-   npm run dev:tanstack-router
+   pnpm run dev:tanstack-router
+
+   # Terminal 3: Next.js (port 5175)
+   pnpm run dev:next
    ```
 
 3. **Verify Servers**
 
-   Make sure both servers are accessible:
+   Make sure all servers are accessible:
 
    - React Router: http://localhost:5173
    - TanStack Router: http://localhost:5174
+   - Next.js: http://localhost:5175
 
 ## Usage
 
@@ -47,7 +54,7 @@ These scripts are based on best practices from [puppeteer-webperf](https://githu
 Run the complete benchmark suite:
 
 ```bash
-npm run perf
+pnpm run perf
 ```
 
 This will:
@@ -61,31 +68,31 @@ This will:
 #### 1. Run Benchmark Measurements
 
 ```bash
-npm run perf:measure
+pnpm run perf:measure
 
 # Or with custom options:
-node scripts/performance-benchmark.js --runs 3 --apps react-router tanstack-router
+node scripts/performance-benchmark.js --runs 3 --apps react-router tanstack-router next
 ```
 
 **Options:**
 
-- `--apps` - Specify which apps to test (default: both)
+- `--apps` - Specify which apps to test (default: all)
 - `--routes` - Specify which routes to test (default: all)
 - `--runs` - Number of measurement runs per test (default: 5)
 
 #### 2. Analyze Results
 
 ```bash
-npm run perf:analyze
+pnpm run perf:analyze
 
 # Or analyze specific file:
-node scripts/analyze-results.js --file ./performance-results/benchmark-results-1234567890.json
+node scripts/analyze-results.js --file ./reports/benchmark-results.json
 ```
 
 #### 3. Generate HTML Report
 
 ```bash
-npm run perf:report
+pnpm run perf:report
 
 # Or with custom output:
 node scripts/generate-report.js --output ./my-report.html
@@ -131,6 +138,11 @@ const CONFIG = {
       name: "tanstack-router",
       url: "http://localhost:5174",
       port: 5174,
+    },
+    {
+      name: "next",
+      url: "http://localhost:5175",
+      port: 5175,
     },
   ],
   warmupRuns: 2, // Warmup runs before measurement
@@ -214,6 +226,7 @@ Ensure development servers are started and accessible:
 ```bash
 curl http://localhost:5173  # Should return HTML
 curl http://localhost:5174  # Should return HTML
+curl http://localhost:5175  # Should return HTML
 ```
 
 #### Chrome/Puppeteer Issues
@@ -309,12 +322,10 @@ When adding new features or metrics:
 2. Add appropriate error handling
 3. Include console logging for debugging
 4. Update this README with new functionality
-5. Test with both router implementations
+5. Test with all router implementations
 
 ## References
 
-- [Puppeteer WebPerf Examples](https://github.com/addyosmani/puppeteer-webperf)
 - [Lighthouse Configuration](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md)
 - [Core Web Vitals](https://web.dev/vitals/)
 - [Puppeteer API](https://pptr.dev/)
-- [Performance Analysis Best Practices](https://qiita.com/algas/items/f385222580145f01dea2)

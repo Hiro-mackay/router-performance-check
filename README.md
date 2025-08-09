@@ -8,6 +8,7 @@ React Router v7 と Tanstack Router のパフォーマンスを比較するた�
 router-performance-check/
 ├── 📁 react-router/          # React Router v7プロジェクト
 ├── 📁 tanstack-router/       # Tanstack Routerプロジェクト
+├── 📁 next/                  # Next.jsプロジェクト
 ├── 📁 scripts/               # セットアップ・ユーティリティスクリプト
 ├── 📄 package.json          # オーケストレーション用スクリプト
 └── 📄 .gitignore            # 統合gitignore設定
@@ -19,76 +20,72 @@ router-performance-check/
 
 ```bash
 # 1. 依存関係をインストール
-npm install
+pnpm install
 
-# 2. プロジェクトの初期セットアップ
-npm run setup
+# 2. 開発サーバーを同時起動
+pnpm run dev
 
-# 3. 開発サーバーを同時起動
-npm run dev
+# 3. プレビュー環境起動
+pnpm run preview
+
+# 4. デプロイ
+pnpm rnn deploy
 ```
 
 ### 🌐 アクセス URL
 
 - **React Router**: http://localhost:5173
-- **Tanstack Router**: http://localhost:3000
+- **Tanstack Router**: http://localhost:5174
+- **Next.js**: http://localhost:5175
 
 ## 📋 利用可能なコマンド
 
 ### 基本操作
 
 ```bash
-npm run setup           # 初回セットアップ（依存関係 + 型生成）
-npm run dev            # 両方の開発サーバーを同時起動
-npm start              # npm run dev のエイリアス
+pnpm run dev       # ホットリロード付き、開発環境
+pnpm run preview   # Cloudflare Workerのローカル環境を立ち上げ
 ```
 
 ### 個別操作
 
 ```bash
-npm run dev:react-router      # React Router開発サーバーのみ
-npm run dev:tanstack-router   # Tanstack Router開発サーバーのみ
+pnpm run dev:react-router      # React Router開発サーバーのみ
+pnpm run dev:tanstack-router   # Tanstack Router開発サーバーのみ
+pnpm run dev:next              # Next.js開発サーバーのみ
 ```
 
 ### ビルド操作
 
 ```bash
-npm run build                    # 両プロジェクトをビルド
-npm run build:react-router       # React Routerのみビルド
-npm run build:tanstack-router    # Tanstack Routerのみビルド
-npm run build:analyze            # バンドル分析付きビルド
+pnpm run build                    # 全プロジェクトをビルド
+pnpm run build:react-router       # React Routerのみビルド
+pnpm run build:tanstack-router    # Tanstack Routerのみビルド
+pnpm run build:next               # Next.jsのみビルド
 ```
 
 ### パフォーマンス測定
 
 ```bash
 # ローカル環境での測定
-npm run perf                    # 完全なパフォーマンステスト（ビルド + 測定 + 分析）
-npm run perf:measure           # パフォーマンス測定のみ
-npm run perf:analyze           # 結果の分析
-npm run perf:report            # HTMLレポート生成
+pnpm run perf                    # 完全なパフォーマンステスト（ビルド + 測定 + 分析）
+pnpm run perf:measure           # パフォーマンス測定のみ
+pnpm run perf:analyze           # 結果の分析
+pnpm run perf:report            # HTMLレポート生成
 
 # Cloudflare Worker環境での測定
-npm run perf:cloudflare        # Cloudflare Workerでのパフォーマンス測定
-npm run perf:cloudflare:analyze # Cloudflare結果の分析
-npm run perf:cloudflare:report  # Cloudflare用HTMLレポート生成
+pnpm run perf:cloudflare        # Cloudflare Workerでのパフォーマンス測定
+pnpm run perf:cloudflare:analyze # Cloudflare結果の分析
+pnpm run perf:cloudflare:report  # Cloudflare用HTMLレポート生成
 ```
 
 ### デプロイ
 
 ```bash
-npm run deploy                 # 全アプリケーションをCloudflare Workersにデプロイ
-npm run deploy:react-router    # React Routerのみデプロイ
-npm run deploy:tanstack-router # Tanstack Routerのみデプロイ
-npm run deploy:next            # Next.jsのみデプロイ
-```
-
-### メンテナンス
-
-```bash
-npm run clean        # ビルドキャッシュをクリア
-npm run typecheck    # 両プロジェクトの型チェック
-npm run install:all  # 両プロジェクトの依存関係を再インストール
+pnpm run deploy                 # 全アプリケーションをCloudflare Workersにデプロイ
+pnpm run deploy:react-router    # React Routerのみデプロイ
+pnpm run deploy:tanstack-router # Tanstack Routerのみデプロイ
+pnpm run deploy:next            # Next.jsのみデプロイ
 ```
 
 ## 🛠️ 技術スタック
@@ -143,18 +140,10 @@ npm run install:all  # 両プロジェクトの依存関係を再インストー
 
 ### よくある問題と解決法
 
-#### 依存関係の問題
-
-```bash
-npm run clean
-npm run install:all
-npm run setup
-```
-
 #### 型エラー
 
 ```bash
-npm run typecheck
+pnpm run typecheck
 ```
 
 #### ポート競合
@@ -165,14 +154,16 @@ npm run typecheck
 
 ```bash
 # プロジェクト個別でのデバッグ
-cd react-router && npm run build
-cd tanstack-router && npm run build
+cd react-router && pnpm run build
+cd tanstack-router && pnpm run build
+cd next && pnpm run build
 ```
 
 ## 📚 参考資料
 
 - [React Router v7 Documentation](https://reactrouter.com/)
 - [Tanstack Router Documentation](https://tanstack.com/router/)
+- [Next.js Documentation](https://nextjs.org/)
 - [Vite Documentation](https://vitejs.dev/)
 
 ## 🤝 コントリビューション
