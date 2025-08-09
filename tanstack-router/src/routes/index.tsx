@@ -1,0 +1,42 @@
+import { createFileRoute } from "@tanstack/react-router";
+import logo from "../logo.svg";
+
+export const Route = createFileRoute("/")({
+  component: App,
+});
+
+function App() {
+  return (
+    <div className="text-center">
+      <header className="bg-gray-800 min-h-screen flex flex-col items-center justify-center text-white text-[calc(10px+2vmin)]">
+        <img
+          src={logo}
+          className="h-[40vmin] pointer-events-none animate-spin duration-[20s] linear infinite"
+          alt="logo"
+        />
+        <p>
+          Edit <code>src/routes/index.tsx</code> and save to reload.
+        </p>
+        <p style={{ fontSize: "16px", margin: "10px 0", color: "#87ceeb" }}>
+          🚀 <strong>High-Load Performance Testing Enabled</strong>
+        </p>
+        <a
+          className="text-blue-400 hover:text-blue-300"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+        <a
+          className="text-blue-400 hover:text-blue-300 ml-4"
+          href="https://tanstack.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn TanStack
+        </a>
+      </header>
+    </div>
+  );
+}
