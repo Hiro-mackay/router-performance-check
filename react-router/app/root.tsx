@@ -5,23 +5,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  NavLink,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+export const links: Route.LinksFunction = () => [];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,7 +32,65 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div>
+      <nav
+        style={{
+          backgroundColor: "#2c3e50",
+          padding: "15px 20px",
+          color: "white",
+          borderBottom: "3px solid #3498db",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+        >
+          <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "bold" }}>
+            🚀 React Router Performance Test
+          </h1>
+          <div style={{ display: "flex", gap: "20px" }}>
+            <NavLink
+              to="/"
+              style={({ isActive }) => ({
+                color: "#ecf0f1",
+                textDecoration: "none",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                border: "1px solid #34495e",
+                backgroundColor: isActive ? "#3498db" : "#34495e",
+                transition: "all 0.3s ease",
+              })}
+              className="nav-link"
+            >
+              🏠 Home
+            </NavLink>
+            <NavLink
+              to="/posts"
+              style={({ isActive }) => ({
+                color: "#ecf0f1",
+                textDecoration: "none",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                border: "1px solid #34495e",
+                backgroundColor: isActive ? "#3498db" : "#34495e",
+                transition: "all 0.3s ease",
+              })}
+              className="nav-link"
+            >
+              📝 Posts
+            </NavLink>
+          </div>
+        </div>
+      </nav>
+      <Outlet />
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
