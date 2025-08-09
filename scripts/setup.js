@@ -54,32 +54,32 @@ function main() {
 
   // Install dependencies for React Router
   runCommand(
-    "cd react-router && npm install",
+    "cd react-router && pnpm install",
     "Installing React Router dependencies"
   );
 
   // Install dependencies for Tanstack Router
   runCommand(
-    "cd tanstack-router && npm install",
+    "cd tanstack-router && pnpm install",
     "Installing Tanstack Router dependencies"
   );
 
   // Generate types for React Router
   runCommand(
-    "cd react-router && npx react-router typegen",
+    "cd react-router && pnpm react-router typegen",
     "Generating React Router types"
   );
 
   // Generate route tree for Tanstack Router
   runCommand(
-    "cd tanstack-router && npm run build > /dev/null 2>&1 || true",
+    "cd tanstack-router && pnpm run build > /dev/null 2>&1 || true",
     "Generating Tanstack Router route tree"
   );
 
   log("\n🎉 Setup completed successfully!", colors.bright);
   log("\n📋 Available commands:", colors.yellow);
-  log("  npm run dev          - Start both development servers");
-  log("  npm run build        - Build both projects");
+  log("  pnpm run dev          - Start both development servers");
+  log("  pnpm run build        - Build both projects");
   log("  npm run test:performance - Run performance comparison");
   log("\n🌐 Development servers will run on:");
   log("  React Router:    http://localhost:5173");

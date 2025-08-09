@@ -44,6 +44,21 @@ const lighthouseConfig = {
     // Only gather performance, not accessibility, SEO, etc.
     onlyCategories: ["performance"],
   },
+  // Custom audit groups
+  groups: {
+    metrics: {
+      title: "Metrics",
+      description: "Performance metrics",
+    },
+    "load-opportunities": {
+      title: "Opportunities",
+      description: "Suggestions to reduce loading time",
+    },
+    diagnostics: {
+      title: "Diagnostics",
+      description: "More information about performance",
+    },
+  },
   // Custom audit categories focusing on router performance
   categories: {
     performance: {

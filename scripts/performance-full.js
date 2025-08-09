@@ -56,22 +56,6 @@ async function killExistingServers() {
   }
 }
 
-async function buildApps() {
-  log.header("Building Applications for Production");
-
-  // Build all applications from config
-  for (const app of CONFIG.apps) {
-    log.info(`Building ${app.name}...`);
-    try {
-      await execAsync(`cd ${app.directory} && ${app.buildCommand}`);
-      log.success(`${app.name} build completed`);
-    } catch (error) {
-      log.error(`${app.name} build failed: ${error.message}`);
-      throw error;
-    }
-  }
-}
-
 async function startServer(config) {
   log.info(`Starting ${config.name} server on port ${config.port}...`);
 
@@ -211,9 +195,6 @@ async function main() {
   try {
     // Clean up any existing servers
     await killExistingServers();
-
-    // Build applications
-    await buildApps();
 
     // Start servers
     log.header("Starting Production Servers");
