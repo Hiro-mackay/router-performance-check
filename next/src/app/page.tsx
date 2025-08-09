@@ -1,103 +1,161 @@
-import Image from "next/image";
+export const metadata = {
+  title: "Next.js App - High Load",
+  description: "Welcome to Next.js with performance testing!",
+};
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div style={{ padding: "20px" }}>
+      <div>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <h1 style={{ color: "#2c3e50", fontSize: "2.5em", margin: "20px 0" }}>
+            Welcome to Next.js Performance Test 🚀
+          </h1>
+          <p
+            style={{
+              fontSize: "1.2em",
+              color: "#34495e",
+              maxWidth: "600px",
+              margin: "0 auto",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            This application demonstrates high-performance data fetching and
+            processing with Next.js App Router, designed for comprehensive
+            performance benchmarking.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "30px",
+            marginTop: "30px",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <div
+            style={{
+              backgroundColor: "#f8f9fa",
+              padding: "25px",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef",
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ color: "#2c3e50", margin: "0 0 15px 0" }}>
+              🏠 Home Page Features
+            </h3>
+            <ul style={{ textAlign: "left", lineHeight: "1.8" }}>
+              <li>✅ Server-side data fetching with Next.js App Router</li>
+              <li>📊 Lightweight API calls (3 concurrent requests)</li>
+              <li>⚡ Built-in caching with revalidate strategy</li>
+              <li>🎯 Performance metrics tracking</li>
+              <li>🔄 Automatic data refresh every 60 seconds</li>
+            </ul>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#fff3cd",
+              padding: "25px",
+              borderRadius: "12px",
+              border: "1px solid #ffeaa7",
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ color: "#856404", margin: "0 0 15px 0" }}>
+              📝 Posts Page Features
+            </h3>
+            <ul style={{ textAlign: "left", lineHeight: "1.8" }}>
+              <li>🔥 Heavy data processing (9 concurrent requests)</li>
+              <li>📈 Complex data transformation and analysis</li>
+              <li>💾 Large dataset handling (2MB+ data)</li>
+              <li>🧠 Sentiment analysis simulation</li>
+              <li>⚙️ CPU-intensive operations</li>
+            </ul>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#d1ecf1",
+              padding: "25px",
+              borderRadius: "12px",
+              border: "1px solid #bee5eb",
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ color: "#0c5460", margin: "0 0 15px 0" }}>
+              🚀 Performance Testing
+            </h3>
+            <ul style={{ textAlign: "left", lineHeight: "1.8" }}>
+              <li>📊 Real-time performance monitoring</li>
+              <li>⏱️ Precise timing measurements</li>
+              <li>🔍 Browser console logging</li>
+              <li>📈 Detailed load statistics</li>
+              <li>🎯 Cross-router comparison ready</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "50px",
+            padding: "30px",
+            backgroundColor: "#e8f5e8",
+            borderRadius: "12px",
+            border: "2px solid #28a745",
+            textAlign: "center",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <h2 style={{ color: "#155724", margin: "0 0 20px 0" }}>
+            🎯 Ready for Performance Benchmarking
+          </h2>
+          <p style={{ fontSize: "18px", margin: "15px 0", color: "#155724" }}>
+            This Next.js application is now configured for comprehensive
+            performance testing alongside React Router and TanStack Router
+            implementations.
+          </p>
+          <div
+            style={{
+              marginTop: "25px",
+              display: "flex",
+              justifyContent: "center",
+              gap: "20px",
+            }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <strong style={{ color: "#28a745", fontSize: "24px" }}>✅</strong>
+              <p style={{ margin: "10px 0", fontWeight: "bold" }}>
+                Server-Side Rendering
+              </p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <strong style={{ color: "#28a745", fontSize: "24px" }}>⚡</strong>
+              <p style={{ margin: "10px 0", fontWeight: "bold" }}>App Router</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <strong style={{ color: "#28a745", fontSize: "24px" }}>📊</strong>
+              <p style={{ margin: "10px 0", fontWeight: "bold" }}>
+                Performance Metrics
+              </p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <strong style={{ color: "#28a745", fontSize: "24px" }}>🔧</strong>
+              <p style={{ margin: "10px 0", fontWeight: "bold" }}>
+                High Load Testing
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: "40px" }}>
+          <p style={{ fontSize: "16px", color: "#6c757d" }}>
+            🔍 <strong>Performance Tip:</strong> Check the browser console for
+            detailed fetch timing and processing information when navigating
+            between pages.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
